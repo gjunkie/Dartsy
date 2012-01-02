@@ -127,7 +127,7 @@ var Names = function(myView, index){
 		backgroundColor:'none',
 		borderRadius: 5,
 		text: players[index].name,
-		font:{fontSize:20,fontFamily:'Futura-Medium'},
+		font:{fontSize:20,fontFamily:'Ballpark'},
 		textAlign:'center',
 		width:100,
 		height: 50,

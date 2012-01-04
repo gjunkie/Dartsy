@@ -10,7 +10,6 @@ var gameOptionsTrigger = Titanium.UI.createLabel({
 
 var restartGame = Titanium.UI.createButton({
 	color:'#000',
-	backgroundColor:'rgba(0,0,0,.2)',
 	borderRadius: 10,
 	title:'New Game',
 	font: {fontSize:15,fontFamily:'Futura-Medium'},
@@ -22,7 +21,6 @@ var restartGame = Titanium.UI.createButton({
 
 var endSet = Titanium.UI.createButton({
 	color:'#000',
-	backgroundColor:'rgba(0,0,0,.2)',
 	borderRadius: 10,
 	title:'End Set',
 	font: {fontSize:15,fontFamily:'Futura-Medium'},

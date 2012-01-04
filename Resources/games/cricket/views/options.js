@@ -12,6 +12,7 @@ var placement = null;
 var deleteIndex = null;
 var clearLabel = null;
 var clearButton = null;
+var lastPlayerButtonTapped = null;
 
 var playerSelect = Titanium.UI.createView({
 	id: 'Player Selector',
@@ -46,10 +47,12 @@ var PlayerName = Titanium.UI.createTextField({
 });
 
 var DeletePlayer = Titanium.UI.createButton({
-	width: 80,
-	height: 30,
-	right: 10,
-	title: 'Delete',
+	//backgroundImage: 'images/deletePlayer.png',
+	backgroundImage:'images/PlayButtonDisabled.png',
+	width: 27,
+	height: 27,
+	right: 0,
+	title: '',
 });
 
 var CricketTitle = Titanium.UI.createImageView({
@@ -67,6 +70,15 @@ var numOfGamesText = Titanium.UI.createLabel({
 	color: '#b2b2b2',
 	font:{fontSize:25,fontFamily:'Futura-Medium'},
 });
+
+var submittedPlayer = Titanium.UI.createLabel({
+	text: '',
+	textAlign: 'center',
+	height: 50,
+	color: '#ffffff',
+	font:{fontSize:45,fontFamily:'Ballpark'},
+});
+
 	
 // Buttons for user to select number of players
 for(var i=0;i<possiblePlayers;i++){
@@ -79,7 +91,7 @@ for(var i=0;i<possiblePlayers;i++){
 		backgroundImage: 'images/playerNotSelected.png',
 		borderRadius: 50,
 		hintText:'Player 1',
-		font:{fontSize:30,fontFamily:'Helvetica'},
+		font:{fontSize:30,fontFamily:'Ballpark'},
 		textAlign:'center',
 		title: '',
 		textAlign:'center',
@@ -96,10 +108,11 @@ for(var i=0;i<possiblePlayers;i++){
 	PlayerLabels[i] = Titanium.UI.createLabel({
 		color: '#fff',
 		id: i,
-		width: 100,
+		width: 116,
 		height: 30,
 		left: leftMargin,
 		textAlign: 'center',
+		font:{fontSize:24,fontFamily:'Ballpark'},
 		top: '87%',
 	});
 	aPlayerLabel = PlayerLabels[i];
@@ -108,24 +121,32 @@ for(var i=0;i<possiblePlayers;i++){
 	aPlayer.addEventListener('click', function(){
 		PlayerName.focus();
 		if (this.playerIsSet){
+			for(var i=0;i<thePlayerButtons.length;i++){
+				if(!thePlayerButtons[i].playerIsSet && thePlayerButtons[i] != this){
+					thePlayerButtons[i].backgroundImage = 'images/playerNotSelected.png';
+					thePlayerButtons[i].selected = false;
+				}
+			}
 			deleteIndex = this.playerIndex;
 			clearLabel = PlayerLabels[this.id];
 			clearButton = this;
-			playerSliderDoor();
-			PlayerName.value = this.name;
-			playerSlider.add(DeletePlayer);
-
-		} else if (!this.playerIsSet){
-			playerSlider.remove(DeletePlayer);
-			if (sliderIsOpen == false){
+			if ((lastPlayerButtonTapped == this.id && sliderIsOpen) || (lastPlayerButtonTapped != this.id && !sliderIsOpen) || (!sliderIsOpen)){
 				playerSliderDoor();
-			} else if (sliderIsOpen == true && this.playerIsSet == false){
-				playerSelect.animate(playersSliderShowHideTop);
-				setsSelect.animate(playersSliderShowHideBottom);
+			}
+			submittedPlayer.text = this.name;
+			playerSlider.remove(PlayerName);
+			playerSlider.add(submittedPlayer);
+			playerSlider.add(DeletePlayer);
+		} else if (!this.playerIsSet){
+			playerSlider.add(PlayerName);
+			playerSlider.remove(submittedPlayer);
+			playerSlider.remove(DeletePlayer);
+			if (lastPlayerButtonTapped == this.id || lastPlayerButtonTapped == null || !sliderIsOpen){
+				playerSliderDoor();
 			}
 			PlayerName.value = '';
 			for(var i=0;i<thePlayerButtons.length;i++){
-				if(thePlayerButtons[i].playerIsSet==false && thePlayerButtons[i] != this){
+				if(!thePlayerButtons[i].playerIsSet && thePlayerButtons[i] != this){
 					thePlayerButtons[i].backgroundImage = 'images/playerNotSelected.png';
 					thePlayerButtons[i].selected = false;
 				}
@@ -141,6 +162,7 @@ for(var i=0;i<possiblePlayers;i++){
 			}
 		}
 		playButtonCheck();
+		lastPlayerButtonTapped = this.id;
 	});
 	playerSelect.add(aPlayer);
 	playerSelect.add(aPlayerLabel);

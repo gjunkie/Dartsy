@@ -3,49 +3,40 @@ var modalIsVisible = false;
 var dartsModal = Titanium.UI.createView({
 	borderRadius:10,
 	backgroundImage:'images/dartsModal.png',
-	width:151,
-	height:83,
+	width:108,
+	height:75,
 	owner: null,
 	myView: null,
 });
 
 var dartsModalBull = Titanium.UI.createView({
 	borderRadius:10,
-	backgroundImage:'images/dartsModal.png',
-	width:151,
-	height:83,
+	backgroundImage:'images/bullseyeModal.png',
+	width:65,
+	height:76,
 	bottom: 145,
 	owner: null,
 	myView: null,
 });
 
 var dartsxtwo = Titanium.UI.createButton({
-	title: 'x2',
-	color:'#fff',
-	font:{fontSize:20,fontFamily:'Futura-Medium'},
-	textAlign:'center',
-	color:'#fff',
+	title: '',
 	backgroundImage: 'images/double.png',
-	width: 48,
-	height: 47,
-	borderRadius:5,
+	width: 44,
+	height: 44,
 	worth: 2,
 	top: 8,
 	touchEnabled: true
 });
 
 var dartsxthree = Titanium.UI.createButton({
-	title: 'x3',
-	color:'#fff',
-	font:{fontSize:20,fontFamily:'Futura-Medium'},
-	textAlign:'center',
+	title: '',
 	color:'#fff',
 	backgroundImage: 'images/triple.png',
-	width: 48,
-	height: 47,
-	borderRadius:5,
+	width: 44,
+	height: 44,
 	worth: 3,
-	right: 15,
+	right: 10,
 	top: 8,
 	touchEnabled: true
 });
@@ -77,7 +68,7 @@ var addDartsModal = function(btn, theView, topPlacement){
 	dartsModal.myView = theView;
 	dartsModalBull.myView = theView;
 	if(btn.worth<25){
-		dartsxtwo.left = 15;
+		dartsxtwo.left = 10;
 		theModal = dartsModal;
 		dartsModal.add(dartsxtwo);
 		dartsModal.add(dartsxthree);

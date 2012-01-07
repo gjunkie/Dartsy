@@ -2,7 +2,7 @@
 Titanium.UI.setBackgroundImage('#000');
 
 var debug = function(code){
-	Ti.API.info(code);
+	Ti.API.debug(code);
 }
 
 Titanium.include('games/cricket/models/db.js');

@@ -3,6 +3,7 @@
 var allNumbers = Object.keys(Games.Cricket.avail_nums).length;
 var gameKeys = Games.Cricket.avail_nums;
 var availNums=[];
+var backgroundImageNumber = null;
 var playerButtons=[];
 var playerPointsLabels = [];
 var playerNamesLabels = [];
@@ -54,21 +55,22 @@ miss.addEventListener('click', function(){
 
 for(i=0;i<gameKeys.length;i++){
 	// Numbers in the middle
-	topDistance = 110+(120*i);
+	topDistance = 124+(122*i);
 	if(Games.Cricket.avail_nums[i]==25){
 		var theTitle = 'Bull';
 	} else {
 		var theTitle = Games.Cricket.avail_nums[i];
 	}
+	backgroundImageNumber = Games.Cricket.avail_nums[i];
 	availNums[i] = Titanium.UI.createLabel({
 		color:'#fff',
-		backgroundImage: 'images/number.png',
-		text: theTitle,
+		backgroundImage: 'images/numbers/'+backgroundImageNumber+'.png',
+		text: '',
 		font: {fontSize:35,fontFamily:'Futura-Medium'},
 		textAlign:'center',
 		playersLeft: totalPlayers,
-		width:110,
-		height: 110,
+		width:64,
+		height: 66,
 		top: topDistance,
 		touchEnabled: true
 	});
@@ -88,13 +90,12 @@ var paintButtons = function(myView, totalPlayers, playerIndex){
 				owner: players[playerIndex].name,
 				index: i,
 				color:'#fff',
-				backgroundImage: 'images/button.png',
-				borderRadius: 50,
+				backgroundImage:'images/button.png',
 				title:'',
 				font:{fontSize:40,fontFamily:'Futura-Medium'},
 				textAlign:'center',
-				width:106,
-				height: 106,
+				width:105,
+				height: 105,
 				top: topDistance,
 				incModal: modalTopDistance,
 				relation: availNums[i],
@@ -127,7 +128,7 @@ var Names = function(myView, index){
 		backgroundColor:'none',
 		borderRadius: 5,
 		text: players[index].name,
-		font:{fontSize:20,fontFamily:'Ballpark'},
+		font:{fontSize:22,fontFamily:'Ballpark'},
 		textAlign:'center',
 		width:100,
 		height: 50,

@@ -41,9 +41,11 @@ var PlayerName = Titanium.UI.createTextField({
     hintText:'Player Name',
 	width: 200,
 	height: 30,
+	autocorrect: false,
     borderStyle:Titanium.UI.INPUT_BORDERSTYLE_ROUNDED,
     keyboardToolbarColor: '#999',   
     keyboardToolbarHeight: 40,
+	returnKeyType: Titanium.UI.RETURNKEY_DONE
 });
 
 var DeletePlayer = Titanium.UI.createButton({
@@ -119,7 +121,6 @@ for(var i=0;i<possiblePlayers;i++){
 	
 	// Event listeners for players
 	aPlayer.addEventListener('click', function(){
-		PlayerName.focus();
 		if (this.playerIsSet){
 			for(var i=0;i<thePlayerButtons.length;i++){
 				if(!thePlayerButtons[i].playerIsSet && thePlayerButtons[i] != this){
@@ -139,6 +140,7 @@ for(var i=0;i<possiblePlayers;i++){
 			playerSlider.add(DeletePlayer);
 		} else if (!this.playerIsSet){
 			playerSlider.add(PlayerName);
+			PlayerName.focus();
 			playerSlider.remove(submittedPlayer);
 			playerSlider.remove(DeletePlayer);
 			if (lastPlayerButtonTapped == this.id || lastPlayerButtonTapped == null || !sliderIsOpen){
@@ -185,7 +187,6 @@ for(var i=0;i<Games.Cricket.sets.length;i++){
 		top: '15%',
 		left: leftMargin,
 		touchEnabled: true,
-		returnKeyType: Titanium.UI.RETURNKEY_NEXT 
 	});
 	
 	possibleSet = possibleSets[i];

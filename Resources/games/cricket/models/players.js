@@ -8,6 +8,7 @@ var Player = function(id,name) {
 	this.startedTurn = false;
 	this.score = 0;
 	this.wins = 0;
+	this.closedNums = 0;
 	this.allClosed = false;
 	this.losses = 0;
 	this.shots = 0;

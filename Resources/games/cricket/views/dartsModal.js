@@ -135,8 +135,10 @@ var button_calc = function(button, multiplier, owner){
 			points = 0;
 		}
 		if(!someoneFinished) {
+			debug('not someone finished');
 			checkClosedNums(button.parent.children);
 		} else if(someoneFinished) {
+			debug('someone finished');
 			winner(button.parent.children);
 		} else {
 			debug('this is the else')

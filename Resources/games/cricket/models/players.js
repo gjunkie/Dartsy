@@ -12,6 +12,7 @@ var Player = function(id,name) {
 	this.allClosed = false;
 	this.losses = 0;
 	this.shots = 0;
+	this.buttons = [];
 	this.numbers = [
 		20, 
 		19, 

@@ -14,7 +14,6 @@ var closeNumbers = function(indx){
 	}
 	if(hits_on_this_num==views.length){
 		for(i=0;i<views.length;i++){
-			// Add any transitions when closing numbers for eye candy here
 			views[i].children[indx].touchEnabled=false;
 			views[i].children[indx].status=false;
 			views[i].children[indx].animate(seeThru);
@@ -45,13 +44,17 @@ var has_highest_score = function(playerIndex){
         }
 	}
 	if(highestIndex!=null){
+		debug('highest index not null');
+		debug(playerIndex);
+		debug(highestIndex);
 		if (players[highestIndex] == players[playerIndex]){
+			debug('highest index same as player index');
 			highestIndex = null;
 			highestScoreTmp = 0;
 	    	return true;
 	    }
 	} else {
-		highestIndex = null;
+		debug('highest index is null');
 		highestScoreTmp = 0;
 	    return false;
 	}
@@ -60,15 +63,17 @@ var has_highest_score = function(playerIndex){
 // This checks if all players have started their turns
 var allPlayersFinished = function(){
 	for(i=0; i<totalPlayers; i++){
-		if(players[i].startedTurn == true){
+		if(players[i].startedTurn){
 			playersFinished++;
+			debug('players finished = ' + playersFinished);
 		}
 	}
+	// try removing throwsThisRound == 3 to end game even if not all darts are thrown
 	if(playersFinished == totalPlayers && throwsThisRound == 3){
 		playersFinished=0;
 		return true;
 	}
-	playersFinished=0;
+	playersFinished = 0;
 }
 
 var displayWinner = function(winner){
@@ -82,10 +87,12 @@ var displayWinner = function(winner){
 	}
 }
 
+// Counts how many closed numbers the specified player has,
+// returns true if player finished all numbers
 var currentPlayerFinished = 0;
 var playerFinishedNums = function(playerIndex){
 	for(var i=0;i<7;i++){
-		if(views[playerIndex].children[i].hits>2){
+		if(players[playerIndex].buttons[i].closed){
 			currentPlayerFinished++;
 		}
 	}
@@ -140,6 +147,7 @@ var checkClosedNums = function(buttons){
 			someoneFinished = true;
 		}
 	}
+	debug('first player to close is' + firstPlayerToClose)
 	closedNums=0;
 }
 
@@ -153,16 +161,20 @@ var matchesHighestScore = function(playerToCheck, topScore){
 }
 
 var winner = function(buttons){
+	debug('checking winner');
 	if (totalPlayers == 1) {
 		// If only one person is playing
 		singlePlayerFinished()
 	} else if(has_highest_score(currentPlayerIndex) && allPlayersFinished() && playerFinishedNums(currentPlayerIndex)) {
 		// Player who closed all numbers who also has highest score wins
+		debug('first');
 		displayWinner(currentPlayerIndex);
 	} else if(tieGame()) {
 		// Game is tied
 	} else if(matchesHighestScore(firstPlayerToClose, highestScore) && allPlayersFinished()) {
+		// this is running because it's "matching" the highest score, even if it is itself
 		// If at least 2 players are tied in score, but one player has closed all numbers, and all players have finished their last turn
+		debug('third');
 		displayWinner(firstPlayerToClose);
 	}
 }
@@ -245,6 +257,7 @@ var winnerOfSets = function(winner){
 			for(numOfButtons=0;numOfButtons<7;numOfButtons++){
 				for(numOfViews=0;numOfViews<totalPlayers;numOfViews++){
 					views[numOfViews].touchEnabled = false;
+					numbersView.touchEnabled = false;
 				}
 			}
 		} else if(e.index == 1) {
@@ -283,6 +296,7 @@ var start_new_game = function(){
 	numberTracker.length = 0;
 	players[0].turn = true;
 	players[0].startedTurn = true;
+	numbersView.touchEnabled = true;
 	slideBanner(turnBanners[0],'down');
 	currentPlayerStart();
 	indicators.myView = views[0];

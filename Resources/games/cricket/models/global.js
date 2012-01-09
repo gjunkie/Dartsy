@@ -7,6 +7,9 @@ var changeTurn = function(newPlayerIndex){
 		currentPlayerIndex++;
 		currentPlayerStart(newPlayerIndex);
 	} else {
+		if(someoneFinished) {
+			winner(players[currentPlayerIndex].buttons);
+		}
 		currentPlayerDone();
 		Games.Cricket.rounds =+ 1;
 		currentPlayerIndex = 0;
@@ -20,8 +23,10 @@ var changeTurn = function(newPlayerIndex){
 	newPlayerIndex = null;
 	miss.touchEnabled = true;
 	showIndicators();
-	if(modalIsVisible == true){
+	if(modalIsVisible){
+		// Future optimization: check which modal is showing and remove it
 		dartsModal.myView.remove(dartsModal);
+		dartsModalBull.myView.remove(dartsModalBull);
 		modalIsVisible = false;
 	}
 }

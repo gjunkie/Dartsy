@@ -17,11 +17,8 @@ var throwsLeft = 0;
 
 
 var undoPoints = Titanium.UI.createButton({
-	color:'#fff',
 	title: '',
 	backgroundImage: 'images/undo.png',
-	font: {fontSize:18,fontFamily:'Futura-Medium'},
-	textAlign:'center',
 	playersLeft: totalPlayers,
 	width:73,
 	height: 62,
@@ -101,11 +98,13 @@ var paintButtons = function(myView, totalPlayers, playerIndex){
 				relation: availNums[i],
 				hits: 0,
 				worth: Games.Cricket.avail_nums[i],
+				closed: false,
 				status: true,
 				touchEnabled: true,
 			});
 		}
 		playerButton = playerButtons[i];
+		players[playerIndex].buttons.push(playerButton);
 		// append all buttons to this array for comparing purposes
 		allButtons.push(playerButton);
 		currentPlayer = totalPlayers[i];

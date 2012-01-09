@@ -19,10 +19,12 @@ var calculate_points = function(numberHit, value, tap_count){
 // highlights the number passed in
 var highlight = function(scorableNum){
 	if(scorableNum.hits>2){
+		scorableNum.closed = true;
 		scorableNum.font = {fontSize:20};
 		scorableNum.color = '#189814';
 		scorableNum.backgroundImage = 'images/scorableButton.png';
 	} else {
+		scorableNum.closed = false;
 		scorableNum.font = {fontSize:40};
 		scorableNum.color = '#ffffff';
 		scorableNum.backgroundImage = 'images/button.png';
@@ -44,6 +46,7 @@ var determine_highest_score = function(){
         if (players[i].score > highestScore) {
             highestIndex = i;
             highestScore = players[i].score;
+            debug(highestScore)
         }
 	}
 }

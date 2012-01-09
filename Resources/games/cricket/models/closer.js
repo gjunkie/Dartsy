@@ -264,6 +264,8 @@ var winnerOfSets = function(winner){
 	});
 }
 
+// Start new game. This restarts current game.
+// Do not set views to not touch enabled so names can be used to skip turns
 var start_new_game = function(){
 	for(numOfButtons=0;numOfButtons<7;numOfButtons++){
 		for(numOfViews=0;numOfViews<totalPlayers;numOfViews++){
@@ -271,8 +273,8 @@ var start_new_game = function(){
 			calculate_points(views[numOfViews].children[numOfButtons], 0, 0);
 			views[numOfViews].children[numOfButtons].hits = 0;
 			views[numOfViews].children[numOfButtons].animate(notSeeThru);
-			views[numOfViews].children[numOfButtons].touchEnabled = true;
 			views[numOfViews].children[numOfButtons].status = true;
+			views[numOfViews].children[numOfButtons].touchEnabled = false;
 			printScore(views[numOfViews].children[8], 0);
 			highlight(views[numOfViews].children[numOfButtons]);
 			players[numOfViews].turn = false;

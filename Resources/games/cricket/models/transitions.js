@@ -33,8 +33,8 @@ var playersSliderShowHideBottom = Titanium.UI.createAnimation();
 
 // Game transitions up/down
 var gameSlideUp = Titanium.UI.createAnimation();
-    gameSlideUp.top = -100;
-    gameSlideUp.bottom = 100;
+    gameSlideUp.top = -94;
+    gameSlideUp.bottom = 94;
     gameSlideUp.duration = 250;
     gameSlideUp.addEventListener('complete',function(){
 		GameOptionsVisible = true;
@@ -86,8 +86,7 @@ var cantScore = Titanium.UI.createAnimation();
 
 // Miss Button Pressed
 var buttonPressed = Titanium.UI.createAnimation();
-	buttonPressed.width = 65;
-	buttonPressed.height = 65;
+	buttonPressed.top = -10;
 	buttonPressed.duration = 50;
 	buttonPressed.autoreverse = true;
 

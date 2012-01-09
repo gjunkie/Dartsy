@@ -25,7 +25,7 @@ var highlight = function(scorableNum){
 		scorableNum.backgroundImage = 'images/scorableButton.png';
 	} else {
 		scorableNum.closed = false;
-		scorableNum.font = {fontSize:40};
+		scorableNum.font = {fontSize:50};
 		scorableNum.color = '#ffffff';
 		scorableNum.backgroundImage = 'images/button.png';
 	}

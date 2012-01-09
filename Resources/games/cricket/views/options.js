@@ -22,6 +22,35 @@ var playerSelect = Titanium.UI.createView({
 	zIndex: 3,
 });
 
+var factsView = Titanium.UI.createView({
+	id: 'Fun Facts',
+	backgroundColor:'#232323',
+	height:100,
+	width:420,
+	borderRadius: 20,
+	borderWidth:2,
+	borderColor:'#000000',
+	top: 150,
+	zIndex: 4,
+});
+
+var factsLabel = Titanium.UI.createLabel({
+	id: 'Fun Facts',
+	color: '#7e7e7e',
+	font:{fontSize:12,fontFamily:'Futura'},
+	height:'95%',
+	width:'95%',
+});
+
+var pickRandomProperty = function(facts) {
+    var fact;
+    var count = 0;
+    for (var item in facts)
+        if (Math.random() < 1/++count)
+           fact = item;
+    factsLabel.text = facts[fact].toUpperCase();
+}
+
 var setsSelect = Titanium.UI.createView({
 	id: 'Sets Selector',
 	backgroundImage:'images/cricket-intro-bottom.jpg',
@@ -48,6 +77,14 @@ var PlayerName = Titanium.UI.createTextField({
 	returnKeyType: Titanium.UI.RETURNKEY_DONE
 });
 
+var OkButton = Titanium.UI.createButton({
+	backgroundImage:'images/ok.png',
+	width: 48,
+	height: 30,
+	right: 225,
+	title: '',
+});
+
 var DeletePlayer = Titanium.UI.createButton({
 	backgroundImage:'images/deletePlayer.png',
 	bottom: 35,
@@ -63,13 +100,22 @@ var CricketTitle = Titanium.UI.createImageView({
 	top: 20,
 });
 
+var playersText = Titanium.UI.createLabel({
+	text: 'CHOOSE PLAYERS',
+	textAlign: 'center',
+	height: 30,
+	bottom: 200,
+	color: '#b2b2b2',
+	font:{fontSize:25,fontFamily:'Futura-CondensedMedium'},
+});
+
 var numOfGamesText = Titanium.UI.createLabel({
-	text: 'NUMBER OF GAMES',
+	text: 'BEST OF',
 	textAlign: 'center',
 	height: 30,
 	top: 20,
 	color: '#b2b2b2',
-	font:{fontSize:25,fontFamily:'Futura-Medium'},
+	font:{fontSize:25,fontFamily:'Futura-CondensedMedium'},
 });
 
 var submittedPlayer = Titanium.UI.createLabel({
@@ -172,14 +218,14 @@ for(var i=0;i<possiblePlayers;i++){
 
 // Buttons for user to select number of sets
 for(var i=0;i<Games.Cricket.sets.length;i++){
-	var leftMargin = 28 + (14*i) + '%';
+	var leftMargin = 29 + (14*i) + '%';
 	possibleSets[i] = Titanium.UI.createButton({
 		color:'#fff',
 		backgroundImage: 'images/blank-set.png',
 		hintText:'Player 1',
-		font:{fontSize:18,fontFamily:'Helvetica'},
+		font:{fontSize:35,fontFamily:'Futura-CondensedMedium'},
 		textAlign:'center',
-		title: 'best of ' + Games.Cricket.sets[i],
+		title: Games.Cricket.sets[i],
 		gamesToPlay: Games.Cricket.sets[i],
 		textAlign:'center',
 		width:110,
@@ -296,12 +342,10 @@ var addColumns = function(playerCount, name){
 }
 
 var play = Titanium.UI.createButton({
-	color:'#000',
 	backgroundImage:'images/PlayButtonDisabled.png',
 	backgroundSelectedImage:'',
 	borderRadius: 10,
 	title:'',
-	font:{fontSize:15,fontFamily:'Futura-Medium'},
 	textAlign:'center',
 	width:112,
 	height: 112,
@@ -343,6 +387,13 @@ PlayerName.addEventListener('return',function(){
 	playButtonCheck();
 });
 
+OkButton.addEventListener('click',function(){
+	if (PlayerName.value != '') {
+		submitThePlayer();
+	}
+	playButtonCheck();
+});
+
 DeletePlayer.addEventListener('click', function(){
 	removePlayer(deleteIndex, clearLabel, clearButton);
 	if (totalPlayers==0){
@@ -368,9 +419,13 @@ indicators.add(indicator1);
 indicators.add(indicator2);
 indicators.add(indicator3);
 playerSelect.add(CricketTitle);
+playerSelect.add(playersText);
+factsView.add(factsLabel);
+playerSelect.add(factsView);
 setsSelect.add(play);
 setsSelect.add(numOfGamesText);
 playerSlider.add(PlayerName);
+playerSlider.add(OkButton);
 win1.add(playerSlider);
 win1.add(playerSelect);
 win1.add(setsSelect);

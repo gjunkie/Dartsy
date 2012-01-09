@@ -60,16 +60,12 @@ for(i=0;i<gameKeys.length;i++){
 	}
 	backgroundImageNumber = Games.Cricket.avail_nums[i];
 	availNums[i] = Titanium.UI.createLabel({
-		color:'#fff',
 		backgroundImage: 'images/numbers/'+backgroundImageNumber+'.png',
 		text: '',
-		font: {fontSize:35,fontFamily:'Futura-Medium'},
-		textAlign:'center',
 		playersLeft: totalPlayers,
 		width:64,
 		height: 66,
 		top: topDistance,
-		touchEnabled: true
 	});
 	number = availNums[i];
 	numbersView.add(number);
@@ -89,7 +85,7 @@ var paintButtons = function(myView, totalPlayers, playerIndex){
 				color:'#fff',
 				backgroundImage:'images/button.png',
 				title:'',
-				font:{fontSize:40,fontFamily:'Futura-Medium'},
+				font:{fontSize:50,fontFamily:'Futura-CondensedMedium'},
 				textAlign:'center',
 				width:105,
 				height: 105,
@@ -138,7 +134,7 @@ var Names = function(myView, index){
 	playerPointsLabels[index] = Titanium.UI.createLabel({
 		color:'#fff',
 		text:'0 pts',
-		font:{fontSize:20,fontFamily:'Futura-Medium'},
+		font:{fontSize:25,fontFamily:'Futura-CondensedMedium'},
 		textAlign:'center',
 		width:100,
 		height: 23,

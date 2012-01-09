@@ -11,37 +11,59 @@ var gameOptionsTrigger = Titanium.UI.createLabel({
 var restartGame = Titanium.UI.createButton({
 	color:'#000',
 	borderRadius: 10,
-	title:'New Game',
-	font: {fontSize:15,fontFamily:'Futura-Medium'},
+	title:'Restart Game',
+	font: {fontSize:18,fontFamily:'Futura-CondensedMedium'},
 	textAlign:'center',
-	width:120,
+	width:100,
 	height: 40,
-	left: '30%',
+	left: '27%',
 });
 
-var endSet = Titanium.UI.createButton({
+var restartSet = Titanium.UI.createButton({
 	color:'#000',
 	borderRadius: 10,
-	title:'End Set',
-	font: {fontSize:15,fontFamily:'Futura-Medium'},
+	title:'Restart Set',
+	font: {fontSize:18,fontFamily:'Futura-CondensedMedium'},
 	textAlign:'center',
-	width:120,
+	width:100,
 	height: 40,
-	right: '30%',
+});
+
+
+var quitSet = Titanium.UI.createButton({
+	color:'#000',
+	borderRadius: 10,
+	title:'Quit',
+	font: {fontSize:18,fontFamily:'Futura-CondensedMedium'},
+	textAlign:'center',
+	width:100,
+	height: 40,
+	right: '27%',
 });
 
 var GameOptions = Titanium.UI.createView({
 	id: 'Game Options',
-	height: 100,
+	height: 94,
+	width:768,
 	bottom: 0,
-	backgroundColor: '#232323',
-	//backgroundOpacity: .5,
+	backgroundImage: 'images/gameOptions.png',
+});
+
+var GameOptionsMask = Titanium.UI.createView({
+	id: 'Game Options Mask',
+	bottom: 94,
+});
+
+GameOptionsMask.addEventListener('click', function(){
+	GameView.animate(gameSlideDown);
+	win2.remove(GameOptionsMask);
 });
 
 var GameOptionsVisible = false;
 gameOptionsTrigger.addEventListener('click', function(){
 	if (GameOptionsVisible == false) {
 		GameView.animate(gameSlideUp);
+		win2.add(GameOptionsMask);
 	} else if (GameOptionsVisible == true) {
 		GameView.animate(gameSlideDown);
 	}
@@ -53,33 +75,59 @@ var restartGameAlert = Titanium.UI.createAlertDialog({
     buttonNames: ['Yes', 'Cancel'],
     cancel: 1
 });
+
 restartGame.addEventListener('click', function(){
 	restartGameAlert.show();
 	restartGameAlert.addEventListener('click',function(e){
 		if(e.index == 0) {
 			start_new_game();
 		}
-	GameView.animate(gameSlideDown);
+		GameView.animate(gameSlideDown);
+		win2.remove(GameOptionsMask);
 	});
 });
-var endSetAlert = Titanium.UI.createAlertDialog({
-    title: 'End Set',
-    message: 'Are you sure you want to end this set?',
+
+var quitSetAlert = Titanium.UI.createAlertDialog({
+    title: 'Quit',
+    message: 'Are you sure you want to quit?',
     buttonNames: ['Yes', 'Cancel'],
     cancel: 1,
 });
-endSet.addEventListener('click', function(){
-	endSetAlert.show();
-	endSetAlert.addEventListener('click',function(e){
+
+quitSet.addEventListener('click', function(){
+	quitSetAlert.show();
+	quitSetAlert.addEventListener('click',function(e){
 		if(e.index == 0) {
 			end_set();
 			win1.open();
 			win2.close();
 		}
+		GameView.animate(gameSlideDown);
+		win2.remove(GameOptionsMask);
+	});
+});
+
+var restartSetAlert = Titanium.UI.createAlertDialog({
+    title: 'Restart Set',
+    message: 'Are you sure you want to restart this set?',
+    buttonNames: ['Yes', 'Cancel'],
+    cancel: 1,
+});
+
+restartSet.addEventListener('click', function(){
+	restartSetAlert.show();
+	restartSetAlert.addEventListener('click',function(e){
+		if(e.index == 0) {
+			GameNumber = 0;
+			start_new_game();
+		}
+		GameView.animate(gameSlideDown);
+		win2.remove(GameOptionsMask);
 	});
 });
 
 numbersView.add(gameOptionsTrigger);
 win2.add(GameOptions);
 GameOptions.add(restartGame);
-GameOptions.add(endSet);
+GameOptions.add(restartSet);
+GameOptions.add(quitSet);

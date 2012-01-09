@@ -57,6 +57,7 @@
 	<key>UIAppFonts</key>
 	<array>
 		<string>ballw.ttf</string>
+		<string>Futura.ttc</string>
 	</array>
 </dict>
 </plist>

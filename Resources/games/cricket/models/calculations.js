@@ -46,7 +46,6 @@ var determine_highest_score = function(){
         if (players[i].score > highestScore) {
             highestIndex = i;
             highestScore = players[i].score;
-            debug(highestScore)
         }
 	}
 }

@@ -135,33 +135,32 @@ var button_calc = function(button, multiplier, owner){
 			points = 0;
 		}
 		if(!someoneFinished) {
-			debug('not someone finished');
 			checkClosedNums(button.parent.children);
 		} else if(someoneFinished) {
-			debug('someone finished');
 			winner(button.parent.children);
 		} else {
-			debug('this is the else')
+
 		}
 		if(closeNumbers(button.index)){
 			break;
 		};
+	}
 		/*
-var currentNumHits = db2.execute("SELECT 'count_" + button.worth + "' FROM playersTabels4 WHERE name = '" + owner + "'");
-if (currentNumHits.isValidRow()){
-	debug('sweet there');
-	var newhits = 13;
-	//var numberHit = db2.execute("UPDATE playersTabels4 SET count_" + button.worth + " = '7' WHERE name = '" + owner + "'");
-	var numberHit = db2.execute("UPDATE playersTabels4 SET count_"+button.worth+" = "+newhits+" WHERE name = '" + owner + "'");
-	
-} else {
-	debug('not there');
-}
-*/
-//var rows = db2.execute("INSERT 1 FROM playersTabels3 WHERE name= '" + owner + "'");
-	// var rows = db2.execute('INSERT INTO playersTabels3 (nineteen) VALUES (1) WHERE name = Freddie009');
-// 
-// var imagesString = rows.fieldByName('nineteen');
+		var currentNumHits = db2.execute("SELECT 'count_" + button.worth + "' FROM playersTabels4 WHERE name = '" + owner + "'");
+		if (currentNumHits.isValidRow()){
+			debug('sweet there');
+			var newhits = 13;
+			//var numberHit = db2.execute("UPDATE playersTabels4 SET count_" + button.worth + " = '7' WHERE name = '" + owner + "'");
+			var numberHit = db2.execute("UPDATE playersTabels4 SET count_"+button.worth+" = "+newhits+" WHERE name = '" + owner + "'");
+			
+		} else {
+			debug('not there');
+		}
+		*/
+		//var rows = db2.execute("INSERT 1 FROM playersTabels3 WHERE name= '" + owner + "'");
+			// var rows = db2.execute('INSERT INTO playersTabels3 (nineteen) VALUES (1) WHERE name = Freddie009');
+		// 
+		// var imagesString = rows.fieldByName('nineteen');
 		// var numberHit = db2.execute("UPDATE '" + button + "' FROM playersTabels3 WHERE name = '" + playerName + "'");
 		// if (playerExists.isValidRow()){
 			// debug('its there')
@@ -169,5 +168,5 @@ if (currentNumHits.isValidRow()){
 			// debug('not there');
 			// db2.execute('INSERT INTO playersTabels3 (name) VALUES (?)',playerName);
 		// }
-	}
+	
 }

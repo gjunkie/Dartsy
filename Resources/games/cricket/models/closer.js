@@ -44,17 +44,12 @@ var has_highest_score = function(playerIndex){
         }
 	}
 	if(highestIndex!=null){
-		debug('highest index not null');
-		debug(playerIndex);
-		debug(highestIndex);
 		if (players[highestIndex] == players[playerIndex]){
-			debug('highest index same as player index');
 			highestIndex = null;
 			highestScoreTmp = 0;
 	    	return true;
 	    }
 	} else {
-		debug('highest index is null');
 		highestScoreTmp = 0;
 	    return false;
 	}
@@ -65,7 +60,6 @@ var allPlayersFinished = function(){
 	for(i=0; i<totalPlayers; i++){
 		if(players[i].startedTurn){
 			playersFinished++;
-			debug('players finished = ' + playersFinished);
 		}
 	}
 	// try removing throwsThisRound == 3 to end game even if not all darts are thrown
@@ -147,7 +141,6 @@ var checkClosedNums = function(buttons){
 			someoneFinished = true;
 		}
 	}
-	debug('first player to close is' + firstPlayerToClose)
 	closedNums=0;
 }
 
@@ -161,20 +154,17 @@ var matchesHighestScore = function(playerToCheck, topScore){
 }
 
 var winner = function(buttons){
-	debug('checking winner');
 	if (totalPlayers == 1) {
 		// If only one person is playing
 		singlePlayerFinished()
 	} else if(has_highest_score(currentPlayerIndex) && allPlayersFinished() && playerFinishedNums(currentPlayerIndex)) {
 		// Player who closed all numbers who also has highest score wins
-		debug('first');
 		displayWinner(currentPlayerIndex);
 	} else if(tieGame()) {
 		// Game is tied
 	} else if(matchesHighestScore(firstPlayerToClose, highestScore) && allPlayersFinished()) {
 		// this is running because it's "matching" the highest score, even if it is itself
 		// If at least 2 players are tied in score, but one player has closed all numbers, and all players have finished their last turn
-		debug('third');
 		displayWinner(firstPlayerToClose);
 	}
 }

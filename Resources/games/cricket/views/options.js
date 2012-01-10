@@ -14,6 +14,19 @@ var clearLabel = null;
 var clearButton = null;
 var lastPlayerButtonTapped = null;
 
+var helpButton = Titanium.UI.createButton({
+	id: 'Help Button',
+	backgroundImage:'images/help.png',
+	height:31,
+	width:31,
+	bottom: 20,
+	right: 20,
+});
+
+helpButton.addEventListener('click',function(){
+	helpView.animate(helpViewShow);
+});
+
 var playerSelect = Titanium.UI.createView({
 	id: 'Player Selector',
 	backgroundImage:'images/cricket-intro-top.jpg',
@@ -24,9 +37,10 @@ var playerSelect = Titanium.UI.createView({
 
 var factsView = Titanium.UI.createView({
 	id: 'Fun Facts',
-	backgroundColor:'#232323',
+	backgroundColor:'#161616',
 	height:100,
 	width:420,
+	opacity: 0.75,
 	borderRadius: 20,
 	borderWidth:2,
 	borderColor:'#000000',
@@ -36,7 +50,8 @@ var factsView = Titanium.UI.createView({
 
 var factsLabel = Titanium.UI.createLabel({
 	id: 'Fun Facts',
-	color: '#7e7e7e',
+	color: '#949494',
+	textAlign: 'center',
 	font:{fontSize:12,fontFamily:'Futura'},
 	height:'95%',
 	width:'95%',
@@ -437,6 +452,7 @@ factsView.add(factsLabel);
 playerSelect.add(factsView);
 setsSelect.add(play);
 setsSelect.add(numOfGamesText);
+//setsSelect.add(helpButton);
 playerSlider.add(PlayerName);
 playerSlider.add(OkButton);
 win1.add(playerSlider);

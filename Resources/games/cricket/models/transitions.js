@@ -89,6 +89,16 @@ var buttonPressed = Titanium.UI.createAnimation();
 	buttonPressed.top = -10;
 	buttonPressed.duration = 50;
 	buttonPressed.autoreverse = true;
+	
+	
+// Help View Animations
+var helpViewShow = Titanium.UI.createAnimation();
+	helpViewShow.left = '100%';
+	helpViewShow.duration = 250;
+
+var helpViewHide = Titanium.UI.createAnimation();
+	helpViewHide.left = '0%';
+	helpViewHide.duration = 250;
 
 // Turn Banners
 var slideBanner = function(banner, direction){

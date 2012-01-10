@@ -36,7 +36,7 @@ var Facts = [
 	'The left-hand side (near the 14 section) is preferred by beginners for its concentration of larger numbers.',
 	'Mathematically, removing the rotational symmetry by placing the "20" at the top, there are 19!, or 121,645,100,408,832,000 possible dartboards.',
 	'In the standard game, the dartboard is hung so that the bullseye is 5 feet 8 inches (172.72 cm) from the floor—eye-level for a 6-foot (180 cm) person.',
-	'Initially the missiles were simply cut down arrows or crossbow bolts.', 
+	'Initially the darts were simply cut down arrows or crossbow bolts.', 
 	'The first-purpose made darts were manufactured in one piece from wood; wrapped with a strip of lead for weight and fitted with flights made from split turkey feathers.',
 	'A perfect game of Cricket requires 8 throws, each hitting all triples, and the last two hitting a single and double bullseye.',
 	'Hitting three bullseyes is called a "hat Trick"',
@@ -47,7 +47,7 @@ var Facts = [
 if(Titanium.Platform.osname == 'ipad'){
 	var possiblePlayers = 4;
 	var win1 = Titanium.UI.createWindow({  
-	    title:'Instructions',
+	    title:'Options',
 	});
 	var win2 = Titanium.UI.createWindow({  
 	    title:'Cricket',
@@ -65,6 +65,7 @@ if(Titanium.Platform.osname == 'iphone'){
 }
 
 Titanium.include('games/cricket/models/global.js');
+Titanium.include('games/cricket/views/ipad/help.js');
 Titanium.include('games/cricket/views/options.js');
 Titanium.include('games/cricket/cricket.js');
 

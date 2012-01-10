@@ -42,7 +42,7 @@ numbersView.add(miss);
 
 miss.addEventListener('click', function(){
 	this.animate(buttonPressed);
-	numbers_missed(players[currentPlayerIndex]);
+	numbers_missed(players[currentPlayerIndex], currentPlayerIndex);
 	if (throwsThisRound == 3){
 		throwsThisRound = 0;
 		changeTurn();

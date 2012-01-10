@@ -59,5 +59,7 @@
 		<string>ballw.ttf</string>
 		<string>Futura.ttc</string>
 	</array>
+	<key>UIPrerenderedIcon</key>
+	<true/>
 </dict>
 </plist>

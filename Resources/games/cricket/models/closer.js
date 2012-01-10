@@ -28,6 +28,7 @@ var closeNumbers = function(indx){
 var openNumbers = function(button){
 	// Reverse the number closure
 	button.touchEnabled=true;
+	button.status=true;
 	button.animate(notSeeThru);
 	highlight(button);
 	availNums[button.index].animate(notSeeThru);
@@ -245,7 +246,7 @@ var winnerOfSets = function(winner){
 		if(e.index == 0) {
 			// if user presses OK, all buttons are made untouchable.
 			for(numOfButtons=0;numOfButtons<7;numOfButtons++){
-				for(numOfViews=0;numOfViews<totalPlayers;numOfViews++){
+				for(var numOfViews=0;numOfViews<totalPlayers;numOfViews++){
 					views[numOfViews].touchEnabled = false;
 					numbersView.touchEnabled = false;
 				}
@@ -267,16 +268,16 @@ var winnerOfSets = function(winner){
 // Start new game. This restarts current game.
 // Do not set views to not touch enabled so names can be used to skip turns
 var start_new_game = function(){
-	for(numOfButtons=0;numOfButtons<7;numOfButtons++){
-		for(numOfViews=0;numOfViews<totalPlayers;numOfViews++){
+	for(var numOfButtons=0;numOfButtons<7;numOfButtons++){
+		for(var numOfViews=0;numOfViews<totalPlayers;numOfViews++){
 			views[numOfViews].remove(dartsModal);
-			calculate_points(views[numOfViews].children[numOfButtons], 0, 0);
-			views[numOfViews].children[numOfButtons].hits = 0;
-			views[numOfViews].children[numOfButtons].animate(notSeeThru);
-			views[numOfViews].children[numOfButtons].status = true;
-			views[numOfViews].children[numOfButtons].touchEnabled = false;
+			calculate_points(players[numOfViews].buttons[numOfButtons], 0, 0);
+			players[numOfViews].buttons[numOfButtons].hits = 0;
+			players[numOfViews].buttons[numOfButtons].animate(notSeeThru);
+			players[numOfViews].buttons[numOfButtons].status = true;
+			players[numOfViews].buttons[numOfButtons].touchEnabled = false;
 			printScore(views[numOfViews].children[8], 0);
-			highlight(views[numOfViews].children[numOfButtons]);
+			highlight(players[numOfViews].buttons[numOfButtons]);
 			players[numOfViews].turn = false;
 		}
 		availNums[numOfButtons].animate(notSeeThru);

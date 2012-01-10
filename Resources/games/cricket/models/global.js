@@ -38,7 +38,7 @@ var currentPlayerDone = function(){
 	// Does not account for players ahead of last player if this is a lower index player
 	throwsThisRound = 3;
 	for(var i=0;i<availNums.length;i++){
-		views[currentPlayerIndex].children[i].touchEnabled = false;		
+		players[currentPlayerIndex].buttons[i].touchEnabled = false;		
 	}
 }
 
@@ -51,8 +51,8 @@ var currentPlayerStart = function(newPlayerIndex){
 	players[currentPlayerIndex].turn = true;
 	players[currentPlayerIndex].startedTurn = true;
 	for(var i=0;i<availNums.length;i++){
-		if(views[currentPlayerIndex].children[i].status) {
-			views[currentPlayerIndex].children[i].touchEnabled = true;
+		if(players[currentPlayerIndex].buttons[i].status) {
+			players[currentPlayerIndex].buttons[i].touchEnabled = true;
 		}
 	}
 }

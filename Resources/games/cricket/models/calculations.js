@@ -116,9 +116,7 @@ var numbers_missed = function(player, index){
 	numberTracker.push({button: miss, multiplier: 0});
 	throwsThisRound++;
 	totalThrows++;
-	if(!index){
-		removeIndicator(throwsThisRound);
-	}
+	removeIndicator(throwsThisRound);
 	player.throwsThisRound = throwsThisRound;
 	if(someoneFinished) {
 		winner(currentPlayerIndex, views[currentPlayerIndex].children);

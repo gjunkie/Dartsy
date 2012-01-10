@@ -9,36 +9,39 @@ var gameOptionsTrigger = Titanium.UI.createLabel({
 });
 
 var restartGame = Titanium.UI.createButton({
-	color:'#000',
+	color:'#fff',
 	borderRadius: 10,
 	title:'Restart Game',
-	font: {fontSize:18,fontFamily:'Futura-CondensedMedium'},
+	backgroundImage: 'none',
+	font: {fontSize:24,fontFamily:'Ballpark'},
 	textAlign:'center',
-	width:100,
+	width:150,
 	height: 40,
-	left: '27%',
+	left: '20%',
 });
 
 var restartSet = Titanium.UI.createButton({
-	color:'#000',
+	color:'#fff',
 	borderRadius: 10,
+	backgroundImage: 'none',
 	title:'Restart Set',
-	font: {fontSize:18,fontFamily:'Futura-CondensedMedium'},
+	font: {fontSize:24,fontFamily:'Ballpark'},
 	textAlign:'center',
-	width:100,
+	width:150,
 	height: 40,
 });
 
 
 var quitSet = Titanium.UI.createButton({
-	color:'#000',
+	color:'#fff',
 	borderRadius: 10,
 	title:'Quit',
-	font: {fontSize:18,fontFamily:'Futura-CondensedMedium'},
+	backgroundImage: 'none',
+	font: {fontSize:24,fontFamily:'Ballpark'},
 	textAlign:'center',
-	width:100,
+	width:150,
 	height: 40,
-	right: '27%',
+	right: '20%',
 });
 
 var GameOptions = Titanium.UI.createView({

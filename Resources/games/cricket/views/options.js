@@ -168,12 +168,7 @@ for(var i=0;i<possiblePlayers;i++){
 	// Event listeners for players
 	aPlayer.addEventListener('click', function(){
 		if (this.playerIsSet){
-			for(var i=0;i<thePlayerButtons.length;i++){
-				if(!thePlayerButtons[i].playerIsSet && thePlayerButtons[i] != this){
-					thePlayerButtons[i].backgroundImage = 'images/playerNotSelected.png';
-					thePlayerButtons[i].selected = false;
-				}
-			}
+			clearUnsetPlayers(this);
 			deleteIndex = this.playerIndex;
 			clearLabel = PlayerLabels[this.id];
 			clearButton = this;
@@ -182,10 +177,12 @@ for(var i=0;i<possiblePlayers;i++){
 			}
 			submittedPlayer.text = this.name;
 			playerSlider.remove(PlayerName);
+			playerSlider.remove(OkButton);
 			playerSlider.add(submittedPlayer);
 			playerSlider.add(DeletePlayer);
 		} else if (!this.playerIsSet){
 			playerSlider.add(PlayerName);
+			playerSlider.add(OkButton);
 			PlayerName.focus();
 			playerSlider.remove(submittedPlayer);
 			playerSlider.remove(DeletePlayer);
@@ -193,12 +190,7 @@ for(var i=0;i<possiblePlayers;i++){
 				playerSliderDoor();
 			}
 			PlayerName.value = '';
-			for(var i=0;i<thePlayerButtons.length;i++){
-				if(!thePlayerButtons[i].playerIsSet && thePlayerButtons[i] != this){
-					thePlayerButtons[i].backgroundImage = 'images/playerNotSelected.png';
-					thePlayerButtons[i].selected = false;
-				}
-			}
+			clearUnsetPlayers(this);
 			placement = this.id;
 			if(!this.selected){
 				this.selected = true;
@@ -239,6 +231,7 @@ for(var i=0;i<Games.Cricket.sets.length;i++){
 		
 	// Event listeners for sets
 	possibleSet.addEventListener('click', function(){
+		clearUnsetPlayers(null);
 		for(var i=0;i<=2;i++){
 			possibleSets[i].backgroundImage ='images/blank-set.png';
 		}
@@ -253,6 +246,26 @@ for(var i=0;i<Games.Cricket.sets.length;i++){
 		playButtonCheck();
 	});
 	setsSelect.add(possibleSet);
+}
+
+// To clear all buttons pass in null
+// To not clear active button, pass in button
+var clearUnsetPlayers = function(currentButton){
+	if(currentButton != null){
+		for(var i=0;i<thePlayerButtons.length;i++){
+			if(!thePlayerButtons[i].playerIsSet && thePlayerButtons[i] != currentButton){
+				thePlayerButtons[i].backgroundImage = 'images/playerNotSelected.png';
+				thePlayerButtons[i].selected = false;
+			}
+		}
+	} else {
+		for(var i=0;i<thePlayerButtons.length;i++){
+			if(!thePlayerButtons[i].playerIsSet){
+				thePlayerButtons[i].backgroundImage = 'images/playerNotSelected.png';
+				thePlayerButtons[i].selected = false;
+			}
+		}
+	}
 }
 
 var playButtonCheck = function(){

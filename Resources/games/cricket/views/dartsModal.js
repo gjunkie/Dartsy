@@ -135,7 +135,7 @@ var button_calc = function(button, multiplier, owner){
 			points = 0;
 		}
 		if(!someoneFinished) {
-			checkClosedNums(button.parent.children);
+			checkClosedNums(button.parent.children, owner);
 		} else if(someoneFinished) {
 			winner(button.parent.children);
 		} else {

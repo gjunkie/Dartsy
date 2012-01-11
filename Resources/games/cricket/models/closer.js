@@ -41,25 +41,16 @@ var highestScoreTmp = 0;
 var has_highest_score = function(){
 	debug('highest score is running');
 	for(i=0;i<totalPlayers;i++){
-		debug('inside for loop');
         if (players[i].score > highestScoreTmp) {
             highestIndex = i;
             highestScoreTmp = players[i].score;
-			debug('highest player index = ' + highestIndex);
-			debug('highest player score = ' + highestScoreTmp);
         }
 	}
-			debug('highest player index = ' + highestIndex);
-			debug('highest player score = ' + highestScoreTmp);
 	if(highestIndex!=null){
 		if(playerFinishedNums(highestIndex)){
-			debug('highest score is true');
-			debug('highest player index = ' + highestIndex);
-			debug('highest player score = ' + highestScoreTmp);
 	    	return true;
 		}
 	} else {
-		debug('highest score is false');
 		highestScoreTmp = 0;
 	    return false;
 	}
@@ -116,7 +107,7 @@ var closedNums = 0;
 var closedConfirm = 0
 var playersChecked = 0;
 var firstPlayerToClose = null;
-var checkClosedNums = function(buttons){
+var checkClosedNums = function(buttons, player){
 	// This is in case a player has closed all numbers
 	// and then undoes moves to open numbers
 	if(someoneFinished) {
@@ -128,12 +119,13 @@ var checkClosedNums = function(buttons){
 			}
 			if(closedConfirm<7){
 				closedConfirm = 0;
-				players[currentPlayerIndex].allClosed = false;
 				someoneFinished = false;
+				players[i].allClosed = false;
 			} else {
 				closedConfirm = 0;
 				someoneFinished = true;
 				playersChecked = 0;
+				players[i].allClosed = true;
 				break;
 			}
 			playersChecked++;
@@ -149,9 +141,38 @@ var checkClosedNums = function(buttons){
 		if(closedNums==7) {
 			firstPlayerToClose = currentPlayerIndex;
 			someoneFinished = true;
+			player.allClosed = true;
 		}
 	}
 	closedNums=0;
+}
+
+// Determine if all players have closed all numbers
+var playersAllClosed = 0;
+var allPlayersClosedAllNumbers = function(){
+	debug('checking if all players are closed');
+	for(var i=0;i<totalPlayers;i++){
+		for(var a=0;a<players[i].buttons.length;a++){
+			if(players[i].buttons[a].hits>2){
+				closedConfirm++;
+				debug('total closed numbers for player '+ i + ' = ' + closedConfirm);
+			}
+		}
+		if(closedConfirm<7){
+			closedConfirm = 0;
+			playersAllClosed = 0;
+			return false;
+		} else {
+			closedConfirm = 0;
+			playersChecked = 0;
+			playersAllClosed++;
+		}
+	}
+	debug('players closed = ' + playersAllClosed);
+	if(playersAllClosed==totalPlayers){
+		playersAllClosed = 0;
+		return true;
+	}
 }
 
 // Determines if 2 or more players are tied
@@ -178,6 +199,7 @@ var winner = function(buttons){
 	} else if(tieGame()) {
 		// Game is tied
 		lastTurn = true;
+		tieAlert();
 	} else if(matchesHighestScore(firstPlayerToClose, highestScore) && allPlayersFinished()) {
 		// this is running because it's "matching" the highest score, even if it is itself
 		// If at least 2 players are tied in score, but one player has closed all numbers, and all players have finished their last turn
@@ -190,19 +212,17 @@ var winner = function(buttons){
 // Checks if all players have closed all numbers and score is the same
 var tieGame = function(){
 	for(i=0; i<totalPlayers; i++){
-		if(players[i].allClosed){
-			playersClosed++;
-		}
 		if(players[i].score == highestScore){
 			sameScore++;
 		}
 	}
-	if(playersClosed == totalPlayers && sameScore == totalPlayers){
-		playersClosed = 0;
+		debug('same scored players = ' + sameScore);
+	if(allPlayersClosedAllNumbers() && sameScore == totalPlayers){
+		debug('tie is true');
 		sameScore = 0;
 		return true;
 	} else {
-		playersClosed = 0;
+		debug('tie is false');
 		sameScore = 0;
 		return false;
 	}
@@ -236,6 +256,25 @@ var winnerAlert = function(winner){
 	});
 	gameWinnerAlert.show();
 	gameWinnerAlert.addEventListener('click',function(e){
+		if(e.index == 0) {
+			start_new_game();
+		} else if(e.index == 1) {
+			end_set();
+			win1.open();
+			win2.close();
+		}
+	});
+}
+
+var tieAlert = function(){
+	var tieAlert = Titanium.UI.createAlertDialog({
+	    title: 'Tie Game!',
+	    message: 'Wow... really? Ok well you\'ll have to play that game again. We need a winner!',
+	    buttonNames: ['Next Game', 'Quit Set'],
+	    cancel: 0
+	});
+	tieAlert.show();
+	tieAlert.addEventListener('click',function(e){
 		if(e.index == 0) {
 			start_new_game();
 		} else if(e.index == 1) {

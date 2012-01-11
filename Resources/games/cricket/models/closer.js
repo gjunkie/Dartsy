@@ -267,14 +267,14 @@ var winnerAlert = function(winner){
 }
 
 var tieAlert = function(){
-	var tieAlert = Titanium.UI.createAlertDialog({
+	var gameTieAlert = Titanium.UI.createAlertDialog({
 	    title: 'Tie Game!',
 	    message: 'Wow... really? Ok well you\'ll have to play that game again. We need a winner!',
 	    buttonNames: ['Next Game', 'Quit Set'],
 	    cancel: 0
 	});
-	tieAlert.show();
-	tieAlert.addEventListener('click',function(e){
+	gameTieAlert.show();
+	gameTieAlert.addEventListener('click',function(e){
 		if(e.index == 0) {
 			start_new_game();
 		} else if(e.index == 1) {

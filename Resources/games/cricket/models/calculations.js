@@ -118,8 +118,12 @@ var numbers_missed = function(player, index){
 	totalThrows++;
 	removeIndicator(throwsThisRound);
 	player.throwsThisRound = throwsThisRound;
-	if(someoneFinished) {
+	if(!someoneFinished) {
+		checkClosedNums(player.buttons);
+	} else if(someoneFinished) {
+		debug('missed and someone finished... winner is next to run');
 		winner(currentPlayerIndex, views[currentPlayerIndex].children);
+		debug('after winner should have run');
 	}
 }
 

@@ -1,33 +1,36 @@
 var currentPlayerIndex = 0;
+var lastTurn = false;
 
 var changeTurn = function(newPlayerIndex){
-	if(currentPlayerIndex != (totalPlayers-1)){
-		currentPlayerDone();
-		players[currentPlayerIndex].turns =+ 1;
-		currentPlayerIndex++;
-		currentPlayerStart(newPlayerIndex);
-	} else {
-		if(someoneFinished) {
-			winner(players[currentPlayerIndex].buttons);
+	if(!lastTurn){
+		if(currentPlayerIndex != (totalPlayers-1)){
+			currentPlayerDone();
+			players[currentPlayerIndex].turns =+ 1;
+			currentPlayerIndex++;
+			currentPlayerStart(newPlayerIndex);
+		} else {
+			if(someoneFinished) {
+				winner(players[currentPlayerIndex].buttons);
+			}
+			currentPlayerDone();
+			Games.Cricket.rounds =+ 1;
+			currentPlayerIndex = 0;
+			for(i=0; i<totalPlayers; i++){
+				players[i].startedTurn = false;
+			}
+			clearThrownDarts();
+			currentPlayerStart(newPlayerIndex);
 		}
-		currentPlayerDone();
-		Games.Cricket.rounds =+ 1;
-		currentPlayerIndex = 0;
-		for(i=0; i<totalPlayers; i++){
-			players[i].startedTurn = false;
+		throwsThisRound = 0;
+		newPlayerIndex = null;
+		miss.touchEnabled = true;
+		showIndicators();
+		if(modalIsVisible){
+			// Future optimization: check which modal is showing and remove it
+			dartsModal.myView.remove(dartsModal);
+			dartsModalBull.myView.remove(dartsModalBull);
+			modalIsVisible = false;
 		}
-		clearThrownDarts();
-		currentPlayerStart(newPlayerIndex);
-	}
-	throwsThisRound = 0;
-	newPlayerIndex = null;
-	miss.touchEnabled = true;
-	showIndicators();
-	if(modalIsVisible){
-		// Future optimization: check which modal is showing and remove it
-		dartsModal.myView.remove(dartsModal);
-		dartsModalBull.myView.remove(dartsModalBull);
-		modalIsVisible = false;
 	}
 }
 

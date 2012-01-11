@@ -37,7 +37,7 @@ var Facts = [
 	'Mathematically, removing the rotational symmetry by placing the "20" at the top, there are 19!, or 121,645,100,408,832,000 possible dartboards.',
 	'In the standard game, the dartboard is hung so that the bullseye is 5 feet 8 inches (172.72 cm) from the floor—eye-level for a 6-foot (180 cm) person.',
 	'Initially the darts were simply cut down arrows or crossbow bolts.', 
-	'The first-purpose made darts were manufactured in one piece from wood; wrapped with a strip of lead for weight and fitted with flights made from split turkey feathers.',
+	'The first purpose-made darts were manufactured in one piece from wood; wrapped with a strip of lead for weight and fitted with flights made from split turkey feathers.',
 	'A perfect game of Cricket requires 8 throws, each hitting all triples, and the last two hitting a single and double bullseye.',
 	'Hitting three bullseyes is called a "hat Trick"',
 	'Supposedly based on the typical price of lodging in an old English hostelry (2 shillings and 6 pence), scoring 20, 5, and 1 is called a Bed and Breakfast.',

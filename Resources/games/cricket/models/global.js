@@ -9,7 +9,7 @@ var changeTurn = function(newPlayerIndex){
 			currentPlayerIndex++;
 			currentPlayerStart(newPlayerIndex);
 		} else {
-			if(someoneFinished) {
+			if(someoneFinished || allPlayersClosedAllNumbers()) {
 				winner(players[currentPlayerIndex].buttons);
 			}
 			currentPlayerDone();

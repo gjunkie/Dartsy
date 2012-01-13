@@ -329,6 +329,7 @@ var resetGlobalVars = function(){
 	numberTracker.length = 0;
 	players[0].turn = true;
 	players[0].startedTurn = true;
+	views[0].touchEnabled = true;
 	miss.touchEnabled = true;
 	undoPoints.touchEnabled = true;
 	someoneFinished = false;
@@ -348,6 +349,7 @@ var start_new_game = function(){
 			players[numOfViews].buttons[numOfButtons].animate(notSeeThru);
 			players[numOfViews].buttons[numOfButtons].status = true;
 			players[numOfViews].buttons[numOfButtons].touchEnabled = false;
+			players[numOfViews].buttons[numOfButtons].closed = false;
 			printScore(views[numOfViews].children[8], 0);
 			highlight(players[numOfViews].buttons[numOfButtons]);
 			players[numOfViews].turn = false;
@@ -359,6 +361,7 @@ var start_new_game = function(){
 	currentPlayerStart();
 	indicators.myView = views[0];
 	views[0].add(indicators);
+	debug('before loop')
 }
 
 var end_set = function(){

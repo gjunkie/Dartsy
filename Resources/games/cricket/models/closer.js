@@ -354,6 +354,7 @@ var start_new_game = function(){
 	indicators.myView = views[0];
 	views[0].add(indicators);
 	someoneFinished = false;
+	indicatorsVisible = true;
 	lastTurn = false;
 	firstPlayerToClose = null;
 }

@@ -1,6 +1,6 @@
 var currentPlayerIndex = 0;
 var lastTurn = false;
-var indicatorsVisible = true;
+var indicatorsRemoved = false;
 
 var changeTurn = function(newPlayerIndex){
 	if(!lastTurn){
@@ -52,7 +52,7 @@ var currentPlayerStart = function(newPlayerIndex){
 		currentPlayerIndex = newPlayerIndex;
 	}
 	slideBanner(turnBanners[currentPlayerIndex],'down');
-	indicatorsVisible = false;
+	indicatorsRemoved = false;
 	players[currentPlayerIndex].turn = true;
 	players[currentPlayerIndex].startedTurn = true;
 	for(var i=0;i<availNums.length;i++){
@@ -92,7 +92,9 @@ var removeIndicator = function(index){
 	if(index == 3){
 		views[currentPlayerIndex].remove(indicators);
 	}
-	indicatorsVisible = false;
+	if(index==2){
+		indicatorsRemoved = true;
+	}
 }
 
 var addIndicator = function(index){
@@ -103,6 +105,7 @@ var addIndicator = function(index){
 		}
 	}
 	indicators.children[index-1].show();
+	indicatorsRemoved = false;
 }
 
 var showIndicators = function(){
@@ -111,4 +114,5 @@ var showIndicators = function(){
 	for(i=0;i<3;i++){
 		indicators.children[i].show();
 	}
+	indicatorsRemoved = false;
 }

@@ -322,6 +322,21 @@ var winnerOfSets = function(winner){
 	});
 }
 
+var resetGlobalVars = function(){
+	currentPlayerIndex = 0;
+	throwsThisRound = 0;
+	totalThrows = 0;
+	numberTracker.length = 0;
+	players[0].turn = true;
+	players[0].startedTurn = true;
+	miss.touchEnabled = true;
+	undoPoints.touchEnabled = true;
+	someoneFinished = false;
+	indicatorsRemoved = false;
+	lastTurn = false;
+	firstPlayerToClose = null;
+}
+
 // Start new game. This restarts current game.
 // Do not set views to not touch enabled so names can be used to skip turns
 var start_new_game = function(){
@@ -340,23 +355,10 @@ var start_new_game = function(){
 		availNums[numOfButtons].animate(notSeeThru);
 	}
 	slideBanner(turnBanners[currentPlayerIndex],'up');
-	currentPlayerIndex = 0;
-	throwsThisRound = 0;
-	totalThrows = 0;
-	numberTracker.length = 0;
-	players[0].turn = true;
-	players[0].startedTurn = true;
-	miss.touchEnabled = true;
-	undoPoints.touchEnabled = true;
-	// Figure out why this runs twice.
-	//slideBanner(turnBanners[0],'down');
+	resetGlobalVars();
 	currentPlayerStart();
 	indicators.myView = views[0];
 	views[0].add(indicators);
-	someoneFinished = false;
-	indicatorsVisible = true;
-	lastTurn = false;
-	firstPlayerToClose = null;
 }
 
 var end_set = function(){

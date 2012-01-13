@@ -25,7 +25,6 @@ var changeTurn = function(newPlayerIndex){
 		throwsThisRound = 0;
 		newPlayerIndex = null;
 		miss.touchEnabled = true;
-		showIndicators();
 		if(modalIsVisible){
 			// Future optimization: check which modal is showing and remove it
 			dartsModal.myView.remove(dartsModal);
@@ -55,6 +54,7 @@ var currentPlayerStart = function(newPlayerIndex){
 	indicatorsRemoved = false;
 	players[currentPlayerIndex].turn = true;
 	players[currentPlayerIndex].startedTurn = true;
+	showIndicators();
 	for(var i=0;i<availNums.length;i++){
 		if(players[currentPlayerIndex].buttons[i].status) {
 			players[currentPlayerIndex].buttons[i].touchEnabled = true;
@@ -104,6 +104,7 @@ var addIndicator = function(index){
 			indicators.children[i].hide();
 		}
 	}
+	// Index - 1 due to 0 based array
 	indicators.children[index-1].show();
 	indicatorsRemoved = false;
 }

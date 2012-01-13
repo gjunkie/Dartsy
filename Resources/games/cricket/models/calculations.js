@@ -116,14 +116,14 @@ var numbers_missed = function(player, index){
 	numberTracker.push({button: miss, multiplier: 0});
 	throwsThisRound++;
 	totalThrows++;
-	removeIndicator(throwsThisRound);
+	if(indicatorsVisible){
+		removeIndicator(throwsThisRound);
+	}
 	player.throwsThisRound = throwsThisRound;
 	if(!someoneFinished) {
 		checkClosedNums(player.buttons, player);
 	} else if(someoneFinished) {
-		debug('missed and someone finished... winner is next to run');
 		winner(currentPlayerIndex, views[currentPlayerIndex].children);
-		debug('after winner should have run');
 	}
 }
 

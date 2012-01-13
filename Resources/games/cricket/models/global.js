@@ -1,5 +1,6 @@
 var currentPlayerIndex = 0;
 var lastTurn = false;
+var indicatorsVisible = true;
 
 var changeTurn = function(newPlayerIndex){
 	if(!lastTurn){
@@ -51,6 +52,7 @@ var currentPlayerStart = function(newPlayerIndex){
 		currentPlayerIndex = newPlayerIndex;
 	}
 	slideBanner(turnBanners[currentPlayerIndex],'down');
+	indicatorsVisible = false;
 	players[currentPlayerIndex].turn = true;
 	players[currentPlayerIndex].startedTurn = true;
 	for(var i=0;i<availNums.length;i++){
@@ -90,6 +92,7 @@ var removeIndicator = function(index){
 	if(index == 3){
 		views[currentPlayerIndex].remove(indicators);
 	}
+	indicatorsVisible = false;
 }
 
 var addIndicator = function(index){

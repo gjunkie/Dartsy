@@ -101,15 +101,16 @@ var helpViewHide = Titanium.UI.createAnimation();
 	helpViewHide.duration = 250;
 
 // Turn Banners
+var top;
 var slideBanner = function(banner, direction){
-	var top;
+	debug(direction);
 	if (direction == 'down'){
 		top = 0;
 	} else if (direction == 'up'){
 		top = -127;
 	}
 	var turnBannerSlider = Titanium.UI.createAnimation();
-	turnBannerSlider.top = top;
 	turnBannerSlider.duration = 250;
+	turnBannerSlider.top = top;
 	banner.animate(turnBannerSlider);
 }

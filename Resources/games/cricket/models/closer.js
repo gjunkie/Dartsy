@@ -348,7 +348,8 @@ var start_new_game = function(){
 	players[0].startedTurn = true;
 	miss.touchEnabled = true;
 	undoPoints.touchEnabled = true;
-	slideBanner(turnBanners[0],'down');
+	// Figure out why this runs twice.
+	//slideBanner(turnBanners[0],'down');
 	currentPlayerStart();
 	indicators.myView = views[0];
 	views[0].add(indicators);

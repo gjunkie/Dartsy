@@ -152,6 +152,8 @@ var Names = function(myView, index){
 				// add one to current index to avoid current player
 				// less than index to avoid player we skipped to
 				for(var i=currentPlayerIndex+1;i<index;i++){
+					debug('i = '+i)
+					debug('index = '+index)
 					loopMisses(i);
 				}
 			} else if(index<currentPlayerIndex){
@@ -172,6 +174,7 @@ var Names = function(myView, index){
 }
 
 var loopMisses = function(index){
+	//debug(index)
 	for(var a=0;a<3;a++){
 		numbers_missed(players[index], true);
 	}

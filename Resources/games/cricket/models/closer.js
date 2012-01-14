@@ -192,13 +192,11 @@ var winner = function(){
 		displayWinner(highestIndex);
 		highestIndex = null;
 		highestScoreTmp = 0;
-		someoneFinished = false;
 		views[currentPlayerIndex].remove(indicators);
 		slideBanner(turnBanners[currentPlayerIndex],'up');
 	} else if(tieGame()) {
 		// Game is tied
 		lastTurn = true;
-		someoneFinished = false;
 		views[currentPlayerIndex].remove(indicators);
 		slideBanner(turnBanners[currentPlayerIndex],'up');
 		tieAlert();
@@ -206,7 +204,6 @@ var winner = function(){
 		// this is running because it's "matching" the highest score, even if it is itself
 		// If at least 2 players are tied in score, but one player has closed all numbers, and all players have finished their last turn
 		lastTurn = true;
-		someoneFinished = false;
 		views[currentPlayerIndex].remove(indicators);
 		slideBanner(turnBanners[currentPlayerIndex],'up');
 		displayWinner(firstPlayerToClose);
@@ -342,7 +339,7 @@ var resetGlobalVars = function(){
 	}
 }
 
-// Start new game. This restarts current game.
+// Start new game. This restarts current game. Does not resest Games Played.
 // Do not set views to not touch enabled so names can be used to skip turns
 var start_new_game = function(){
 	for(var numOfButtons=0;numOfButtons<7;numOfButtons++){
@@ -360,11 +357,11 @@ var start_new_game = function(){
 		availNums[numOfButtons].animate(notSeeThru);
 	}
 	killModal();
-	slideBanner(turnBanners[currentPlayerIndex],'up');
+	if(currentPlayerIndex>0){
+		slideBanner(turnBanners[currentPlayerIndex],'up');
+	}
 	resetGlobalVars();
-	currentPlayerStart();
-	indicators.myView = views[0];
-	views[0].add(indicators);
+	currentPlayerStart(0);
 }
 
 var end_set = function(){

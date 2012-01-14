@@ -113,6 +113,9 @@ var undo = function(){
 }
 
 var numbers_missed = function(player, index){
+	if(throwsThisRound==3){
+		throwsThisRound=0;
+	}
 	numberTracker.push({button: miss, multiplier: 0});
 	throwsThisRound++;
 	totalThrows++;

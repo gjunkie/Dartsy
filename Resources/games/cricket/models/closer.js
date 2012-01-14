@@ -39,7 +39,6 @@ var openNumbers = function(button){
 var highestIndex = null;
 var highestScoreTmp = 0;
 var has_highest_score = function(){
-	debug('highest score is running');
 	for(i=0;i<totalPlayers;i++){
         if (players[i].score > highestScoreTmp) {
             highestIndex = i;
@@ -67,8 +66,10 @@ var allPlayersFinished = function(){
 	if(playersFinished == totalPlayers && throwsThisRound == 3){
 		playersFinished=0;
 		return true;
+	} else {
+		playersFinished = 0;
+		return false;
 	}
-	playersFinished = 0;
 }
 
 var displayWinner = function(winner){
@@ -112,7 +113,7 @@ var checkClosedNums = function(buttons, player){
 	// and then undoes moves to open numbers
 	if(someoneFinished) {
 		for(var i=0;i<totalPlayers;i++){
-			for(var a=0;a<players[i].buttons.count;a++){
+			for(var a=0;a<players[i].buttons.length;a++){
 				if(players[i].buttons[a].hits>2){
 					closedConfirm++;
 				}
@@ -150,12 +151,10 @@ var checkClosedNums = function(buttons, player){
 // Determine if all players have closed all numbers
 var playersAllClosed = 0;
 var allPlayersClosedAllNumbers = function(){
-	debug('checking if all players are closed');
 	for(var i=0;i<totalPlayers;i++){
 		for(var a=0;a<players[i].buttons.length;a++){
 			if(players[i].buttons[a].hits>2){
 				closedConfirm++;
-				debug('total closed numbers for player '+ i + ' = ' + closedConfirm);
 			}
 		}
 		if(closedConfirm<7){
@@ -168,7 +167,6 @@ var allPlayersClosedAllNumbers = function(){
 			playersAllClosed++;
 		}
 	}
-	debug('players closed = ' + playersAllClosed);
 	if(playersAllClosed==totalPlayers){
 		playersAllClosed = 0;
 		return true;
@@ -184,27 +182,33 @@ var matchesHighestScore = function(playerToCheck, topScore){
 	}
 }
 
-var winner = function(buttons){
-	debug('winner is running');
+var winner = function(){
 	if (totalPlayers == 1) {
 		// If only one person is playing
 		singlePlayerFinished()
 	} else if(has_highest_score() && allPlayersFinished()) {
 		// Player who closed all numbers who also has highest score wins
-		debug('winner determined: 1');
 		lastTurn = true;
 		displayWinner(highestIndex);
 		highestIndex = null;
 		highestScoreTmp = 0;
+		someoneFinished = false;
+		views[currentPlayerIndex].remove(indicators);
+		slideBanner(turnBanners[currentPlayerIndex],'up');
 	} else if(tieGame()) {
 		// Game is tied
 		lastTurn = true;
+		someoneFinished = false;
+		views[currentPlayerIndex].remove(indicators);
+		slideBanner(turnBanners[currentPlayerIndex],'up');
 		tieAlert();
 	} else if(matchesHighestScore(firstPlayerToClose, highestScore) && allPlayersFinished()) {
 		// this is running because it's "matching" the highest score, even if it is itself
 		// If at least 2 players are tied in score, but one player has closed all numbers, and all players have finished their last turn
-		debug('winner determined: 2');
 		lastTurn = true;
+		someoneFinished = false;
+		views[currentPlayerIndex].remove(indicators);
+		slideBanner(turnBanners[currentPlayerIndex],'up');
 		displayWinner(firstPlayerToClose);
 	}
 }
@@ -216,13 +220,10 @@ var tieGame = function(){
 			sameScore++;
 		}
 	}
-		debug('same scored players = ' + sameScore);
 	if(allPlayersClosedAllNumbers() && sameScore == totalPlayers){
-		debug('tie is true');
 		sameScore = 0;
 		return true;
 	} else {
-		debug('tie is false');
 		sameScore = 0;
 		return false;
 	}
@@ -336,6 +337,9 @@ var resetGlobalVars = function(){
 	indicatorsRemoved = false;
 	lastTurn = false;
 	firstPlayerToClose = null;
+	for(i=0; i<totalPlayers; i++){
+		players[i].startedTurn = false;
+	}
 }
 
 // Start new game. This restarts current game.
@@ -361,7 +365,6 @@ var start_new_game = function(){
 	currentPlayerStart();
 	indicators.myView = views[0];
 	views[0].add(indicators);
-	debug('before loop')
 }
 
 var end_set = function(){

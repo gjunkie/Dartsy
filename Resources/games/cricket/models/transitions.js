@@ -104,7 +104,6 @@ var helpViewHide = Titanium.UI.createAnimation();
 // Pass in the banner object and direction as string: 'up', 'down'
 var top;
 var slideBanner = function(banner, direction){
-	debug(direction);
 	if (direction == 'down'){
 		top = 0;
 	} else if (direction == 'up'){

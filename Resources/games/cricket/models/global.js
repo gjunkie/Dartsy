@@ -11,7 +11,7 @@ var changeTurn = function(newPlayerIndex){
 			currentPlayerStart(newPlayerIndex);
 		} else {
 			if(someoneFinished || allPlayersClosedAllNumbers()) {
-				winner(players[currentPlayerIndex].buttons);
+				winner();
 			}
 			currentPlayerDone();
 			Games.Cricket.rounds =+ 1;

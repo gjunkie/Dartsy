@@ -39,6 +39,7 @@ var available_to_score = function(button, taps){
 }
 
 // determines which player holds highest score
+// does not account for two player tied for first place.
 var highestIndex = null;
 var highestScore = 0;
 var determine_highest_score = function(){

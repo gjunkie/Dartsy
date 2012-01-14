@@ -27,7 +27,9 @@ var closeNumbers = function(indx){
 
 var openNumbers = function(button){
 	// Reverse the number closure
-	button.touchEnabled=true;
+	if(players[button.playerNum].turn){
+		button.touchEnabled=true;
+	}
 	button.status=true;
 	button.animate(notSeeThru);
 	highlight(button);

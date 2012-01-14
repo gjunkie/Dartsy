@@ -47,7 +47,7 @@ var removeModal = function(){
 	theModal.animate(fadeOutSlow);
 	if (throwsThisRound == 3){
 		changeTurn();
-		dartsModal.myView.remove(theModal);
+		killModal();
 		modalIsVisible = false;
 	};
 };

@@ -85,7 +85,9 @@ var removePlayer = function(playerIndex, label, button){
 var removeIndicator = function(index){
 	indicators.children[index-1].hide();
 	if(index == 3){
-		views[currentPlayerIndex].remove(indicators);
+		if(!indicatorsRemoved){
+			views[currentPlayerIndex].remove(indicators);
+		}
 	}
 	if(index==2){
 		indicatorsRemoved = true;

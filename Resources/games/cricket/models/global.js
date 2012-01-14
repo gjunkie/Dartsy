@@ -25,12 +25,7 @@ var changeTurn = function(newPlayerIndex){
 		throwsThisRound = 0;
 		newPlayerIndex = null;
 		miss.touchEnabled = true;
-		if(modalIsVisible){
-			// Future optimization: check which modal is showing and remove it
-			dartsModal.myView.remove(dartsModal);
-			dartsModalBull.myView.remove(dartsModalBull);
-			modalIsVisible = false;
-		}
+		killModal();
 	}
 }
 

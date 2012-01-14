@@ -347,7 +347,6 @@ var resetGlobalVars = function(){
 var start_new_game = function(){
 	for(var numOfButtons=0;numOfButtons<7;numOfButtons++){
 		for(var numOfViews=0;numOfViews<totalPlayers;numOfViews++){
-			views[numOfViews].remove(dartsModal);
 			calculate_points(players[numOfViews].buttons[numOfButtons], 0, 0);
 			players[numOfViews].buttons[numOfButtons].hits = 0;
 			players[numOfViews].buttons[numOfButtons].animate(notSeeThru);
@@ -360,6 +359,7 @@ var start_new_game = function(){
 		}
 		availNums[numOfButtons].animate(notSeeThru);
 	}
+	killModal();
 	slideBanner(turnBanners[currentPlayerIndex],'up');
 	resetGlobalVars();
 	currentPlayerStart();

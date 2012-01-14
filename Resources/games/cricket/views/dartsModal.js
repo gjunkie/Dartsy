@@ -1,6 +1,7 @@
 var modalIsVisible = false;
 
 var dartsModal = Titanium.UI.createView({
+	id: 'dartsModal',
 	borderRadius:10,
 	backgroundImage:'images/dartsModal.png',
 	width:108,
@@ -10,6 +11,7 @@ var dartsModal = Titanium.UI.createView({
 });
 
 var dartsModalBull = Titanium.UI.createView({
+	id: 'dartsModalBull',
 	borderRadius:10,
 	backgroundImage:'images/bullseyeModal.png',
 	width:65,

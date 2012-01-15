@@ -2,6 +2,8 @@
 var playersClosed = 0;
 var playersFinished = 0;
 var sameScore = 0;
+var viewChildrenCount = 0;
+var viewChild = null;
 
 // Disable number that is no longer scorable for any player
 // Is passed index of clicked number to compare with other numbers of same index
@@ -368,15 +370,17 @@ var start_new_game = function(){
 
 var end_set = function(){
 	GameView.animate(gameSlideDown);
-	for(i=0;i<views.length;i++){
+	for(i=0;i<totalPlayers;i++){
+		viewChildrenCount = views[i].children.length;
+		for(var numOfButtons=0;numOfButtons<viewChildrenCount;numOfButtons++){
+			viewChild = views[i].children[numOfButtons];
+			if(viewChild != null){
+				views[i].remove(views[i].children[numOfButtons]);
+			}
+		}
+		players[i].buttons.length = 0;
 		GameView.remove(views[i]);
 	}
-	someoneFinished = false;
-	firstPlayerToClose = null;
 	views.length = 0;
-	playerButtons.length = 0;
-	numberTracker.length = 0;
-	totalThrows = 0;
-	throwsThisRound = 0;
 	GameNumber = 0;
 }

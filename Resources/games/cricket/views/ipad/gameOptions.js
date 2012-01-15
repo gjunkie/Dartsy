@@ -92,3 +92,5 @@ var quitSetAlert = Titanium.UI.createAlertDialog({
 
 numbersView.add(gameOptionsTrigger);
 win2.add(GameOptions);
+
+Titanium.include('../../models/gameOptions.js');

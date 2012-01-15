@@ -9,6 +9,14 @@ miss.addEventListener('click', function(){
 	killModal();
 });
 
+undoPoints.addEventListener('click', function(){
+	if (totalThrows > 0) {
+		killModal();
+		undo();
+		clearTimeout(modalTimer);
+	}
+});
+
 var buttonTap = function(playerButton){
 	playerButton.addEventListener('click',function(){
 		if (throwsThisRound != 3){

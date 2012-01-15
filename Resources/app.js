@@ -55,7 +55,7 @@ if(Titanium.Platform.osname == 'ipad'){
 }
 
 if(Titanium.Platform.osname == 'iphone'){
-	var possiblePlayers = 2;
+	var possiblePlayers = 4;
 	var win1 = Titanium.UI.createWindow({  
 	    title:'Instructions',
 	});
@@ -64,20 +64,27 @@ if(Titanium.Platform.osname == 'iphone'){
 	});
 }
 
-Titanium.include('games/cricket/models/global.js');
-Titanium.include('games/cricket/views/ipad/help.js');
-Titanium.include('games/cricket/views/options.js');
-Titanium.include('games/cricket/models/options.js');
-Titanium.include('games/cricket/cricket.js');
-paintPlayerSelections();
-paintPossibleSets();
-
-// open window with name fields
-win1.open();
-pickRandomProperty(Facts);
 
 if(Titanium.Platform.osname == 'ipad'){
 	Ti.API.debug('iPad');
+	Titanium.include('games/cricket/cricket.js');
+	Titanium.include('games/cricket/views/ipad/help.js');
+	Titanium.include('games/cricket/views/ipad/options.js');
+	Titanium.include('games/cricket/views/ipad/dartsModal.js');
+	Titanium.include('games/cricket/views/ipad/buttons.js');
+	Titanium.include('games/cricket/views/ipad/gameOptions.js');
+
 } else if(Titanium.Platform.osname == 'iphone'){
 	Ti.API.debug('iPhone');
+	Titanium.include('games/cricket/views/iphone/options.js');
+	Titanium.include('games/cricket/cricket.js');
 }
+
+
+	Titanium.include('games/cricket/models/global.js');
+
+paintPlayerSelections();
+paintPossibleSets();
+// open window with options
+win1.open();
+pickRandomProperty(Facts);

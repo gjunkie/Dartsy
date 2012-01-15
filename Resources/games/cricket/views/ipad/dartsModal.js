@@ -42,3 +42,5 @@ var dartsxthree = Titanium.UI.createButton({
 	top: 8,
 	touchEnabled: true
 });
+
+Titanium.include('../../models/dartsModal.js');

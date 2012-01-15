@@ -1,5 +1,6 @@
 // This file creates all scorable buttons and playable numbers on the board 
 
+debug('view buttons ipad loaded');
 var allNumbers = Object.keys(Games.Cricket.avail_nums).length;
 var gameKeys = Games.Cricket.avail_nums;
 var availNums=[];
@@ -15,6 +16,12 @@ var totalThrows = 0;
 var throwsThisRound = 0;
 var throwsLeft = 0;
 
+var numbersView = Titanium.UI.createView({
+	id: 'Numbers',
+	backgroundImage:'images/numbers_bg.jpg',
+	width:175,
+	zIndex: 3,
+});
 
 var undoPoints = Titanium.UI.createButton({
 	title: '',
@@ -132,3 +139,7 @@ var Names = function(myView, index){
 	myView.add(playerNameLabel);
 	myView.add(playerTotalLabel);
 }
+
+numbersView.add(undoPoints);
+GameView.add(numbersView);
+Titanium.include('../../models/buttons.js');

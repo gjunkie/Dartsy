@@ -44,6 +44,22 @@ var quitSet = Titanium.UI.createButton({
 	right: '20%',
 });
 
+var clearBoard = Titanium.UI.createButton({
+	color:'#fff',
+	borderRadius: 10,
+	title:'Clear Board',
+	backgroundImage: 'none',
+	font: {fontSize:24,fontFamily:'Ballpark'},
+	textAlign:'center',
+	width:150,
+	height: 40,
+	left: '30%',
+});
+
+clearBoard.addEventListener('click', function(){
+	start_new_game();
+});
+
 var GameOptions = Titanium.UI.createView({
 	id: 'Game Options',
 	height: 94,
@@ -57,6 +73,17 @@ var GameOptionsMask = Titanium.UI.createView({
 	bottom: 94,
 });
 
+var removeOptions = function(){
+	if(totalPlayers>1){
+		GameOptions.remove(restartGame);
+		GameOptions.remove(restartSet);
+		GameOptions.remove(quitSet);
+	} else {
+		GameOptions.remove(clearBoard);
+		GameOptions.remove(quitSet);
+	}
+}
+
 GameOptionsMask.addEventListener('click', function(){
 	GameView.animate(gameSlideDown);
 	win2.remove(GameOptionsMask);
@@ -64,6 +91,17 @@ GameOptionsMask.addEventListener('click', function(){
 
 var GameOptionsVisible = false;
 gameOptionsTrigger.addEventListener('click', function(){
+	if(totalPlayers>1){
+		quitSet.right = '20%';
+		restartGame.left = '20%';
+		GameOptions.add(restartGame);
+		GameOptions.add(restartSet);
+		GameOptions.add(quitSet);
+	} else {
+		quitSet.right = '30%';
+		GameOptions.add(clearBoard);
+		GameOptions.add(quitSet);
+	}
 	if (GameOptionsVisible == false) {
 		GameView.animate(gameSlideUp);
 		win2.add(GameOptionsMask);
@@ -131,6 +169,3 @@ restartSet.addEventListener('click', function(){
 
 numbersView.add(gameOptionsTrigger);
 win2.add(GameOptions);
-GameOptions.add(restartGame);
-GameOptions.add(restartSet);
-GameOptions.add(quitSet);

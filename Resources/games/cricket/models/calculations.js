@@ -131,6 +131,11 @@ var numbers_missed = function(player, index){
 	}
 }
 
+var loopMisses = function(index){
+	for(var a=0;a<3;a++){
+		numbers_missed(players[index], true);
+	}
+}
 
 // Print total score
 var printScore = function(label, score){

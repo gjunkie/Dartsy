@@ -57,15 +57,6 @@ var factsLabel = Titanium.UI.createLabel({
 	width:'95%',
 });
 
-var pickRandomProperty = function(facts) {
-    var fact;
-    var count = 0;
-    for (var item in facts)
-        if (Math.random() < 1/++count)
-           fact = item;
-    factsLabel.text = facts[fact].toUpperCase();
-}
-
 var setsSelect = Titanium.UI.createView({
 	id: 'Sets Selector',
 	backgroundImage:'images/cricket-intro-bottom.jpg',
@@ -142,125 +133,74 @@ var submittedPlayer = Titanium.UI.createLabel({
 	font:{fontSize:45,fontFamily:'Ballpark'},
 });
 
-	
 // Buttons for user to select number of players
-for(var i=0;i<possiblePlayers;i++){
-	var leftMargin = 20 + (15*i) + '%';
-	thePlayerButtons[i] = Titanium.UI.createButton({
-		id: i,
-		playerIndex: null,
-		name: '',
-		color:'#fff',
-		backgroundImage: 'images/playerNotSelected.png',
-		borderRadius: 50,
-		hintText:'Player 1',
-		font:{fontSize:30,fontFamily:'Ballpark'},
-		textAlign:'center',
-		title: '',
-		textAlign:'center',
-		width:116,
-		height: 116,
-		top: '65%',
-		left: leftMargin,
-		selected: false,
-		playerIsSet: false,
-		touchEnabled: true,
-	});
-	aPlayer = thePlayerButtons[i];
-
-	PlayerLabels[i] = Titanium.UI.createLabel({
-		color: '#fff',
-		id: i,
-		width: 116,
-		height: 30,
-		left: leftMargin,
-		textAlign: 'center',
-		font:{fontSize:24,fontFamily:'Ballpark'},
-		top: '87%',
-	});
-	aPlayerLabel = PlayerLabels[i];
+var paintPlayerSelections = function() {
+	for(var i=0;i<possiblePlayers;i++){
+		var leftMargin = 20 + (15*i) + '%';
+		thePlayerButtons[i] = Titanium.UI.createButton({
+			id: i,
+			playerIndex: null,
+			name: '',
+			color:'#fff',
+			backgroundImage: 'images/playerNotSelected.png',
+			borderRadius: 50,
+			hintText:'Player 1',
+			font:{fontSize:30,fontFamily:'Ballpark'},
+			textAlign:'center',
+			title: '',
+			textAlign:'center',
+			width:116,
+			height: 116,
+			top: '65%',
+			left: leftMargin,
+			selected: false,
+			playerIsSet: false,
+			touchEnabled: true,
+		});
+		aPlayer = thePlayerButtons[i];
+		playerTap(aPlayer);
 	
-	// Event listeners for players
-	aPlayer.addEventListener('click', function(){
-		if (this.playerIsSet){
-			clearUnsetPlayers(this);
-			deleteIndex = this.playerIndex;
-			clearLabel = PlayerLabels[this.id];
-			clearButton = this;
-			if ((lastPlayerButtonTapped == this.id && sliderIsOpen) || (lastPlayerButtonTapped != this.id && !sliderIsOpen) || (!sliderIsOpen)){
-				playerSliderDoor();
-			}
-			submittedPlayer.text = this.name;
-			playerSlider.remove(PlayerName);
-			playerSlider.remove(OkButton);
-			playerSlider.add(submittedPlayer);
-			playerSlider.add(DeletePlayer);
-		} else if (!this.playerIsSet){
-			playerSlider.add(PlayerName);
-			playerSlider.add(OkButton);
-			PlayerName.focus();
-			playerSlider.remove(submittedPlayer);
-			playerSlider.remove(DeletePlayer);
-			if (lastPlayerButtonTapped == this.id || lastPlayerButtonTapped == null || !sliderIsOpen){
-				playerSliderDoor();
-			}
-			PlayerName.value = '';
-			clearUnsetPlayers(this);
-			placement = this.id;
-			if(!this.selected){
-				this.selected = true;
-				this.backgroundImage = 'images/playerSelected.png';
-				playerClicked = true;
-			} else if (this.selected){
-				this.selected=false;
-				this.backgroundImage = 'images/playerNotSelected.png';
-			}
-		}
-		playButtonCheck();
-		lastPlayerButtonTapped = this.id;
-	});
-	playerSelect.add(aPlayer);
-	playerSelect.add(aPlayerLabel);
+		PlayerLabels[i] = Titanium.UI.createLabel({
+			color: '#fff',
+			id: i,
+			width: 116,
+			height: 30,
+			left: leftMargin,
+			textAlign: 'center',
+			font:{fontSize:24,fontFamily:'Ballpark'},
+			top: '87%',
+		});
+		aPlayerLabel = PlayerLabels[i];
+		
+		playerSelect.add(aPlayer);
+		playerSelect.add(aPlayerLabel);
+	}
 }
 
-// Buttons for user to select number of sets
-for(var i=0;i<Games.Cricket.sets.length;i++){
-	var leftMargin = 29 + (14*i) + '%';
-	possibleSets[i] = Titanium.UI.createButton({
-		color:'#fff',
-		backgroundImage: 'images/blank-set.png',
-		hintText:'Player 1',
-		font:{fontSize:35,fontFamily:'Futura-CondensedMedium'},
-		textAlign:'center',
-		title: Games.Cricket.sets[i],
-		gamesToPlay: Games.Cricket.sets[i],
-		textAlign:'center',
-		width:110,
-		height: 110,
-		top: '15%',
-		left: leftMargin,
-		touchEnabled: true,
-	});
-	
-	possibleSet = possibleSets[i];
+var paintPossibleSets = function(){
+	// Buttons for user to select number of sets
+	for(var i=0;i<Games.Cricket.sets.length;i++){
+		var leftMargin = 29 + (14*i) + '%';
+		possibleSets[i] = Titanium.UI.createButton({
+			color:'#fff',
+			backgroundImage: 'images/blank-set.png',
+			hintText:'Player 1',
+			font:{fontSize:35,fontFamily:'Futura-CondensedMedium'},
+			textAlign:'center',
+			title: Games.Cricket.sets[i],
+			gamesToPlay: Games.Cricket.sets[i],
+			textAlign:'center',
+			width:110,
+			height: 110,
+			top: '15%',
+			left: leftMargin,
+			touchEnabled: true,
+		});
 		
-	// Event listeners for sets
-	possibleSet.addEventListener('click', function(){
-		clearUnsetPlayers(null);
-		for(var i=0;i<=2;i++){
-			possibleSets[i].backgroundImage ='images/blank-set.png';
-		}
-		if (sliderIsOpen){
-			playerSliderDoor();
-		}
-		this.backgroundImage = 'images/blue-button.png';
-		GamesToPlay = this.gamesToPlay;
-		if (!setsChosen){
-			setsChosen = true;
-		}
-		playButtonCheck();
-	});
-	setsSelect.add(possibleSet);
+		possibleSet = possibleSets[i];
+		possibleSetTap(possibleSet);
+		setsSelect.add(possibleSet);
+	}
 }
 
 // To clear all buttons pass in null

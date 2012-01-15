@@ -2,6 +2,7 @@
 Titanium.include('models/players.js');
 Titanium.include('models/calculations.js');
 Titanium.include('views/dartsModal.js');
+Titanium.include('models/dartsModal.js');
  
 var numbersView = Titanium.UI.createView({
 	id: 'Numbers',
@@ -11,7 +12,9 @@ var numbersView = Titanium.UI.createView({
 });
 
 Titanium.include('views/buttons.js');
+Titanium.include('models/buttons.js');
 Titanium.include('views/gameOptions.js');
+Titanium.include('models/gameOptions.js');
 Titanium.include('models/transitions.js');
 
 

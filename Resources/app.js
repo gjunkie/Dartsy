@@ -67,7 +67,10 @@ if(Titanium.Platform.osname == 'iphone'){
 Titanium.include('games/cricket/models/global.js');
 Titanium.include('games/cricket/views/ipad/help.js');
 Titanium.include('games/cricket/views/options.js');
+Titanium.include('games/cricket/models/options.js');
 Titanium.include('games/cricket/cricket.js');
+paintPlayerSelections();
+paintPossibleSets();
 
 // open window with name fields
 win1.open();

@@ -40,15 +40,6 @@ var miss = Titanium.UI.createButton({
 });
 numbersView.add(miss);
 
-miss.addEventListener('click', function(){
-	this.animate(buttonPressed);
-	numbers_missed(players[currentPlayerIndex], currentPlayerIndex);
-	if (throwsThisRound == 3){
-		throwsThisRound = 0;
-		changeTurn();
-	};
-	killModal();
-});
 
 for(i=0;i<gameKeys.length;i++){
 	// Numbers in the middle
@@ -102,15 +93,10 @@ var paintButtons = function(myView, totalPlayers, playerIndex){
 		playerButton = playerButtons[i];
 		players[playerIndex].buttons.push(playerButton);
 		// append all buttons to this array for comparing purposes
+		// next two lines may be useless
 		allButtons.push(playerButton);
 		currentPlayer = totalPlayers[i];
-		playerButton.addEventListener('click',function(){
-			if (throwsThisRound != 3){
-				button_calc(this, 1, this.owner);
-				addDartsModal(this, this.parent, this.incModal);
-				determine_highest_score();
-			}
-		});
+		buttonTap(playerButton, i);
 		myView.add(playerButton);
 	}
 }
@@ -140,54 +126,9 @@ var Names = function(myView, index){
 		height: 23,
 		bottom: 20,
 	});
-	// Quickly change turns by tapping another player's name
-	playerNamesLabels[index].addEventListener('click',function(){
-		if(index!=currentPlayerIndex){
-			// Remaining darts are misses
-			throwsLeft = 3 - throwsThisRound;
-			for(var i=0;i<throwsLeft;i++){
-				numbers_missed(players[currentPlayerIndex], index);
-			}
-			throwsThisRound = 3;
-			// If skipping to a player ahead of current player
-			if(index>currentPlayerIndex){
-				// add one to current index to avoid current player
-				// less than index to avoid player we skipped to
-				for(var i=currentPlayerIndex+1;i<index;i++){
-					players[i].startedTurn = true;
-					loopMisses(i);
-				}
-			// If skipping to a player before current player
-			} else if(index<currentPlayerIndex){
-				for(var i=currentPlayerIndex+1;i<totalPlayers;i++){
-					players[i].startedTurn = true;
-					loopMisses(i);
-				}
-				// Check if game is over before running this
-				for(var i=0;i<index;i++){
-					players[i].startedTurn = true;
-					loopMisses(i);
-				}
-				checkClosedNums(players[currentPlayerIndex].buttons, players[currentPlayerIndex]);
-				if(someoneFinished) {
-					lastTurn = true;
-					winner();
-				}
-				for(var i=index;i<totalPlayers;i++){
-					players[i].startedTurn = false;
-				}
-			}
-			changeTurn(index);
-		}
-	});
+	namesTap(index);
 	playerTotalLabel = playerPointsLabels[index];
 	playerNameLabel = playerNamesLabels[index];
 	myView.add(playerNameLabel);
 	myView.add(playerTotalLabel);
-}
-
-var loopMisses = function(index){
-	for(var a=0;a<3;a++){
-		numbers_missed(players[index], true);
-	}
 }

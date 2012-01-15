@@ -56,10 +56,6 @@ var clearBoard = Titanium.UI.createButton({
 	left: '30%',
 });
 
-clearBoard.addEventListener('click', function(){
-	start_new_game();
-});
-
 var GameOptions = Titanium.UI.createView({
 	id: 'Game Options',
 	height: 94,
@@ -73,79 +69,11 @@ var GameOptionsMask = Titanium.UI.createView({
 	bottom: 94,
 });
 
-var removeOptions = function(){
-	if(totalPlayers>1){
-		GameOptions.remove(restartGame);
-		GameOptions.remove(restartSet);
-		GameOptions.remove(quitSet);
-	} else {
-		GameOptions.remove(clearBoard);
-		GameOptions.remove(quitSet);
-	}
-}
-
-GameOptionsMask.addEventListener('click', function(){
-	GameView.animate(gameSlideDown);
-	win2.remove(GameOptionsMask);
-});
-
-var GameOptionsVisible = false;
-gameOptionsTrigger.addEventListener('click', function(){
-	if(totalPlayers>1){
-		quitSet.right = '20%';
-		restartGame.left = '20%';
-		GameOptions.add(restartGame);
-		GameOptions.add(restartSet);
-		GameOptions.add(quitSet);
-	} else {
-		quitSet.right = '30%';
-		GameOptions.add(clearBoard);
-		GameOptions.add(quitSet);
-	}
-	if (GameOptionsVisible == false) {
-		GameView.animate(gameSlideUp);
-		win2.add(GameOptionsMask);
-	} else if (GameOptionsVisible == true) {
-		GameView.animate(gameSlideDown);
-	}
-});
-
 var restartGameAlert = Titanium.UI.createAlertDialog({
     title: 'Restart Game',
     message: 'Are you sure you want to restart this game?',
     buttonNames: ['Yes', 'Cancel'],
     cancel: 1
-});
-
-restartGame.addEventListener('click', function(){
-	restartGameAlert.show();
-	restartGameAlert.addEventListener('click',function(e){
-		if(e.index == 0) {
-			start_new_game();
-		}
-		GameView.animate(gameSlideDown);
-		win2.remove(GameOptionsMask);
-	});
-});
-
-var quitSetAlert = Titanium.UI.createAlertDialog({
-    title: 'Quit',
-    message: 'Are you sure you want to quit?',
-    buttonNames: ['Yes', 'Cancel'],
-    cancel: 1,
-});
-
-quitSet.addEventListener('click', function(){
-	quitSetAlert.show();
-	quitSetAlert.addEventListener('click',function(e){
-		if(e.index == 0) {
-			end_set();
-			win1.open();
-			win2.close();
-		}
-		GameView.animate(gameSlideDown);
-		win2.remove(GameOptionsMask);
-	});
 });
 
 var restartSetAlert = Titanium.UI.createAlertDialog({
@@ -155,16 +83,11 @@ var restartSetAlert = Titanium.UI.createAlertDialog({
     cancel: 1,
 });
 
-restartSet.addEventListener('click', function(){
-	restartSetAlert.show();
-	restartSetAlert.addEventListener('click',function(e){
-		if(e.index == 0) {
-			GameNumber = 0;
-			start_new_game();
-		}
-		GameView.animate(gameSlideDown);
-		win2.remove(GameOptionsMask);
-	});
+var quitSetAlert = Titanium.UI.createAlertDialog({
+    title: 'Quit',
+    message: 'Are you sure you want to quit?',
+    buttonNames: ['Yes', 'Cancel'],
+    cancel: 1,
 });
 
 numbersView.add(gameOptionsTrigger);

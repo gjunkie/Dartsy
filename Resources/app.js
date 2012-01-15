@@ -76,8 +76,11 @@ if(Titanium.Platform.osname == 'ipad'){
 
 } else if(Titanium.Platform.osname == 'iphone'){
 	Ti.API.debug('iPhone');
-	Titanium.include('games/cricket/views/iphone/options.js');
 	Titanium.include('games/cricket/cricket.js');
+	Titanium.include('games/cricket/views/iphone/options.js');
+	Titanium.include('games/cricket/views/iphone/dartsModal.js');
+	Titanium.include('games/cricket/views/iphone/buttons.js');
+	Titanium.include('games/cricket/views/iphone/gameOptions.js');
 }
 
 

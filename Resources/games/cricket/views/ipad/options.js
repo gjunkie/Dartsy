@@ -16,7 +16,7 @@ var lastPlayerButtonTapped = null;
 
 var helpButton = Titanium.UI.createButton({
 	id: 'Help Button',
-	backgroundImage:'images/help.png',
+	backgroundImage:'images/ipad/help.png',
 	height:31,
 	width:31,
 	bottom: 20,
@@ -29,7 +29,7 @@ helpButton.addEventListener('click',function(){
 
 var playerSelect = Titanium.UI.createView({
 	id: 'Player Selector',
-	backgroundImage:'images/cricket-intro-top.jpg',
+	backgroundImage:'images/ipad/cricket-intro-top.jpg',
 	height:'50%',
 	top: 0,
 	zIndex: 3,
@@ -59,7 +59,7 @@ var factsLabel = Titanium.UI.createLabel({
 
 var setsSelect = Titanium.UI.createView({
 	id: 'Sets Selector',
-	backgroundImage:'images/cricket-intro-bottom.jpg',
+	backgroundImage:'images/ipad/cricket-intro-bottom.jpg',
 	height:'50%',
 	bottom: 0,
 	zIndex: 3,
@@ -67,7 +67,7 @@ var setsSelect = Titanium.UI.createView({
 
 var playerSlider = Titanium.UI.createView({
 	id: 'Player Slider',
-	backgroundImage: 'images/PlayerSubmit_bg.jpg',
+	backgroundImage: 'images/ipad/PlayerSubmit_bg.jpg',
 	height: '15%',
 });
 
@@ -84,7 +84,7 @@ var PlayerName = Titanium.UI.createTextField({
 });
 
 var OkButton = Titanium.UI.createButton({
-	backgroundImage:'images/ok.png',
+	backgroundImage:'images/ipad/ok.png',
 	width: 48,
 	height: 30,
 	right: 225,
@@ -92,7 +92,7 @@ var OkButton = Titanium.UI.createButton({
 });
 
 var DeletePlayer = Titanium.UI.createButton({
-	backgroundImage:'images/deletePlayer.png',
+	backgroundImage:'images/ipad/deletePlayer.png',
 	bottom: 35,
 	width: 27,
 	height: 27,
@@ -100,7 +100,7 @@ var DeletePlayer = Titanium.UI.createButton({
 });
 
 var CricketTitle = Titanium.UI.createImageView({
-	image: 'images/CricketTitle.png',
+	image: 'images/ipad/CricketTitle.png',
 	width: 219,
 	height: 117,
 	top: 20,
@@ -142,7 +142,7 @@ var paintPlayerSelections = function() {
 			playerIndex: null,
 			name: '',
 			color:'#fff',
-			backgroundImage: 'images/playerNotSelected.png',
+			backgroundImage: 'images/ipad/playerNotSelected.png',
 			borderRadius: 50,
 			hintText:'Player 1',
 			font:{fontSize:30,fontFamily:'Ballpark'},
@@ -183,7 +183,7 @@ var paintPossibleSets = function(){
 		var leftMargin = 29 + (14*i) + '%';
 		possibleSets[i] = Titanium.UI.createButton({
 			color:'#fff',
-			backgroundImage: 'images/blank-set.png',
+			backgroundImage: 'images/ipad/blank-set.png',
 			hintText:'Player 1',
 			font:{fontSize:35,fontFamily:'Futura-CondensedMedium'},
 			textAlign:'center',
@@ -205,7 +205,7 @@ var paintPossibleSets = function(){
 
 var GameView = Titanium.UI.createView({
 	id: 'Cricket View',
-	backgroundImage:'images/cricket-dark-wood.jpg',
+	backgroundImage:'images/ipad/cricket-dark-wood.jpg',
 });
 
 var indicators = Titanium.UI.createView({
@@ -218,7 +218,7 @@ var indicators = Titanium.UI.createView({
 
 var indicator1 = Titanium.UI.createLabel({
 	id: 'Indicator 1',
-	backgroundImage: 'images/dartIndicator.png',
+	backgroundImage: 'images/ipad/dartIndicator.png',
 	height: 13,
 	width: 13,
 	left: 26,
@@ -226,7 +226,7 @@ var indicator1 = Titanium.UI.createLabel({
 
 var indicator2 = Titanium.UI.createLabel({
 	id: 'Indicator 1',
-	backgroundImage: 'images/dartIndicator.png',
+	backgroundImage: 'images/ipad/dartIndicator.png',
 	height: 13,
 	width: 13,
 	left: 13,
@@ -234,7 +234,7 @@ var indicator2 = Titanium.UI.createLabel({
 
 var indicator3 = Titanium.UI.createLabel({
 	id: 'Indicator 1',
-	backgroundImage: 'images/dartIndicator.png',
+	backgroundImage: 'images/ipad/dartIndicator.png',
 	height: 13,
 	width: 13,
 	left: 0,
@@ -253,7 +253,7 @@ var addColumns = function(playerCount, name){
 			leftSpace = (20*players[i].id) + 20 + '%'
 		}
 		turnBanners[i] = Titanium.UI.createImageView({
-			image: 'images/banner.png',
+			image: 'images/ipad/banner.png',
 			width: 100,
 			height: 127,
 			top: -127,
@@ -277,7 +277,7 @@ var addColumns = function(playerCount, name){
 }
 
 var play = Titanium.UI.createButton({
-	backgroundImage:'images/PlayButtonDisabled.png',
+	backgroundImage:'images/ipad/PlayButtonDisabled.png',
 	backgroundSelectedImage:'',
 	borderRadius: 10,
 	title:'',

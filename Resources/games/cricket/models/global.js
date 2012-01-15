@@ -73,7 +73,7 @@ var reverseTurn = function(){
 var removePlayer = function(playerIndex, label, button){
 	players.splice(playerIndex,1);
 	label.text = '';
-	button.backgroundImage = 'images/playerNotSelected.png';
+	button.backgroundImage = 'images/ipad/playerNotSelected.png';
 	button.playerIsSet = false;
 	button.selected = false;
 	PlayerName.blur();

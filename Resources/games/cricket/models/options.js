@@ -49,11 +49,11 @@ var playerTap = function(aPlayer){
 			placement = this.id;
 			if(!this.selected){
 				this.selected = true;
-				this.backgroundImage = 'images/playerSelected.png';
+				this.backgroundImage = 'images/ipad/playerSelected.png';
 				playerClicked = true;
 			} else if (this.selected){
 				this.selected=false;
-				this.backgroundImage = 'images/playerNotSelected.png';
+				this.backgroundImage = 'images/ipad/playerNotSelected.png';
 			}
 		}
 		playButtonCheck();
@@ -66,12 +66,12 @@ var possibleSetTap = function(possibleSet){
 	possibleSet.addEventListener('click', function(){
 		clearUnsetPlayers(null);
 		for(var i=0;i<=2;i++){
-			possibleSets[i].backgroundImage ='images/blank-set.png';
+			possibleSets[i].backgroundImage ='images/ipad/blank-set.png';
 		}
 		if (sliderIsOpen){
 			playerSliderDoor();
 		}
-		this.backgroundImage = 'images/blue-button.png';
+		this.backgroundImage = 'images/ipad/blue-button.png';
 		GamesToPlay = this.gamesToPlay;
 		if (!setsChosen){
 			setsChosen = true;
@@ -86,14 +86,14 @@ var clearUnsetPlayers = function(currentButton){
 	if(currentButton != null){
 		for(var i=0;i<thePlayerButtons.length;i++){
 			if(!thePlayerButtons[i].playerIsSet && thePlayerButtons[i] != currentButton){
-				thePlayerButtons[i].backgroundImage = 'images/playerNotSelected.png';
+				thePlayerButtons[i].backgroundImage = 'images/ipad/playerNotSelected.png';
 				thePlayerButtons[i].selected = false;
 			}
 		}
 	} else {
 		for(var i=0;i<thePlayerButtons.length;i++){
 			if(!thePlayerButtons[i].playerIsSet){
-				thePlayerButtons[i].backgroundImage = 'images/playerNotSelected.png';
+				thePlayerButtons[i].backgroundImage = 'images/ipad/playerNotSelected.png';
 				thePlayerButtons[i].selected = false;
 			}
 		}
@@ -102,11 +102,11 @@ var clearUnsetPlayers = function(currentButton){
 
 var playButtonCheck = function(){
 	if(players.length>0 && setsChosen){
-		play.backgroundImage = 'images/PlayButton.png';
+		play.backgroundImage = 'images/ipad/PlayButton.png';
 		play.touchEnabled = true;
 		play.enabled = true;
 	} else {
-		play.backgroundImage = 'images/PlayButtonDisabled.png';
+		play.backgroundImage = 'images/ipad/PlayButtonDisabled.png';
 		play.touchEnabled = false;
 		play.enabled = false;
 	}	
@@ -155,7 +155,7 @@ OkButton.addEventListener('click',function(){
 DeletePlayer.addEventListener('click', function(){
 	removePlayer(deleteIndex, clearLabel, clearButton);
 	if (totalPlayers==0){
-		play.backgroundImage = 'images/PlayButtonDisabled.png',
+		play.backgroundImage = 'images/ipad/PlayButtonDisabled.png',
 		play.touchEnabled = false;
 	}
 	playButtonCheck();

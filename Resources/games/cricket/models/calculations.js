@@ -22,12 +22,12 @@ var highlight = function(scorableNum){
 		scorableNum.closed = true;
 		scorableNum.font = {fontSize:20};
 		scorableNum.color = '#189814';
-		scorableNum.backgroundImage = 'images/scorableButton.png';
+		scorableNum.backgroundImage = 'images/ipad/scorableButton.png';
 	} else {
 		scorableNum.closed = false;
 		scorableNum.font = {fontSize:50};
 		scorableNum.color = '#ffffff';
-		scorableNum.backgroundImage = 'images/button.png';
+		scorableNum.backgroundImage = 'images/ipad/button.png';
 	}
 }
 

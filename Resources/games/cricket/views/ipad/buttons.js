@@ -76,6 +76,7 @@ var paintButtons = function(myView, totalPlayers, playerIndex){
 		modalTopDistance = 60+(120*i);
 		if (i<allNumbers) {
 			playerButtons[i] = Titanium.UI.createButton({
+				id: Games.Cricket.avail_nums[i],
 				parent: myView,
 				playerNum: playerIndex,
 				owner: players[playerIndex].name,

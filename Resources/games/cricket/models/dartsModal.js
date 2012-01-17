@@ -79,8 +79,6 @@ var button_calc = function(button, multiplier, owner){
 			checkClosedNums(button.parent.children, owner);
 		} else if(someoneFinished) {
 			winner(button.parent.children);
-		} else {
-
 		}
 		if(closeNumbers(button.index)){
 			break;

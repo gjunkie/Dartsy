@@ -101,7 +101,7 @@ var playersText = Titanium.UI.createLabel({
 	text: 'CHOOSE PLAYERS',
 	textAlign: 'center',
 	height: 30,
-	bottom: 200,
+	bottom: 80,
 	color: '#b2b2b2',
 	font:{fontSize:18,fontFamily:'Futura-CondensedMedium'},
 });
@@ -244,8 +244,8 @@ var addColumns = function(playerCount, name){
 		}
 		turnBanners[i] = Titanium.UI.createImageView({
 			image: 'images/ipad/banner.png',
-			width: 100,
-			height: 127,
+			width: 200,
+			height: 50,
 			top: -127,
 			zIndex: 0,
 		});
@@ -284,8 +284,8 @@ indicators.add(indicator2);
 indicators.add(indicator3);
 playerSelect.add(CricketTitle);
 playerSelect.add(playersText);
-factsView.add(factsLabel);
-playerSelect.add(factsView);
+//factsView.add(factsLabel);
+//playerSelect.add(factsView);
 setsSelect.add(play);
 setsSelect.add(numOfGamesText);
 //setsSelect.add(helpButton);

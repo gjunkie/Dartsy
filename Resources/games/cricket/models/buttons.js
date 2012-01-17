@@ -1,4 +1,7 @@
 
+var buttonHit = null;
+var theMultiplier = 0;
+
 miss.addEventListener('click', function(){
 	this.animate(buttonPressed);
 	numbers_missed(players[currentPlayerIndex], currentPlayerIndex);
@@ -17,14 +20,46 @@ undoPoints.addEventListener('click', function(){
 	}
 });
 
+if(iphone){
+	multDialog.addEventListener('click',function(e, button){
+		if(e.index == 0) {
+			multiplierDialog(buttonHit, 2, players[currentPlayerIndex]);
+		} else if(e.index == 1) {
+			multiplierDialog(buttonHit, 3, players[currentPlayerIndex]);
+		}
+		determine_highest_score();
+		if(throwsThisRound==3){
+			changeTurn();
+		}
+	});
+}
+
+var multiplierDialog = function(button, multiplier, player){
+	button_calc(button, multiplier, player);
+}
+
 var buttonTap = function(playerButton){
 	playerButton.addEventListener('click',function(){
 		if (throwsThisRound != 3){
 			button_calc(this, 1, this.owner);
-			addDartsModal(this, this.parent, this.incModal);
+			if(ipad){
+				addDartsModal(this, this.parent, this.incModal);
+			}
 			determine_highest_score();
+			if(iphone && throwsThisRound==3){
+				changeTurn();
+			}
 		}
 	});
+	if(iphone){
+		playerButton.addEventListener('longpress',function(e){
+			buttonHit = playerButton;
+			//debug(e)
+			if (throwsThisRound != 3){
+				multDialog.show();
+			}
+		});
+	}
 }
 
 var namesTap = function(index){

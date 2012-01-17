@@ -5,6 +5,7 @@ var debug = function(code){
 	Ti.API.debug(code);
 }
 
+Titanium.UI.iPhone.statusBarStyle = Titanium.UI.iPhone.StatusBar.OPAQUE_BLACK;
 Titanium.include('games/cricket/models/db.js');
 
 createOrRunDb();
@@ -64,9 +65,11 @@ if(Titanium.Platform.osname == 'iphone'){
 	});
 }
 
-
+var ipad = false;
+var iphone = false;
 if(Titanium.Platform.osname == 'ipad'){
 	Ti.API.debug('iPad');
+	ipad = true;
 	Titanium.include('games/cricket/cricket.js');
 	Titanium.include('games/cricket/views/ipad/help.js');
 	Titanium.include('games/cricket/views/ipad/options.js');
@@ -76,6 +79,7 @@ if(Titanium.Platform.osname == 'ipad'){
 
 } else if(Titanium.Platform.osname == 'iphone'){
 	Ti.API.debug('iPhone');
+	iphone = true;
 	Titanium.include('games/cricket/cricket.js');
 	Titanium.include('games/cricket/views/iphone/options.js');
 	Titanium.include('games/cricket/views/iphone/dartsModal.js');

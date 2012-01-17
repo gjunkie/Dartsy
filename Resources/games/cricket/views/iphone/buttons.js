@@ -48,6 +48,12 @@ var miss = Titanium.UI.createButton({
 numbersView.add(miss);
 
 
+var multDialog = Titanium.UI.createOptionDialog({
+    title: '',
+    options: ['Double','Triple','Cancel'],
+    cancel:2,
+});
+
 for(i=0;i<gameKeys.length;i++){
 	// Numbers in the middle
 	topDistance = 50+(58*i);
@@ -71,6 +77,7 @@ var paintButtons = function(myView, totalPlayers, playerIndex){
 		modalTopDistance = 50+(58*i);
 		if (i<allNumbers) {
 			playerButtons[i] = Titanium.UI.createButton({
+				id: Games.Cricket.avail_nums[i],
 				parent: myView,
 				playerNum: playerIndex,
 				owner: players[playerIndex].name,
@@ -78,7 +85,7 @@ var paintButtons = function(myView, totalPlayers, playerIndex){
 				color:'#fff',
 				backgroundImage:'images/ipad/button.png',
 				title:'',
-				font:{fontSize:50,fontFamily:'Futura-CondensedMedium'},
+				font:{fontSize:40,fontFamily:'Futura-CondensedMedium'},
 				textAlign:'center',
 				width:50,
 				height: 50,
@@ -115,18 +122,18 @@ var Names = function(myView, index){
 		textAlign:'center',
 		width:100,
 		height: 50,
-		top: '2%',
+		top: 0,
 		touchEnabled: true,
 		zIndex: 1,
 	});
 	playerPointsLabels[index] = Titanium.UI.createLabel({
 		color:'#fff',
 		text:'0 pts',
-		font:{fontSize:18,fontFamily:'Futura-CondensedMedium'},
+		font:{fontSize:14,fontFamily:'Futura-CondensedMedium'},
 		textAlign:'center',
 		width:100,
 		height: 23,
-		bottom: 20,
+		bottom: 10,
 	});
 	namesTap(index);
 	playerTotalLabel = playerPointsLabels[index];

@@ -56,10 +56,6 @@ var clearBoard = Titanium.UI.createButton({
 	left: '30%',
 });
 
-clearBoard.addEventListener('click', function(){
-	start_new_game();
-});
-
 var GameOptions = Titanium.UI.createView({
 	id: 'Game Options',
 	height: 94,
@@ -158,6 +154,25 @@ var restartSetAlert = Titanium.UI.createAlertDialog({
 restartSet.addEventListener('click', function(){
 	restartSetAlert.show();
 	restartSetAlert.addEventListener('click',function(e){
+		if(e.index == 0) {
+			GameNumber = 0;
+			start_new_game();
+		}
+		GameView.animate(gameSlideDown);
+		win2.remove(GameOptionsMask);
+	});
+});
+
+var clearBoardAlert = Titanium.UI.createAlertDialog({
+    title: 'Clear Board',
+    message: 'Are you sure you want to start a new game?',
+    buttonNames: ['Yes', 'Cancel'],
+    cancel: 1,
+});
+
+clearBoard.addEventListener('click', function(){
+	clearBoardAlert.show();
+	clearBoardAlert.addEventListener('click',function(e){
 		if(e.index == 0) {
 			GameNumber = 0;
 			start_new_game();

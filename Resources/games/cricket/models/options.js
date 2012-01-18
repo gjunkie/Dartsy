@@ -59,6 +59,21 @@ var playerTap = function(aPlayer){
 		playButtonCheck();
 		lastPlayerButtonTapped = this.id;
 	});
+	var offset={};
+	aPlayer.addEventListener('touchstart', function(e) {
+offset.x = e.x-aPlayer.left;
+offset.y = e.y-aPlayer.top
+});
+ 
+aPlayer.addEventListener('touchmove', function(e) {
+aPlayer.left = e.x-offset.x;
+aPlayer.top =  e.y-offset.y;
+});
+ 
+aPlayer.addEventListener('touchend', function(e) {
+ // maybe some cleaning routines here or droppable stuff
+ 
+});
 }
 
 var possibleSetTap = function(possibleSet){

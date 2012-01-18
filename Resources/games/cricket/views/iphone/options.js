@@ -202,7 +202,7 @@ var indicators = Titanium.UI.createView({
 	id: 'Indicators',
 	height: 13,
 	width: 39,
-	top: 70,
+	top: 3,
 	myView: null,
 });
 
@@ -215,7 +215,7 @@ var indicator1 = Titanium.UI.createLabel({
 });
 
 var indicator2 = Titanium.UI.createLabel({
-	id: 'Indicator 1',
+	id: 'Indicator 2',
 	backgroundImage: 'images/ipad/dartIndicator.png',
 	height: 13,
 	width: 13,
@@ -223,7 +223,7 @@ var indicator2 = Titanium.UI.createLabel({
 });
 
 var indicator3 = Titanium.UI.createLabel({
-	id: 'Indicator 1',
+	id: 'Indicator 3',
 	backgroundImage: 'images/ipad/dartIndicator.png',
 	height: 13,
 	width: 13,

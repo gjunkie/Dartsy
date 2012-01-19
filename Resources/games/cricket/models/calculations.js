@@ -22,12 +22,12 @@ var highlight = function(scorableNum){
 		scorableNum.closed = true;
 		scorableNum.font = {fontSize:20};
 		scorableNum.color = '#189814';
-		scorableNum.backgroundImage = 'images/scorableButton.png';
+		scorableNum.backgroundImage = 'images/ipad/scorableButton.png';
 	} else {
 		scorableNum.closed = false;
 		scorableNum.font = {fontSize:50};
 		scorableNum.color = '#ffffff';
-		scorableNum.backgroundImage = 'images/button.png';
+		scorableNum.backgroundImage = 'images/ipad/button.png';
 	}
 }
 
@@ -131,6 +131,11 @@ var numbers_missed = function(player, index){
 	}
 }
 
+var loopMisses = function(index){
+	for(var a=0;a<3;a++){
+		numbers_missed(players[index], true);
+	}
+}
 
 // Print total score
 var printScore = function(label, score){

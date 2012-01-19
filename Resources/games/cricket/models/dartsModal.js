@@ -1,63 +1,11 @@
-var modalIsVisible = false;
 
-var dartsModal = Titanium.UI.createView({
-	id: 'dartsModal',
-	borderRadius:10,
-	backgroundImage:'images/dartsModal.png',
-	width:108,
-	height:75,
-	owner: null,
-	myView: null,
+dartsxtwo.addEventListener('click', function(){
+	multiplierHit(this.worth);
 });
 
-var dartsModalBull = Titanium.UI.createView({
-	id: 'dartsModalBull',
-	borderRadius:10,
-	backgroundImage:'images/bullseyeModal.png',
-	width:65,
-	height:76,
-	bottom: 145,
-	owner: null,
-	myView: null,
+dartsxthree.addEventListener('click', function(){
+	multiplierHit(this.worth);
 });
-
-var dartsxtwo = Titanium.UI.createButton({
-	title: '',
-	backgroundImage: 'images/double.png',
-	width: 44,
-	height: 44,
-	worth: 2,
-	top: 8,
-	touchEnabled: true
-});
-
-var dartsxthree = Titanium.UI.createButton({
-	title: '',
-	color:'#fff',
-	backgroundImage: 'images/triple.png',
-	width: 44,
-	height: 44,
-	worth: 3,
-	right: 10,
-	top: 8,
-	touchEnabled: true
-});
-
-var removeModal = function(){
-	theModal.animate(fadeOutSlow);
-	if (throwsThisRound == 3){
-		changeTurn();
-		killModal();
-		modalIsVisible = false;
-	};
-};
-
-var killModal = function(){	
-	if (modalIsVisible){
-		dartsModal.myView.remove(theModal);
-		modalIsVisible = false;
-	};
-}
 
 var modalTimer;
 var theModal = null;
@@ -85,15 +33,6 @@ var addDartsModal = function(btn, theView, topPlacement){
 	}
 	modalTimer = setTimeout(removeModal,3000);
 }
-
-dartsxtwo.addEventListener('click', function(){
-	multiplierHit(this.worth);
-});
-
-dartsxthree.addEventListener('click', function(){
-	multiplierHit(this.worth);
-});
-
 
 var multiplier = 0;
 var multiplierHit = function(worth){
@@ -140,8 +79,6 @@ var button_calc = function(button, multiplier, owner){
 			checkClosedNums(button.parent.children, owner);
 		} else if(someoneFinished) {
 			winner(button.parent.children);
-		} else {
-
 		}
 		if(closeNumbers(button.index)){
 			break;
@@ -171,4 +108,20 @@ var button_calc = function(button, multiplier, owner){
 			// db2.execute('INSERT INTO playersTabels3 (name) VALUES (?)',playerName);
 		// }
 	
+}
+
+var removeModal = function(){
+	theModal.animate(fadeOutSlow);
+	if (throwsThisRound == 3){
+		changeTurn();
+		killModal();
+		modalIsVisible = false;
+	};
+};
+
+var killModal = function(){	
+	if (modalIsVisible){
+		dartsModal.myView.remove(theModal);
+		modalIsVisible = false;
+	};
 }

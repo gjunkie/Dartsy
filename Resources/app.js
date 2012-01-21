@@ -5,7 +5,6 @@ var debug = function(code){
 	Ti.API.debug(code);
 }
 
-Titanium.UI.iPhone.statusBarStyle = Titanium.UI.iPhone.StatusBar.OPAQUE_BLACK;
 Titanium.include('games/cricket/models/db.js');
 
 createOrRunDb();
@@ -67,28 +66,40 @@ if(Titanium.Platform.osname == 'iphone'){
 
 var ipad = false;
 var iphone = false;
-if(Titanium.Platform.osname == 'ipad'){
-	Ti.API.debug('iPad');
-	ipad = true;
-	Titanium.include('games/cricket/cricket.js');
-	Titanium.include('games/cricket/views/ipad/help.js');
-	Titanium.include('games/cricket/views/ipad/options.js');
-	Titanium.include('games/cricket/views/ipad/dartsModal.js');
-	Titanium.include('games/cricket/views/ipad/buttons.js');
-	Titanium.include('games/cricket/views/ipad/gameOptions.js');
-
-} else if(Titanium.Platform.osname == 'iphone'){
-	Ti.API.debug('iPhone');
-	iphone = true;
-	Titanium.include('games/cricket/cricket.js');
-	Titanium.include('games/cricket/views/iphone/options.js');
-	Titanium.include('games/cricket/views/iphone/dartsModal.js');
-	Titanium.include('games/cricket/views/iphone/buttons.js');
-	Titanium.include('games/cricket/views/iphone/gameOptions.js');
+var iOSCheck = function(){
+	if(Titanium.Platform.osname == 'ipad'){
+		Ti.API.debug('iPad');
+		ipad = true;
+		Titanium.include('games/cricket/cricket.js');
+		Titanium.include('games/cricket/views/ipad/help.js');
+		Titanium.include('games/cricket/views/ipad/iPadOptions.js');
+		Titanium.include('games/cricket/views/ipad/dartsModal.js');
+		Titanium.include('games/cricket/views/ipad/buttons.js');
+		Titanium.include('games/cricket/views/ipad/gameOptions.js');
+	
+	} else if(Titanium.Platform.osname == 'iphone'){
+		Ti.API.debug('iPhone');
+		iphone = true;
+		Titanium.include('games/cricket/cricket.js');
+		Titanium.include('games/cricket/views/phone/iPhoneOptions.js');
+		Titanium.include('games/cricket/views/phone/dartsModal.js');
+		Titanium.include('games/cricket/views/phone/buttons.js');
+		Titanium.include('games/cricket/views/phone/gameOptions.js');
+	} else {
+		Titanium.include('games/cricket/cricket.js');
+		//Titanium.include('games/cricket/views/android/help.js');
+		Titanium.include('games/cricket/views/android/options.js');
+		Titanium.include('games/cricket/views/android/dartsModal.js');
+		Titanium.include('games/cricket/views/android/buttons.js');
+		Titanium.include('games/cricket/views/android/gameOptions.js');
+	}
+	if(iphone || ipad){
+		Titanium.UI.iPhone.statusBarStyle = Titanium.UI.iPhone.StatusBar.OPAQUE_BLACK;
+	}
 }
+iOSCheck();
 
-
-	Titanium.include('games/cricket/models/global.js');
+Titanium.include('games/cricket/models/global.js');
 
 paintPlayerSelections();
 paintPossibleSets();

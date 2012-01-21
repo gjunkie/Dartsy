@@ -32,6 +32,15 @@ if(iphone){
 			changeTurn();
 		}
 	});
+	multDialogBull.addEventListener('click',function(e, button){
+		if(e.index == 0) {
+			multiplierDialog(buttonHit, 2, players[currentPlayerIndex]);
+		}
+		determine_highest_score();
+		if(throwsThisRound==3){
+			changeTurn();
+		}
+	});
 }
 
 var multiplierDialog = function(button, multiplier, player){
@@ -54,9 +63,12 @@ var buttonTap = function(playerButton){
 	if(iphone){
 		playerButton.addEventListener('longpress',function(e){
 			buttonHit = playerButton;
-			//debug(e)
 			if (throwsThisRound != 3){
-				multDialog.show();
+				if(this.worth<25){
+					multDialog.show();
+				} else {
+					multDialogBull.show();
+				}
 			}
 		});
 	}

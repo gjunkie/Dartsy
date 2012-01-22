@@ -137,7 +137,7 @@ var submittedPlayer = Titanium.UI.createLabel({
 var paintPlayerSelections = function() {
 	for(var i=0;i<possiblePlayers;i++){
 		var leftMargin = 20 + (15*i) + '%';
-		thePlayerButtons[i] = Titanium.UI.createButton({
+		thePlayerButtons[i] = Titanium.UI.createLabel({
 			id: i,
 			playerIndex: null,
 			name: '',
@@ -288,6 +288,85 @@ var play = Titanium.UI.createButton({
 	touchEnabled: false,
 	enabeld: false,
 });
+
+
+
+
+debug(thePlayerButtons);
+
+// DRAG AND DROP CODE FOR BUTTONS
+
+	thePlayerButtons[0].addEventListener("touchmove", function(e){
+		debug('dragging')
+	    var newX, newY, labelY;
+	    if(e.source.name == '0') {
+	        newX = e.x;
+	        newY = 384;
+	        labelY = 451;
+	    } else {
+	        newX = e.x + thePlayerButtons[0].animatedCenter.x - thePlayerButtons[0].width/2;
+	        newY = 384;
+	        labelY = 451;
+	    }
+	 
+	    thePlayerButtons[0].animate({center:{x:newX,y:newY}, duration:1});
+	    PlayerLabels[0].animate({center:{x:newX,y:labelY}, duration:1});
+	});
+	
+	thePlayerButtons[1].addEventListener("touchmove", function(e){
+		debug('dragging')
+	    var newX, newY, labelY;
+	    if(e.source.name == '1') {
+	        newX = e.x;
+	        newY = 384;
+	        labelY = 451;
+	    } else {
+	        newX = e.x + thePlayerButtons[1].animatedCenter.x - thePlayerButtons[1].width/2;
+	        newY = 384;
+	        labelY = 451;
+	    }
+	 
+	    thePlayerButtons[1].animate({center:{x:newX,y:newY}, duration:1});
+	    PlayerLabels[1].animate({center:{x:newX,y:labelY}, duration:1});
+	});
+	
+	thePlayerButtons[2].addEventListener("touchmove", function(e){
+		debug('dragging')
+	    var newX, newY, labelY;
+	    if(e.source.name == '2') {
+	        newX = e.x;
+	        newY = 384;
+	        labelY = 451;
+	    } else {
+	        newX = e.x + thePlayerButtons[2].animatedCenter.x - thePlayerButtons[2].width/2;
+	        newY = 384;
+	        labelY = 451;
+	    }
+	 
+	    thePlayerButtons[2].animate({center:{x:newX,y:newY}, duration:1});
+	    PlayerLabels[2].animate({center:{x:newX,y:labelY}, duration:1});
+	});
+	
+	thePlayerButtons[3].addEventListener("touchmove", function(e){
+		debug('dragging')
+	    var newX, newY, labelY;
+	    if(e.source.name == '3') {
+	        newX = e.x;
+	        newY = 384;
+	        labelY = 451;
+	    } else {
+	        newX = e.x + thePlayerButtons[3].animatedCenter.x - thePlayerButtons[3].width/2;
+	        newY = 384;
+	        labelY = 451;
+	    }
+	 
+	    thePlayerButtons[3].animate({center:{x:newX,y:newY}, duration:1});
+	    PlayerLabels[3].animate({center:{x:newX,y:labelY}, duration:1});
+	});
+
+
+
+
 
 indicators.add(indicator1);
 indicators.add(indicator2);

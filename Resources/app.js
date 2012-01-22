@@ -72,7 +72,7 @@ var iOSCheck = function(){
 		ipad = true;
 		Titanium.include('games/cricket/cricket.js');
 		Titanium.include('games/cricket/views/ipad/help.js');
-		Titanium.include('games/cricket/views/ipad/iPadOptions.js');
+		Titanium.include('games/cricket/views/ipad/ipadOptions.js');
 		Titanium.include('games/cricket/views/ipad/dartsModal.js');
 		Titanium.include('games/cricket/views/ipad/buttons.js');
 		Titanium.include('games/cricket/views/ipad/gameOptions.js');

@@ -187,3 +187,13 @@ var submitThePlayer = function(){
 	// Database Function
 	//checkForNewPlayer(playerName);
 }
+
+var leftLimit;
+var rightLimit;
+if(iphone){
+	leftLimit = 50;
+	rightLimit = 50;
+} else if (ipad){
+	leftLimit = 200;
+	rightLimit = 559;
+}

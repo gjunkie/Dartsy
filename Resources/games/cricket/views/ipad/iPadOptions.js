@@ -13,6 +13,7 @@ var deleteIndex = null;
 var clearLabel = null;
 var clearButton = null;
 var lastPlayerButtonTapped = null;
+var position = [200, 321, 443, 645];
 
 var helpButton = Titanium.UI.createButton({
 	id: 'Help Button',
@@ -136,30 +137,39 @@ var submittedPlayer = Titanium.UI.createLabel({
 // Buttons for user to select number of players
 var paintPlayerSelections = function() {
 	for(var i=0;i<possiblePlayers;i++){
-		var leftMargin = 20 + (15*i) + '%';
+		if(i==0){
+			midLeft = null;
+			midRight = position[i]+((position[i+1]-position[i]));
+		} else if(i==3){
+			midLeft = position[i-1]+((position[i]-position[i-1]));
+			midRight = null;
+		} else {
+			midLeft = position[i-1]+((position[i]-position[i-1]));
+			midRight = position[i]+((position[i+1]-position[i]));
+		}
+		var leftMargin = 145 + (120*i);
 		thePlayerButtons[i] = Titanium.UI.createLabel({
 			id: i,
+			slot:i+1,
 			playerIndex: null,
 			name: '',
-			color:'#fff',
 			backgroundImage: 'images/ipad/playerNotSelected.png',
 			borderRadius: 50,
 			hintText:'Player 1',
-			font:{fontSize:30,fontFamily:'Ballpark'},
-			textAlign:'center',
 			title: '',
-			textAlign:'center',
 			width:116,
 			height: 116,
 			top: '65%',
 			left: leftMargin,
+			mids:{midLeft:midLeft,midRight:midRight},
 			selected: false,
+			position: position[i],
 			playerIsSet: false,
 			touchEnabled: true,
 		});
 		aPlayer = thePlayerButtons[i];
 		playerTap(aPlayer);
-	
+		debug(aPlayer.mids)
 		PlayerLabels[i] = Titanium.UI.createLabel({
 			color: '#fff',
 			id: i,
@@ -176,8 +186,121 @@ var paintPlayerSelections = function() {
 		playerSelect.add(aPlayerLabel);
 	}
 	
+	// set constants from player button options array
+var staticOne = thePlayerButtons[0];
+var staticTwo = thePlayerButtons[1];
+var staticThree = thePlayerButtons[2];
+var staticFour = thePlayerButtons[3];
+var staticOneLabel = PlayerLabels[0];
+var staticTwoLabel = PlayerLabels[1];
+var staticThreeLabel = PlayerLabels[2];
+var staticFourLabel = PlayerLabels[3];
+	
+	var tmp_index;
+	var playersSwitched = false;
+	var tmp_position;
+	var oneSwitch = false;
+	var twoSwitch = false;
+	var threeSwitch = false;
+	var fourSwitch = false;
+	var switchPlayers = function(movingPlayer, movingPlayerX, movingPlayerY, playerLabelY){
+		//debug('moving player id is '+movingPlayer.id);
+		if(positionOne(movingPlayerX) && movingPlayer != staticOne){
+			if(!oneSwitch){
+				debug('Position One Running');
+				// try easing animation
+				staticOne.animate({center:{x:movingPlayer.position,y:movingPlayerY}, duration:1});
+				staticOneLabel.animate({center:{x:movingPlayer.position,y:playerLabelY}, duration:1});
+				tmp_position = staticOne.position;
+				debug('tmp_position is '+tmp_position);
+				staticOne.position = movingPlayer.position;
+				debug('staticOne.position is '+staticOne.position);
+				movingPlayer.position = tmp_position;
+				debug('movingPlayer.position is '+movingPlayer.position);
+				movingPlayer.slot = 1;
+				//oneSwitch = true;
+			}
+		} else if(positionTwo(movingPlayerX) && movingPlayer != staticTwo){
+			if(!twoSwitch){
+				debug('Position Two Running');
+				staticTwo.animate({center:{x:movingPlayer.position,y:movingPlayerY}, duration:1});
+				staticTwoLabel.animate({center:{x:movingPlayer.position,y:playerLabelY}, duration:1});
+				tmp_position = staticTwo.position;
+				debug('tmp_position is '+tmp_position);
+				staticTwo.position = movingPlayer.position;
+				debug('staticTwo.position is '+staticTwo.position);
+				movingPlayer.position = tmp_position;
+				debug('movingPlayer.position is '+movingPlayer.position);
+				movingPlayer.slot = 2;
+				//twoSwitch = true;
+			}
+		} else if(positionThree(movingPlayerX) && movingPlayer != staticThree){
+			if(!threeSwitch){
+				debug('Position Three Running');
+				staticThree.animate({center:{x:movingPlayer.position,y:movingPlayerY}, duration:1});
+				staticThreeLabel.animate({center:{x:movingPlayer.position,y:playerLabelY}, duration:1});
+				tmp_position = staticThree.position;
+				staticThree.position = movingPlayer.position;
+				movingPlayer.position = tmp_position;
+				movingPlayer.slot = 3;
+				//threeSwitch = true;
+			}
+		} else if(positionFour(movingPlayerX) && movingPlayer != staticFour){
+			if(!fourSwitch){
+				debug('Position Four Running');
+				staticFour.animate({center:{x:movingPlayer.position,y:movingPlayerY}, duration:1});
+				staticFourLabel.animate({center:{x:movingPlayer.position,y:playerLabelY}, duration:1});
+				tmp_position = staticFour.position;
+				staticFour.position = movingPlayer.position;
+				movingPlayer.position = tmp_position;
+				movingPlayer.slot = 4;
+				//fourSwitch = true;
+			}
+		}
+	}
+	
+	var changeDroppedPlayer = function(movingPlayer){
+		
+	}
+	
+	// verifies that movingPlayerX is within the boundaries of each section.
+var positionOne = function(movingPlayerX){
+	var left = 200;
+	var right = 300;
+	if(movingPlayerX>left && movingPlayerX<right){
+		return true;
+	} else {
+		return false;
+	}
+}
+var positionTwo = function(movingPlayerX){
+	var left = 300;
+	var right = 400;
+	if(movingPlayerX>left && movingPlayerX<right){
+		return true;
+	} else {
+		return false;
+	}
+}
+var positionThree = function(movingPlayerX){
+	var left = 400;
+	var right = 500;
+	if(movingPlayerX>left && movingPlayerX<right){
+		return true;
+	} else {
+		return false;
+	}
+}
+var positionFour = function(movingPlayerX){
+	var left = 500;
+	var right = 600;
+	if(movingPlayerX>left && movingPlayerX<right){
+		return true;
+	} else {
+		return false;
+	}
+}
 	thePlayerButtons[0].addEventListener("touchmove", function(e){
-		debug('dragging')
 	    var newX, newY, labelY;
 	    if(e.source.name == '0') {
 	        newX = e.x;
@@ -188,13 +311,16 @@ var paintPlayerSelections = function() {
 	        newY = 384;
 	        labelY = 451;
 	    }
-	 
-	    thePlayerButtons[0].animate({center:{x:newX,y:newY}, duration:1});
-	    PlayerLabels[0].animate({center:{x:newX,y:labelY}, duration:1});
+	 	if(newX>leftLimit && newX<rightLimit){
+	 		// next two lines animate the drag.
+		    thePlayerButtons[0].animate({center:{x:newX,y:newY}, duration:1});
+		    PlayerLabels[0].animate({center:{x:newX,y:labelY}, duration:1});
+		    // checks to switch player positions
+		    switchPlayers(this, newX, newY, labelY);
+		}
 	});
 	
 	thePlayerButtons[1].addEventListener("touchmove", function(e){
-		debug('dragging')
 	    var newX, newY, labelY;
 	    if(e.source.name == '1') {
 	        newX = e.x;
@@ -205,13 +331,14 @@ var paintPlayerSelections = function() {
 	        newY = 384;
 	        labelY = 451;
 	    }
-	 
-	    thePlayerButtons[1].animate({center:{x:newX,y:newY}, duration:1});
-	    PlayerLabels[1].animate({center:{x:newX,y:labelY}, duration:1});
+	 	if(newX>leftLimit && newX<rightLimit){
+		    thePlayerButtons[1].animate({center:{x:newX,y:newY}, duration:1});
+		    PlayerLabels[1].animate({center:{x:newX,y:labelY}, duration:1});
+		    switchPlayers(this, newX, newY, labelY);
+		}
 	});
 	
 	thePlayerButtons[2].addEventListener("touchmove", function(e){
-		debug('dragging')
 	    var newX, newY, labelY;
 	    if(e.source.name == '2') {
 	        newX = e.x;
@@ -222,13 +349,14 @@ var paintPlayerSelections = function() {
 	        newY = 384;
 	        labelY = 451;
 	    }
-	 
-	    thePlayerButtons[2].animate({center:{x:newX,y:newY}, duration:1});
-	    PlayerLabels[2].animate({center:{x:newX,y:labelY}, duration:1});
+	 	if(newX>leftLimit && newX<rightLimit){
+		    thePlayerButtons[2].animate({center:{x:newX,y:newY}, duration:1});
+		    PlayerLabels[2].animate({center:{x:newX,y:labelY}, duration:1});
+		    switchPlayers(this, newX, newY, labelY);
+		}
 	});
 	
 	thePlayerButtons[3].addEventListener("touchmove", function(e){
-		debug('dragging')
 	    var newX, newY, labelY;
 	    if(e.source.name == '3') {
 	        newX = e.x;
@@ -239,12 +367,20 @@ var paintPlayerSelections = function() {
 	        newY = 384;
 	        labelY = 451;
 	    }
-	 
-	    thePlayerButtons[3].animate({center:{x:newX,y:newY}, duration:1});
-	    PlayerLabels[3].animate({center:{x:newX,y:labelY}, duration:1});
+	 	if(newX>leftLimit && newX<rightLimit){
+		    thePlayerButtons[3].animate({center:{x:newX,y:newY}, duration:1});
+		    PlayerLabels[3].animate({center:{x:newX,y:labelY}, duration:1});
+		    switchPlayers(this, newX, newY, labelY);
+		}
 	});
 }
 
+
+	// thePlayerButtons[0].addEventListener("touchend", function(e){})
+	// thePlayerButtons[1].addEventListener("touchend", function(e){})
+	// thePlayerButtons[2].addEventListener("touchend", function(e){})
+	// thePlayerButtons[3].addEventListener("touchend", function(e){})
+	
 var paintPossibleSets = function(){
 	// Buttons for user to select number of sets
 	for(var i=0;i<Games.Cricket.sets.length;i++){

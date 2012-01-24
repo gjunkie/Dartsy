@@ -1,7 +1,7 @@
 
 var gameOptionsTrigger = Titanium.UI.createLabel({
 	color:'#fff',
-	backgroundImage:'images/ipad/CricketOptions.png',
+	backgroundImage:'images/'+device+'/CricketOptions.png',
 	text:'',
 	width:71,
 	height: 60,
@@ -61,7 +61,7 @@ var GameOptions = Titanium.UI.createView({
 	height: 94,
 	width:768,
 	bottom: 0,
-	backgroundImage: 'images/ipad/gameOptions.png',
+	backgroundImage: 'images/'+device+'/gameOptions.png',
 });
 
 var GameOptionsMask = Titanium.UI.createView({

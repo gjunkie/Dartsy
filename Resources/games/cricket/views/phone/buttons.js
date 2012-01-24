@@ -1,6 +1,4 @@
 // This file creates all scorable buttons and playable numbers on the board 
-
-debug('view buttons ipad loaded');
 var allNumbers = Object.keys(Games.Cricket.avail_nums).length;
 var gameKeys = Games.Cricket.avail_nums;
 var availNums=[];
@@ -18,18 +16,18 @@ var throwsLeft = 0;
 
 var numbersView = Titanium.UI.createView({
 	id: 'Numbers',
-	backgroundImage:'images/ipad/numbers_bg.jpg',
-	width:'20%',
+	backgroundImage:'images/'+device+'/numbers_bg.jpg',
+	width:88,
 	zIndex: 3,
 });
 
 var undoPoints = Titanium.UI.createButton({
 	title: '',
-	backgroundImage: 'images/ipad/undo.png',
+	backgroundImage: 'images/'+device+'/undo.png',
 	playersLeft: totalPlayers,
-	width:73,
-	height: 62,
-	left: 13,
+	width:36.5,
+	height: 31,
+	left: 2,
 	top: 0,
 	touchEnabled: true
 });
@@ -37,11 +35,11 @@ var undoPoints = Titanium.UI.createButton({
 var miss = Titanium.UI.createButton({
 	color:'#fff',
 	title: '',
-	backgroundImage: 'images/ipad/miss.png',
+	backgroundImage: 'images/'+device+'/miss.png',
 	playersLeft: totalPlayers,
-	width:73,
-	height: 62,
-	right: 13,
+	width:36.5,
+	height: 31,
+	right: 2,
 	top: 0,
 	touchEnabled: true
 });
@@ -65,11 +63,11 @@ for(i=0;i<gameKeys.length;i++){
 	topDistance = 50+(58*i);
 	backgroundImageNumber = Games.Cricket.avail_nums[i];
 	availNums[i] = Titanium.UI.createLabel({
-		backgroundImage: 'images/ipad/numbers/'+backgroundImageNumber+'.png',
+		backgroundImage: 'images/'+device+'/numbers/'+backgroundImageNumber+'.png',
 		text: '',
 		playersLeft: totalPlayers,
-		width:34,
-		height: 36,
+		width:35,
+		height: 35,
 		top: topDistance,
 	});
 	number = availNums[i];
@@ -89,9 +87,9 @@ var paintButtons = function(myView, totalPlayers, playerIndex){
 				owner: players[playerIndex].name,
 				index: i,
 				color:'#fff',
-				backgroundImage:'images/ipad/button.png',
+				backgroundImage:'images/'+device+'/button.png',
 				title:'',
-				font:{fontSize:40,fontFamily:'Futura-CondensedMedium'},
+				font:{fontSize:30,fontFamily:'Futura-CondensedMedium'},
 				textAlign:'center',
 				width:50,
 				height: 50,
@@ -124,7 +122,7 @@ var Names = function(myView, index){
 		backgroundColor:'none',
 		borderRadius: 5,
 		text: players[index].name,
-		font:{fontSize:18,fontFamily:'Ballpark'},
+		font:{fontSize:10,fontFamily:'Ballpark'},
 		textAlign:'center',
 		width:100,
 		height: 50,

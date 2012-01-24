@@ -1,11 +1,19 @@
 
 // Show Hide players slider in options screen
 var playersSliderExposeTop = Titanium.UI.createAnimation();
-    playersSliderExposeTop.top = '-6%';
+	if(ipad){
+	    playersSliderExposeTop.top = '-6%';
+	} else {
+	    playersSliderExposeTop.top = -20;
+	}
     playersSliderExposeTop.duration = 250;
 
 var playersSliderExposeBottom = Titanium.UI.createAnimation();
-    playersSliderExposeBottom.bottom = '-6%';
+	if(ipad){
+		playersSliderExposeBottom.bottom = '-6%';
+	} else {
+		playersSliderExposeBottom.bottom = -45;
+	}
     playersSliderExposeBottom.duration = 250;
     
 var playersSliderHideTop = Titanium.UI.createAnimation();
@@ -108,7 +116,11 @@ var slideBanner = function(banner, direction){
 	if (direction == 'down'){
 		top = 0;
 	} else if (direction == 'up'){
-		top = -127;
+		if(ipad){
+			top = -127;
+		} else {
+			top = -100;
+		}
 	}
 	var turnBannerSlider = Titanium.UI.createAnimation();
 	turnBannerSlider.duration = 250;

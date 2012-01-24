@@ -66,10 +66,12 @@ if(Titanium.Platform.osname == 'iphone'){
 
 var ipad = false;
 var iphone = false;
+var device;
 var iOSCheck = function(){
 	if(Titanium.Platform.osname == 'ipad'){
 		Ti.API.debug('iPad');
 		ipad = true;
+		device = 'ipad';
 		Titanium.include('games/cricket/cricket.js');
 		Titanium.include('games/cricket/views/ipad/help.js');
 		Titanium.include('games/cricket/views/ipad/iPadOptions.js');
@@ -80,6 +82,7 @@ var iOSCheck = function(){
 	} else if(Titanium.Platform.osname == 'iphone'){
 		Ti.API.debug('iPhone');
 		iphone = true;
+		device = 'iphone';
 		Titanium.include('games/cricket/cricket.js');
 		Titanium.include('games/cricket/views/phone/iPhoneOptions.js');
 		Titanium.include('games/cricket/views/phone/dartsModal.js');

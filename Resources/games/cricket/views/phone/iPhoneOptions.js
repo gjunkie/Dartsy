@@ -6,7 +6,7 @@ var possibleSets = [];
 
 var helpButton = Titanium.UI.createButton({
 	id: 'Help Button',
-	backgroundImage:'images/ipad/help.png',
+	backgroundImage:'images/iphone/help.png',
 	height:31,
 	width:31,
 	bottom: 20,
@@ -19,9 +19,17 @@ helpButton.addEventListener('click',function(){
 
 var playerSelect = Titanium.UI.createView({
 	id: 'Player Selector',
-	backgroundImage:'images/ipad/cricket-intro-top.jpg',
-	height:'50%',
-	top: 0,
+	backgroundImage:'images/iphone/cricket-intro-top.jpg',
+	height:200,
+	top: -20,
+	zIndex: 3,
+});
+
+var setsSelect = Titanium.UI.createView({
+	id: 'Sets Selector',
+	backgroundImage:'images/iphone/cricket-intro-bottom.jpg',
+	height:280,
+	bottom: 0,
 	zIndex: 3,
 });
 
@@ -47,18 +55,11 @@ var factsLabel = Titanium.UI.createLabel({
 	width:'95%',
 });
 
-var setsSelect = Titanium.UI.createView({
-	id: 'Sets Selector',
-	backgroundImage:'images/ipad/cricket-intro-bottom.jpg',
-	height:'50%',
-	bottom: 0,
-	zIndex: 3,
-});
-
 var playerSlider = Titanium.UI.createView({
 	id: 'Player Slider',
-	backgroundImage: 'images/ipad/PlayerSubmit_bg.jpg',
-	height: '15%',
+	backgroundImage: 'images/iphone/PlayerSubmit_bg.jpg',
+	height: 45,
+	top: 180,
 });
 
 var PlayerName = Titanium.UI.createTextField({
@@ -75,15 +76,15 @@ var PlayerName = Titanium.UI.createTextField({
 });
 
 var OkButton = Titanium.UI.createButton({
-	backgroundImage:'images/ipad/ok.png',
-	width: 48,
-	height: 30,
-	right: 40,
+	backgroundImage:'images/iphone/ok.png',
+	width: 24,
+	height: 15,
+	right: 20,
 	title: '',
 });
 
 var DeletePlayer = Titanium.UI.createButton({
-	backgroundImage:'images/ipad/deletePlayer.png',
+	backgroundImage:'images/iphone/deletePlayer.png',
 	bottom: 10,
 	width: 18,
 	height: 18,
@@ -91,7 +92,7 @@ var DeletePlayer = Titanium.UI.createButton({
 });
 
 var CricketTitle = Titanium.UI.createImageView({
-	image: 'images/ipad/CricketTitle.png',
+	image: 'images/iphone/CricketTitle.png',
 	width: 219,
 	height: 117,
 	top: 20,
@@ -133,7 +134,7 @@ var paintPlayerSelections = function() {
 			playerIndex: null,
 			name: '',
 			color:'#fff',
-			backgroundImage: 'images/ipad/playerNotSelected.png',
+			backgroundImage: 'images/iphone/playerNotSelected.png',
 			hintText:'Player 1',
 			font:{fontSize:30,fontFamily:'Ballpark'},
 			textAlign:'center',
@@ -141,7 +142,7 @@ var paintPlayerSelections = function() {
 			textAlign:'center',
 			width:60,
 			height: 60,
-			top: '65%',
+			top: 110,
 			left: leftMargin,
 			selected: false,
 			playerIsSet: false,
@@ -158,7 +159,7 @@ var paintPlayerSelections = function() {
 			left: leftMargin,
 			textAlign: 'center',
 			font:{fontSize:17,fontFamily:'Ballpark'},
-			top: '87%',
+			top: 115,
 		});
 		aPlayerLabel = PlayerLabels[i];
 		
@@ -173,16 +174,16 @@ var paintPossibleSets = function(){
 		var leftMargin = 21 + (20*i) + '%';
 		possibleSets[i] = Titanium.UI.createButton({
 			color:'#fff',
-			backgroundImage: 'images/ipad/blank-set.png',
+			backgroundImage: 'images/iphone/blank-set.png',
 			hintText:'Player 1',
 			font:{fontSize:25,fontFamily:'Futura-CondensedMedium'},
 			textAlign:'center',
 			title: Games.Cricket.sets[i],
 			gamesToPlay: Games.Cricket.sets[i],
 			textAlign:'center',
-			width:60,
-			height: 60,
-			top: '20%',
+			width:55,
+			height: 55,
+			top: 50,
 			left: leftMargin,
 			touchEnabled: true,
 		});
@@ -195,7 +196,7 @@ var paintPossibleSets = function(){
 
 var GameView = Titanium.UI.createView({
 	id: 'Cricket View',
-	backgroundImage:'images/ipad/cricket-dark-wood.jpg',
+	backgroundImage:'images/iphone/cricket-dark-wood.jpg',
 });
 
 var indicators = Titanium.UI.createView({
@@ -208,7 +209,7 @@ var indicators = Titanium.UI.createView({
 
 var indicator1 = Titanium.UI.createLabel({
 	id: 'Indicator 1',
-	backgroundImage: 'images/ipad/dartIndicator.png',
+	backgroundImage: 'images/iphone/dartIndicator.png',
 	height: 13,
 	width: 13,
 	left: 26,
@@ -216,7 +217,7 @@ var indicator1 = Titanium.UI.createLabel({
 
 var indicator2 = Titanium.UI.createLabel({
 	id: 'Indicator 2',
-	backgroundImage: 'images/ipad/dartIndicator.png',
+	backgroundImage: 'images/iphone/dartIndicator.png',
 	height: 13,
 	width: 13,
 	left: 13,
@@ -224,7 +225,7 @@ var indicator2 = Titanium.UI.createLabel({
 
 var indicator3 = Titanium.UI.createLabel({
 	id: 'Indicator 3',
-	backgroundImage: 'images/ipad/dartIndicator.png',
+	backgroundImage: 'images/iphone/dartIndicator.png',
 	height: 13,
 	width: 13,
 	left: 0,
@@ -238,12 +239,12 @@ var addColumns = function(playerCount, name){
 	for(var i=0; i<playerCount; i++){
 		thePlayer = players[i];
 		if(players[i].id<2){
-			leftSpace = (20*players[i].id) + '%'
+			leftSpace = (60*players[i].id);
 		} else if (players[i].id>1){
-			leftSpace = (20*players[i].id) + 20 + '%'
+			leftSpace = (60*players[i].id) + 88;
 		}
 		turnBanners[i] = Titanium.UI.createImageView({
-			image: 'images/ipad/banner.png',
+			image: 'images/iphone/banner.png',
 			width: 200,
 			height: 50,
 			top: -127,
@@ -252,8 +253,7 @@ var addColumns = function(playerCount, name){
 		
 		views[i] = Titanium.UI.createView({
 			id: 'view ' + i,
-			borderRadius:10,
-			width:'20%',
+			width:64,
 			left: leftSpace,
 		});
 		theView = views[i];
@@ -267,14 +267,12 @@ var addColumns = function(playerCount, name){
 }
 
 var play = Titanium.UI.createButton({
-	backgroundImage:'images/ipad/PlayButtonDisabled.png',
+	backgroundImage:'images/iphone/PlayButtonDisabled.png',
 	backgroundSelectedImage:'',
-	borderRadius: 10,
 	title:'',
-	textAlign:'center',
-	width:60,
-	height: 60,
-	bottom: '20%',
+	width:56,
+	height: 56,
+	bottom: 50,
 	touchEnabled: false,
 	enabeld: false,
 });

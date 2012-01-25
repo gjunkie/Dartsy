@@ -82,7 +82,7 @@ var iOSCheck = function(){
 	} else if(Titanium.Platform.osname == 'iphone'){
 		Ti.API.debug('iPhone');
 		iphone = true;
-		device = 'iphone';
+		device = 'phone';
 		Titanium.include('games/cricket/cricket.js');
 		Titanium.include('games/cricket/views/phone/iPhoneOptions.js');
 		Titanium.include('games/cricket/views/phone/dartsModal.js');

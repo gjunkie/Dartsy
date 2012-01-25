@@ -121,8 +121,8 @@ var Names = function(myView, index){
 		color:'#fff',
 		backgroundColor:'none',
 		borderRadius: 5,
-		text: players[index].name,
-		font:{fontSize:10,fontFamily:'Ballpark'},
+		text: players[index].name.substr(0, 1),
+		font:{fontSize:30,fontFamily:'Ballpark'},
 		textAlign:'center',
 		width:100,
 		height: 50,
@@ -137,7 +137,7 @@ var Names = function(myView, index){
 		textAlign:'center',
 		width:100,
 		height: 23,
-		bottom: 10,
+		bottom: 2,
 	});
 	namesTap(index);
 	playerTotalLabel = playerPointsLabels[index];

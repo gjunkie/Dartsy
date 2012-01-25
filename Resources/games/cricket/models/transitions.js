@@ -17,7 +17,11 @@ var playersSliderExposeBottom = Titanium.UI.createAnimation();
     playersSliderExposeBottom.duration = 250;
     
 var playersSliderHideTop = Titanium.UI.createAnimation();
-    playersSliderHideTop.top = '0%';
+	if(ipad){
+    	playersSliderHideTop.top = '0%';
+	} else {
+  		playersSliderHideTop.top = -20;
+   	}
     playersSliderHideTop.duration = 250;
     playersSliderHideTop.addEventListener('complete', function(){
 		PlayerName.blur();

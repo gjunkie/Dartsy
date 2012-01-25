@@ -13,7 +13,8 @@ var deleteIndex = null;
 var clearLabel = null;
 var clearButton = null;
 var lastPlayerButtonTapped = null;
-var position = [200, 321, 443, 645];
+var boundaries = [262, 384, 502];
+var positions = [];
 
 var helpButton = Titanium.UI.createButton({
 	id: 'Help Button',
@@ -139,15 +140,16 @@ var paintPlayerSelections = function() {
 	for(var i=0;i<possiblePlayers;i++){
 		if(i==0){
 			midLeft = null;
-			midRight = position[i]+((position[i+1]-position[i]));
+			midRight = boundaries[i];
 		} else if(i==3){
-			midLeft = position[i-1]+((position[i]-position[i-1]));
+			midLeft = boundaries[2];
 			midRight = null;
 		} else {
-			midLeft = position[i-1]+((position[i]-position[i-1]));
-			midRight = position[i]+((position[i+1]-position[i]));
+			midLeft = boundaries[i];
+			midRight = boundaries[i+1];
 		}
 		var leftMargin = 145 + (120*i);
+		positions.push(leftMargin);
 		thePlayerButtons[i] = Titanium.UI.createLabel({
 			id: i,
 			slot:i+1,
@@ -163,13 +165,12 @@ var paintPlayerSelections = function() {
 			left: leftMargin,
 			mids:{midLeft:midLeft,midRight:midRight},
 			selected: false,
-			position: position[i],
+			position: i,
 			playerIsSet: false,
 			touchEnabled: true,
 		});
 		aPlayer = thePlayerButtons[i];
 		playerTap(aPlayer);
-		debug(aPlayer.mids)
 		PlayerLabels[i] = Titanium.UI.createLabel({
 			color: '#fff',
 			id: i,
@@ -259,8 +260,95 @@ var staticFourLabel = PlayerLabels[3];
 		}
 	}
 	
+	var setMoveEvents = function(){
+		var oldX, newX, newY, labelY;
+		for(var i=0;i<4;i++){
+			thePlayerButtons[i].addEventListener("touchmove", function(e){
+			    if(e.source.name == i) {
+			    	oldX = newX;
+			        newX = e.x;
+			        newY = 384;
+			        labelY = 451;
+			    } else {
+			    	oldX = newX;
+			        newX = e.x + this.animatedCenter.x - this.width/2;
+			        newY = 384;
+			        labelY = 451;
+			    }
+			    this.animate({center:{x:newX,y:newY}, duration:1});
+			    //PlayerLabels[i].animate({center:{x:newX,y:labelY}, duration:1});
+				if(leftDirection(oldX, newX) && passedBoundary(this, newX)){
+						debug('switching should happen to the left');
+					if(this.id>0){
+						slidePlayerRight(this, newY, labelY);
+				 		//switchPlayers(this, newX, newY, labelY);
+					}
+				} else if(rightDirection(oldX, newX) && passedBoundary(this, newX)){
+						debug('switching should happen to the right');
+					if(this.id<3){
+						slidePlayerLeft(this, newY, labelY);
+				 		//switchPlayers(this, newX, newY, labelY);
+					}
+				} else {
+					debug(this.id)
+				}
+			});
+		}
+	}
+	setMoveEvents();
+	
+	var slidePlayerLeft = function(movingPlayer, newY, labelY){
+		debug('moving player left='+positions[movingPlayer.position])
+ 		thePlayerButtons[movingPlayer.id+1].animate({center:{x:positions[movingPlayer.position],y:newY}, duration:2});
+ 		PlayerLabels[movingPlayer.id+1].animate({center:{x:positions[movingPlayer.position],y:labelY}, duration:2});
+ 		PlayerLabels[movingPlayer.id+1].position--;
+ 		movingPlayer.position++;
+	}
+	
+	var slidePlayerRight = function(movingPlayer, newY, labelY){
+ 		thePlayerButtons[movingPlayer.id-1].animate({center:{x:movingPlayer.position,y:newY}, duration:2});
+ 		PlayerLabels[movingPlayer.id-1].animate({center:{x:movingPlayer.position,y:labelY}, duration:2});
+ 		movingPlayer.id--;
+	}
+	var passedBoundary = function(playerButton, newX){
+		if(newX<playerButton.mids.midLeft){
+			debug('passed left boundary left '+playerButton.mids.midLeft);
+			return true;
+		} else if(newX>playerButton.mids.midRight){
+			debug('passed right boundary right '+playerButton.mids.midRight);
+			return true;
+		} else {
+			debug(newX);
+			debug('didnt pass boundary left: '+playerButton.mids.midLeft+' or right: '+playerButton.mids.midRight);
+			return false;
+		}
+	}
 	var changeDroppedPlayer = function(movingPlayer){
 		
+	}
+	
+	var leftDirection = function(oldX, newX){
+		if(newX<oldX){
+			    //	debug('oldX='+oldX+' newX='+newX);
+			//debug('direction is left');
+			return true;
+		} else {
+			    //	debug('oldX='+oldX+' newX='+newX);
+			//debug('direction is not left');
+			return false;
+		}
+	}
+	
+	var rightDirection = function(oldX, newX){
+		if(newX>oldX){
+			    debug('oldX='+oldX+' newX='+newX);
+			//debug('direction is right');
+			return true;
+		} else {
+			  //  	debug('oldX='+oldX+' newX='+newX);
+			//debug('direction is not right');
+			return false;
+		}
 	}
 	
 	// verifies that movingPlayerX is within the boundaries of each section.
@@ -300,79 +388,79 @@ var positionFour = function(movingPlayerX){
 		return false;
 	}
 }
-	thePlayerButtons[0].addEventListener("touchmove", function(e){
-	    var newX, newY, labelY;
-	    if(e.source.name == '0') {
-	        newX = e.x;
-	        newY = 384;
-	        labelY = 451;
-	    } else {
-	        newX = e.x + thePlayerButtons[0].animatedCenter.x - thePlayerButtons[0].width/2;
-	        newY = 384;
-	        labelY = 451;
-	    }
-	 	if(newX>leftLimit && newX<rightLimit){
-	 		// next two lines animate the drag.
-		    thePlayerButtons[0].animate({center:{x:newX,y:newY}, duration:1});
-		    PlayerLabels[0].animate({center:{x:newX,y:labelY}, duration:1});
-		    // checks to switch player positions
-		    switchPlayers(this, newX, newY, labelY);
-		}
-	});
-	
-	thePlayerButtons[1].addEventListener("touchmove", function(e){
-	    var newX, newY, labelY;
-	    if(e.source.name == '1') {
-	        newX = e.x;
-	        newY = 384;
-	        labelY = 451;
-	    } else {
-	        newX = e.x + thePlayerButtons[1].animatedCenter.x - thePlayerButtons[1].width/2;
-	        newY = 384;
-	        labelY = 451;
-	    }
-	 	if(newX>leftLimit && newX<rightLimit){
-		    thePlayerButtons[1].animate({center:{x:newX,y:newY}, duration:1});
-		    PlayerLabels[1].animate({center:{x:newX,y:labelY}, duration:1});
-		    switchPlayers(this, newX, newY, labelY);
-		}
-	});
-	
-	thePlayerButtons[2].addEventListener("touchmove", function(e){
-	    var newX, newY, labelY;
-	    if(e.source.name == '2') {
-	        newX = e.x;
-	        newY = 384;
-	        labelY = 451;
-	    } else {
-	        newX = e.x + thePlayerButtons[2].animatedCenter.x - thePlayerButtons[2].width/2;
-	        newY = 384;
-	        labelY = 451;
-	    }
-	 	if(newX>leftLimit && newX<rightLimit){
-		    thePlayerButtons[2].animate({center:{x:newX,y:newY}, duration:1});
-		    PlayerLabels[2].animate({center:{x:newX,y:labelY}, duration:1});
-		    switchPlayers(this, newX, newY, labelY);
-		}
-	});
-	
-	thePlayerButtons[3].addEventListener("touchmove", function(e){
-	    var newX, newY, labelY;
-	    if(e.source.name == '3') {
-	        newX = e.x;
-	        newY = 384;
-	        labelY = 451;
-	    } else {
-	        newX = e.x + thePlayerButtons[3].animatedCenter.x - thePlayerButtons[3].width/2;
-	        newY = 384;
-	        labelY = 451;
-	    }
-	 	if(newX>leftLimit && newX<rightLimit){
-		    thePlayerButtons[3].animate({center:{x:newX,y:newY}, duration:1});
-		    PlayerLabels[3].animate({center:{x:newX,y:labelY}, duration:1});
-		    switchPlayers(this, newX, newY, labelY);
-		}
-	});
+	// thePlayerButtons[0].addEventListener("touchmove", function(e){
+	    // var newX, newY, labelY;
+	    // if(e.source.name == '0') {
+	        // newX = e.x;
+	        // newY = 384;
+	        // labelY = 451;
+	    // } else {
+	        // newX = e.x + thePlayerButtons[0].animatedCenter.x - thePlayerButtons[0].width/2;
+	        // newY = 384;
+	        // labelY = 451;
+	    // }
+	 	// if(newX>leftLimit && newX<rightLimit){
+	 		// // next two lines animate the drag.
+		    // thePlayerButtons[0].animate({center:{x:newX,y:newY}, duration:1});
+		    // PlayerLabels[0].animate({center:{x:newX,y:labelY}, duration:1});
+		    // // checks to switch player positions
+		    // switchPlayers(this, newX, newY, labelY);
+		// }
+	// });
+// 	
+	// thePlayerButtons[1].addEventListener("touchmove", function(e){
+	    // var newX, newY, labelY;
+	    // if(e.source.name == '1') {
+	        // newX = e.x;
+	        // newY = 384;
+	        // labelY = 451;
+	    // } else {
+	        // newX = e.x + thePlayerButtons[1].animatedCenter.x - thePlayerButtons[1].width/2;
+	        // newY = 384;
+	        // labelY = 451;
+	    // }
+	 	// if(newX>leftLimit && newX<rightLimit){
+		    // thePlayerButtons[1].animate({center:{x:newX,y:newY}, duration:1});
+		    // PlayerLabels[1].animate({center:{x:newX,y:labelY}, duration:1});
+		    // switchPlayers(this, newX, newY, labelY);
+		// }
+	// });
+// 	
+	// thePlayerButtons[2].addEventListener("touchmove", function(e){
+	    // var newX, newY, labelY;
+	    // if(e.source.name == '2') {
+	        // newX = e.x;
+	        // newY = 384;
+	        // labelY = 451;
+	    // } else {
+	        // newX = e.x + thePlayerButtons[2].animatedCenter.x - thePlayerButtons[2].width/2;
+	        // newY = 384;
+	        // labelY = 451;
+	    // }
+	 	// if(newX>leftLimit && newX<rightLimit){
+		    // thePlayerButtons[2].animate({center:{x:newX,y:newY}, duration:1});
+		    // PlayerLabels[2].animate({center:{x:newX,y:labelY}, duration:1});
+		    // switchPlayers(this, newX, newY, labelY);
+		// }
+	// });
+// 	
+	// thePlayerButtons[3].addEventListener("touchmove", function(e){
+	    // var newX, newY, labelY;
+	    // if(e.source.name == '3') {
+	        // newX = e.x;
+	        // newY = 384;
+	        // labelY = 451;
+	    // } else {
+	        // newX = e.x + thePlayerButtons[3].animatedCenter.x - thePlayerButtons[3].width/2;
+	        // newY = 384;
+	        // labelY = 451;
+	    // }
+	 	// if(newX>leftLimit && newX<rightLimit){
+		    // thePlayerButtons[3].animate({center:{x:newX,y:newY}, duration:1});
+		    // PlayerLabels[3].animate({center:{x:newX,y:labelY}, duration:1});
+		    // switchPlayers(this, newX, newY, labelY);
+		// }
+	// });
 }
 
 

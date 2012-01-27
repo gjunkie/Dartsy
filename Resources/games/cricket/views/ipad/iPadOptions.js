@@ -145,8 +145,8 @@ var paintPlayerSelections = function() {
 			midLeft = boundaries[2];
 			midRight = null;
 		} else {
-			midLeft = boundaries[i];
-			midRight = boundaries[i+1];
+			midLeft = boundaries[i-1];
+			midRight = boundaries[i];
 		}
 		var leftMargin = 145 + (120*i);
 		positions.push(leftMargin);
@@ -170,7 +170,7 @@ var paintPlayerSelections = function() {
 			touchEnabled: true,
 		});
 		aPlayer = thePlayerButtons[i];
-		playerTap(aPlayer);
+		//playerTap(aPlayer);
 		PlayerLabels[i] = Titanium.UI.createLabel({
 			color: '#fff',
 			id: i,
@@ -262,7 +262,7 @@ var staticFourLabel = PlayerLabels[3];
 	
 	var setMoveEvents = function(){
 		var oldX, newX, newY, labelY;
-		for(var i=0;i<4;i++){
+		for(var i=0;i<possiblePlayers;i++){
 			thePlayerButtons[i].addEventListener("touchmove", function(e){
 			    if(e.source.name == i) {
 			    	oldX = newX;
@@ -290,25 +290,50 @@ var staticFourLabel = PlayerLabels[3];
 				 		//switchPlayers(this, newX, newY, labelY);
 					}
 				} else {
-					debug(this.id)
+					debug('im dragging '+this.id)
+ 					debug('moving player mids '+this.mids.midRight)
+ 					debug('moving player mids '+this.position)
 				}
 			});
 		}
 	}
-	setMoveEvents();
 	
+	var setDroppedEvents = function(){
+		for(var i=0;i<possiblePlayers;i++){
+			thePlayerButtons[i].addEventListener("touchend", function(e){
+				reindexAllPlayerButtons(thePlayerButtons);
+			});
+		}
+	}
+	
+	setMoveEvents();
+	setDroppedEvents();
+	
+	var tmp_mids;
 	var slidePlayerLeft = function(movingPlayer, newY, labelY){
-		debug('moving player left='+positions[movingPlayer.position])
- 		thePlayerButtons[movingPlayer.id+1].animate({center:{x:positions[movingPlayer.position],y:newY}, duration:2});
- 		PlayerLabels[movingPlayer.id+1].animate({center:{x:positions[movingPlayer.position],y:labelY}, duration:2});
- 		PlayerLabels[movingPlayer.id+1].position--;
+ 		thePlayerButtons[movingPlayer.position+1].animate({left:positions[movingPlayer.position], duration:2});
+ 		PlayerLabels[movingPlayer.position+1].animate({center:{x:movingPlayer.left,y:labelY}, duration:2});
+ 		tmp_mids = movingPlayer.mids;
+ 		movingPlayer.mids = thePlayerButtons[movingPlayer.position+1].mids;
+ 		thePlayerButtons[movingPlayer.position+1].mids = tmp_mids;
+ 		thePlayerButtons[movingPlayer.position+1].position--;
  		movingPlayer.position++;
+		for(var i=0;i<possiblePlayers;i++){
+			debug('positions after slide are '+thePlayerButtons[i].position);
+		}
 	}
 	
 	var slidePlayerRight = function(movingPlayer, newY, labelY){
- 		thePlayerButtons[movingPlayer.id-1].animate({center:{x:movingPlayer.position,y:newY}, duration:2});
- 		PlayerLabels[movingPlayer.id-1].animate({center:{x:movingPlayer.position,y:labelY}, duration:2});
- 		movingPlayer.id--;
+ 		thePlayerButtons[movingPlayer.position-1].animate({left:positions[movingPlayer.position], duration:2});
+ 		PlayerLabels[movingPlayer.position-1].animate({center:{x:movingPlayer.left,y:labelY}, duration:2});
+ 		tmp_mids = movingPlayer.mids;
+ 		movingPlayer.mids = thePlayerButtons[movingPlayer.position-1].mids;
+ 		thePlayerButtons[movingPlayer.position-1].mids = tmp_mids;
+ 		thePlayerButtons[movingPlayer.position-1].position++;
+ 		movingPlayer.position--;
+		for(var i=0;i<possiblePlayers;i++){
+			debug('positions after slide are '+thePlayerButtons[i].position);
+		}
 	}
 	var passedBoundary = function(playerButton, newX){
 		if(newX<playerButton.mids.midLeft){
@@ -323,30 +348,31 @@ var staticFourLabel = PlayerLabels[3];
 			return false;
 		}
 	}
-	var changeDroppedPlayer = function(movingPlayer){
+
+	var reindexAllPlayerButtons = function(myArray){
+		myArray.sort(function(a, b){
+			return a.position-b.position;
+		})
 		
+		for(var i=0;i<possiblePlayers;i++){
+			myArray[i].id = myArray[i].position;
+			debug('new position thePlayerButtons is '+myArray[i].position);
+			debug('new id thePlayerButtons is '+myArray[i].id);
+		}
 	}
 	
 	var leftDirection = function(oldX, newX){
 		if(newX<oldX){
-			    //	debug('oldX='+oldX+' newX='+newX);
-			//debug('direction is left');
 			return true;
 		} else {
-			    //	debug('oldX='+oldX+' newX='+newX);
-			//debug('direction is not left');
 			return false;
 		}
 	}
 	
 	var rightDirection = function(oldX, newX){
 		if(newX>oldX){
-			    debug('oldX='+oldX+' newX='+newX);
-			//debug('direction is right');
 			return true;
 		} else {
-			  //  	debug('oldX='+oldX+' newX='+newX);
-			//debug('direction is not right');
 			return false;
 		}
 	}

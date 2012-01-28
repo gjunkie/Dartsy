@@ -59,6 +59,7 @@ var playerTap = function(aPlayer){
 		playButtonCheck();
 		lastPlayerButtonTapped = this.id;
 	});
+}
 
 var possibleSetTap = function(possibleSet){
 	// Event listeners for sets
@@ -116,7 +117,6 @@ var playButtonCheck = function(){
 var submitThePlayer = function(){
 	totalPlayers++;
 	var playerName = PlayerName.value;
-	//players.splice(placement,0,new Player(placement, playerName));
 	players[placement] = new Player(placement, playerName);
 	printName(playerName, placement);
 	thePlayerButtons[placement].playerIsSet=true;
@@ -173,5 +173,5 @@ play.addEventListener('click', function(){
 	start_new_game();
 	win2.open();
 	win1.close();
-})
+});
 

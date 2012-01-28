@@ -59,22 +59,6 @@ var playerTap = function(aPlayer){
 		playButtonCheck();
 		lastPlayerButtonTapped = this.id;
 	});
-	var offset={};
-	aPlayer.addEventListener('touchstart', function(e) {
-offset.x = e.x-aPlayer.left;
-offset.y = e.y-aPlayer.top
-});
- 
-aPlayer.addEventListener('touchmove', function(e) {
-aPlayer.left = e.x-offset.x;
-aPlayer.top =  e.y-offset.y;
-});
- 
-aPlayer.addEventListener('touchend', function(e) {
- // maybe some cleaning routines here or droppable stuff
- 
-});
-}
 
 var possibleSetTap = function(possibleSet){
 	// Event listeners for sets
@@ -97,10 +81,10 @@ var possibleSetTap = function(possibleSet){
 
 // To clear all buttons pass in null
 // To not clear active button, pass in button
-var clearUnsetPlayers = function(currentButton){
-	if(currentButton != null){
+var clearUnsetPlayers = function(tappedButton){
+	if(tappedButton != null){
 		for(var i=0;i<thePlayerButtons.length;i++){
-			if(!thePlayerButtons[i].playerIsSet && thePlayerButtons[i] != currentButton){
+			if(!thePlayerButtons[i].playerIsSet && thePlayerButtons[i] != tappedButton){
 				thePlayerButtons[i].backgroundImage = 'images/'+device+'/playerNotSelected.png';
 				thePlayerButtons[i].selected = false;
 			}
@@ -129,12 +113,18 @@ var playButtonCheck = function(){
 	}	
 }
 
-play.addEventListener('click', function(){
-	addColumns(totalPlayers);
-	start_new_game();
-	win2.open();
-	win1.close();
-})
+var submitThePlayer = function(){
+	totalPlayers++;
+	var playerName = PlayerName.value;
+	//players.splice(placement,0,new Player(placement, playerName));
+	players[placement] = new Player(placement, playerName);
+	printName(playerName, placement);
+	thePlayerButtons[placement].playerIsSet=true;
+	thePlayerButtons[placement].playerIndex = players.length-1;
+	playerSliderDoor();
+	// Database Function
+	//checkForNewPlayer(playerName);
+}
 
 var playerSliderDoor = function(player){
 	PlayerName.hintText = "Player Name";
@@ -178,14 +168,10 @@ DeletePlayer.addEventListener('click', function(){
 	playButtonCheck();
 });
 
-var submitThePlayer = function(){
-	totalPlayers++;
-	var playerName = PlayerName.value;
-	players.splice(placement,0,new Player(placement, playerName));
-	printName(playerName, placement);
-	thePlayerButtons[placement].playerIsSet=true;
-	thePlayerButtons[placement].playerIndex = players.length-1;
-	playerSliderDoor();
-	// Database Function
-	//checkForNewPlayer(playerName);
-}
+play.addEventListener('click', function(){
+	addColumns(totalPlayers);
+	start_new_game();
+	win2.open();
+	win1.close();
+})
+

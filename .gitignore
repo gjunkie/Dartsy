@@ -2,3 +2,7 @@ tmp
 *.class
 *.pyc
 *.pyo
+build/
+.DS_Store
+.settings/
+build.log

@@ -58,8 +58,7 @@ var clearBoard = Titanium.UI.createButton({
 
 var GameOptions = Titanium.UI.createView({
 	id: 'Game Options',
-	height: 94,
-	width:768,
+	height: 47,
 	bottom: 0,
 	backgroundImage: 'images/'+device+'/gameOptions.png',
 });

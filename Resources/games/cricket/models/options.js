@@ -120,10 +120,12 @@ var playButtonCheck = function(){
 		play.backgroundImage = 'images/'+device+'/PlayButton.png';
 		play.touchEnabled = true;
 		play.enabled = true;
+		letsPlay.animate(letsPlayFadeIn);
 	} else {
 		play.backgroundImage = 'images/'+device+'/PlayButtonDisabled.png';
 		play.touchEnabled = false;
 		play.enabled = false;
+		letsPlay.animate(letsPlayFadeOut);
 	}	
 }
 

@@ -25,9 +25,8 @@ var undoPoints = Titanium.UI.createButton({
 	title: '',
 	backgroundImage: 'images/'+device+'/undo.png',
 	playersLeft: totalPlayers,
-	width:36.5,
-	height: 31,
-	left: 2,
+	width:45,
+	height: 38,
 	top: 0,
 	touchEnabled: true
 });
@@ -43,7 +42,7 @@ var miss = Titanium.UI.createButton({
 	top: 0,
 	touchEnabled: true
 });
-numbersView.add(miss);
+//numbersView.add(miss);
 
 
 var multDialog = Titanium.UI.createOptionDialog({
@@ -66,8 +65,8 @@ for(i=0;i<gameKeys.length;i++){
 		backgroundImage: 'images/'+device+'/numbers/'+backgroundImageNumber+'.png',
 		text: '',
 		playersLeft: totalPlayers,
-		width:35,
-		height: 35,
+		width:30,
+		height: 30,
 		top: topDistance,
 	});
 	number = availNums[i];
@@ -89,7 +88,7 @@ var paintButtons = function(myView, totalPlayers, playerIndex){
 				color:'#fff',
 				backgroundImage:'images/'+device+'/button.png',
 				title:'',
-				font:{fontSize:30,fontFamily:'Futura-CondensedMedium'},
+				font:scorableNumFontNormal,
 				textAlign:'center',
 				width:50,
 				height: 50,
@@ -126,7 +125,7 @@ var Names = function(myView, index){
 		textAlign:'center',
 		width:100,
 		height: 50,
-		top: 0,
+		top: -5,
 		touchEnabled: true,
 		zIndex: 1,
 	});

@@ -20,12 +20,12 @@ var calculate_points = function(numberHit, value, tap_count){
 var highlight = function(scorableNum){
 	if(scorableNum.hits>2){
 		scorableNum.closed = true;
-		scorableNum.font = {fontSize:20};
+		scorableNum.font = scorableNumFontActive;
 		scorableNum.color = '#189814';
 		scorableNum.backgroundImage = 'images/ipad/scorableButton.png';
 	} else {
 		scorableNum.closed = false;
-		scorableNum.font = {fontSize:50};
+		scorableNum.font = scorableNumFontNormal;
 		scorableNum.color = '#ffffff';
 		scorableNum.backgroundImage = 'images/ipad/button.png';
 	}

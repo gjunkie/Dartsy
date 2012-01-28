@@ -115,6 +115,18 @@ var playersText = Titanium.UI.createLabel({
 	font:{fontSize:25,fontFamily:'Futura-CondensedMedium'},
 });
 
+var letsPlay = Titanium.UI.createLabel({
+	id: 'Lets Play',
+	text: 'Let\'s Play',
+	color: '#ffffff',
+	textAlign: 'center',
+	font:{fontSize:40,fontFamily:'Ballpark'},
+	opacity: 0,
+	bottom: 30,
+	height:50,
+	width:200,
+});
+
 var numOfGamesText = Titanium.UI.createLabel({
 	text: 'BEST OF',
 	textAlign: 'center',
@@ -298,6 +310,7 @@ factsView.add(factsLabel);
 playerSelect.add(factsView);
 setsSelect.add(play);
 setsSelect.add(numOfGamesText);
+setsSelect.add(letsPlay);
 //setsSelect.add(helpButton);
 playerSlider.add(PlayerName);
 playerSlider.add(OkButton);

@@ -72,7 +72,6 @@ var iOSCheck = function(){
 		Ti.API.debug('iPad');
 		ipad = true;
 		device = 'ipad';
-		Titanium.include('games/cricket/cricket.js');
 		Titanium.include('games/cricket/views/ipad/help.js');
 		Titanium.include('games/cricket/views/ipad/iPadOptions.js');
 		Titanium.include('games/cricket/views/ipad/dartsModal.js');
@@ -83,13 +82,11 @@ var iOSCheck = function(){
 		Ti.API.debug('iPhone');
 		iphone = true;
 		device = 'phone';
-		Titanium.include('games/cricket/cricket.js');
 		Titanium.include('games/cricket/views/phone/iPhoneOptions.js');
 		Titanium.include('games/cricket/views/phone/dartsModal.js');
 		Titanium.include('games/cricket/views/phone/buttons.js');
 		Titanium.include('games/cricket/views/phone/gameOptions.js');
 	} else {
-		Titanium.include('games/cricket/cricket.js');
 		//Titanium.include('games/cricket/views/android/help.js');
 		Titanium.include('games/cricket/views/android/options.js');
 		Titanium.include('games/cricket/views/android/dartsModal.js');
@@ -102,6 +99,8 @@ var iOSCheck = function(){
 }
 iOSCheck();
 
+Titanium.include('games/cricket/globalVariables.js');
+Titanium.include('games/cricket/cricket.js');
 Titanium.include('games/cricket/models/global.js');
 
 paintPlayerSelections();

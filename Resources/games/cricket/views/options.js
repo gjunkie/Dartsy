@@ -434,7 +434,7 @@ DeletePlayer.addEventListener('click', function(){
 var submitThePlayer = function(){
 	totalPlayers++;
 	var playerName = PlayerName.value;
-	players.splice(placement,0,new Player(placement, playerName));
+	players[placement] = new Player(placement, playerName);
 	printName(playerName, placement);
 	thePlayerButtons[placement].playerIsSet=true;
 	thePlayerButtons[placement].playerIndex = players.length-1;

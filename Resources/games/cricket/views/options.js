@@ -338,6 +338,7 @@ var turnBanners = [];
 var thePlayer;
 var leftSpace = null;
 var addColumns = function(playerCount, name){
+	debug(players)
 	for(var i=0; i<playerCount; i++){
 		thePlayer = players[i];
 		if(players[i].id<2){
@@ -434,7 +435,10 @@ DeletePlayer.addEventListener('click', function(){
 var submitThePlayer = function(){
 	totalPlayers++;
 	var playerName = PlayerName.value;
-	players[placement] = new Player(placement, playerName);
+	players.splice(placement,0,new Player(placement, playerName));
+	players.sort(function(a, b){
+		return a.id-b.id
+	})
 	printName(playerName, placement);
 	thePlayerButtons[placement].playerIsSet=true;
 	thePlayerButtons[placement].playerIndex = players.length-1;

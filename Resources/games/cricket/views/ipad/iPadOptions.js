@@ -16,7 +16,7 @@ var lastPlayerButtonTapped = null;
 
 var helpButton = Titanium.UI.createButton({
 	id: 'Help Button',
-	backgroundImage:'images/ipad/help.png',
+	backgroundImage:'images/help.png',
 	height:31,
 	width:31,
 	bottom: 20,
@@ -29,7 +29,7 @@ helpButton.addEventListener('click',function(){
 
 var playerSelect = Titanium.UI.createView({
 	id: 'Player Selector',
-	backgroundImage:'images/ipad/cricket-intro-top.jpg',
+	backgroundImage:'images/'+device+'/cricket-intro-top.jpg',
 	height:'50%',
 	top: 0,
 	zIndex: 3,
@@ -57,9 +57,18 @@ var factsLabel = Titanium.UI.createLabel({
 	width:'95%',
 });
 
+var pickRandomProperty = function(facts) {
+    var fact;
+    var count = 0;
+    for (var item in facts)
+        if (Math.random() < 1/++count)
+           fact = item;
+    factsLabel.text = facts[fact].toUpperCase();
+}
+
 var setsSelect = Titanium.UI.createView({
 	id: 'Sets Selector',
-	backgroundImage:'images/ipad/cricket-intro-bottom.jpg',
+	backgroundImage:'images/'+device+'/cricket-intro-bottom.jpg',
 	height:'50%',
 	bottom: 0,
 	zIndex: 3,
@@ -67,7 +76,7 @@ var setsSelect = Titanium.UI.createView({
 
 var playerSlider = Titanium.UI.createView({
 	id: 'Player Slider',
-	backgroundImage: 'images/ipad/PlayerSubmit_bg.jpg',
+	backgroundImage: 'images/'+device+'/PlayerSubmit_bg.jpg',
 	height: '15%',
 });
 
@@ -84,7 +93,7 @@ var PlayerName = Titanium.UI.createTextField({
 });
 
 var OkButton = Titanium.UI.createButton({
-	backgroundImage:'images/ipad/ok.png',
+	backgroundImage:'images/ok.png',
 	width: 48,
 	height: 30,
 	right: 225,
@@ -92,7 +101,7 @@ var OkButton = Titanium.UI.createButton({
 });
 
 var DeletePlayer = Titanium.UI.createButton({
-	backgroundImage:'images/ipad/deletePlayer.png',
+	backgroundImage:'images/'+device+'/deletePlayer.png',
 	bottom: 35,
 	width: 27,
 	height: 27,
@@ -100,7 +109,7 @@ var DeletePlayer = Titanium.UI.createButton({
 });
 
 var CricketTitle = Titanium.UI.createImageView({
-	image: 'images/ipad/CricketTitle.png',
+	image: 'images/'+device+'/CricketTitle.png',
 	width: 219,
 	height: 117,
 	top: 20,
@@ -113,18 +122,6 @@ var playersText = Titanium.UI.createLabel({
 	bottom: 200,
 	color: '#b2b2b2',
 	font:{fontSize:25,fontFamily:'Futura-CondensedMedium'},
-});
-
-var letsPlay = Titanium.UI.createLabel({
-	id: 'Lets Play',
-	text: 'Let\'s Play',
-	color: '#ffffff',
-	textAlign: 'center',
-	font:{fontSize:40,fontFamily:'Ballpark'},
-	opacity: 0,
-	bottom: 30,
-	height:50,
-	width:200,
 });
 
 var numOfGamesText = Titanium.UI.createLabel({
@@ -145,80 +142,164 @@ var submittedPlayer = Titanium.UI.createLabel({
 	font:{fontSize:45,fontFamily:'Ballpark'},
 });
 
-// Buttons for user to select number of players
-var paintPlayerSelections = function() {
-	for(var i=0;i<possiblePlayers;i++){
-		var leftMargin = 20 + (15*i) + '%';
-		thePlayerButtons[i] = Titanium.UI.createButton({
-			id: i,
-			playerIndex: null,
-			name: '',
-			color:'#fff',
-			backgroundImage: 'images/ipad/playerNotSelected.png',
-			borderRadius: 50,
-			hintText:'Player 1',
-			font:{fontSize:30,fontFamily:'Ballpark'},
-			textAlign:'center',
-			title: '',
-			textAlign:'center',
-			width:116,
-			height: 116,
-			top: '65%',
-			left: leftMargin,
-			selected: false,
-			playerIsSet: false,
-			touchEnabled: true,
-		});
-		aPlayer = thePlayerButtons[i];
-		playerTap(aPlayer);
 	
-		PlayerLabels[i] = Titanium.UI.createLabel({
-			color: '#fff',
-			id: i,
-			width: 116,
-			height: 30,
-			left: leftMargin,
-			textAlign: 'center',
-			font:{fontSize:24,fontFamily:'Ballpark'},
-			top: '87%',
-		});
-		aPlayerLabel = PlayerLabels[i];
+// Buttons for user to select number of players
+for(var i=0;i<possiblePlayers;i++){
+	var leftMargin = 20 + (15*i) + '%';
+	thePlayerButtons[i] = Titanium.UI.createButton({
+		id: i,
+		playerIndex: null,
+		name: '',
+		color:'#fff',
+		backgroundImage: 'images/'+device+'/playerNotSelected.png',
+		borderRadius: 50,
+		hintText:'Player 1',
+		font:{fontSize:30,fontFamily:'Ballpark'},
+		textAlign:'center',
+		title: '',
+		textAlign:'center',
+		width:116,
+		height: 116,
+		top: '65%',
+		left: leftMargin,
+		selected: false,
+		playerIsSet: false,
+		touchEnabled: true,
+	});
+	aPlayer = thePlayerButtons[i];
+
+	PlayerLabels[i] = Titanium.UI.createLabel({
+		color: '#fff',
+		id: i,
+		width: 116,
+		height: 30,
+		left: leftMargin,
+		textAlign: 'center',
+		font:{fontSize:24,fontFamily:'Ballpark'},
+		top: '87%',
+	});
+	aPlayerLabel = PlayerLabels[i];
+	
+	// Event listeners for players
+	aPlayer.addEventListener('click', function(){
+		if (this.playerIsSet){
+			clearUnsetPlayers(this);
+			deleteIndex = this.playerIndex;
+			clearLabel = PlayerLabels[this.id];
+			clearButton = this;
+			if ((lastPlayerButtonTapped == this.id && sliderIsOpen) || (lastPlayerButtonTapped != this.id && !sliderIsOpen) || (!sliderIsOpen)){
+				playerSliderDoor();
+			}
+			submittedPlayer.text = this.name;
+			playerSlider.remove(PlayerName);
+			playerSlider.remove(OkButton);
+			playerSlider.add(submittedPlayer);
+			playerSlider.add(DeletePlayer);
+		} else if (!this.playerIsSet){
+			playerSlider.add(PlayerName);
+			playerSlider.add(OkButton);
+			PlayerName.focus();
+			playerSlider.remove(submittedPlayer);
+			playerSlider.remove(DeletePlayer);
+			if (lastPlayerButtonTapped == this.id || lastPlayerButtonTapped == null || !sliderIsOpen){
+				playerSliderDoor();
+			}
+			PlayerName.value = '';
+			clearUnsetPlayers(this);
+			placement = this.id;
+			if(!this.selected){
+				this.selected = true;
+				this.backgroundImage = 'images/'+device+'/playerSelected.png';
+				playerClicked = true;
+			} else if (this.selected){
+				this.selected=false;
+				this.backgroundImage = 'images/'+device+'/playerNotSelected.png';
+			}
+		}
+		playButtonCheck();
+		lastPlayerButtonTapped = this.id;
+	});
+	playerSelect.add(aPlayer);
+	playerSelect.add(aPlayerLabel);
+}
+
+// Buttons for user to select number of sets
+for(var i=0;i<Games.Cricket.sets.length;i++){
+	var leftMargin = 29 + (14*i) + '%';
+	possibleSets[i] = Titanium.UI.createButton({
+		color:'#fff',
+		backgroundImage: 'images/blank-set.png',
+		hintText:'Player 1',
+		font:{fontSize:35,fontFamily:'Futura-CondensedMedium'},
+		textAlign:'center',
+		title: Games.Cricket.sets[i],
+		gamesToPlay: Games.Cricket.sets[i],
+		textAlign:'center',
+		width:110,
+		height: 110,
+		top: '15%',
+		left: leftMargin,
+		touchEnabled: true,
+	});
+	
+	possibleSet = possibleSets[i];
 		
-		playerSelect.add(aPlayer);
-		playerSelect.add(aPlayerLabel);
+	// Event listeners for sets
+	possibleSet.addEventListener('click', function(){
+		clearUnsetPlayers(null);
+		for(var i=0;i<=2;i++){
+			possibleSets[i].backgroundImage ='images/'+device+'/blank-set.png';
+		}
+		if (sliderIsOpen){
+			playerSliderDoor();
+		}
+		this.backgroundImage = 'images/'+device+'/blue-button.png';
+		GamesToPlay = this.gamesToPlay;
+		if (!setsChosen){
+			setsChosen = true;
+		}
+		playButtonCheck();
+	});
+	setsSelect.add(possibleSet);
+}
+
+// To clear all buttons pass in null
+// To not clear active button, pass in button
+var clearUnsetPlayers = function(currentButton){
+	if(currentButton != null){
+		for(var i=0;i<thePlayerButtons.length;i++){
+			if(!thePlayerButtons[i].playerIsSet && thePlayerButtons[i] != currentButton){
+				thePlayerButtons[i].backgroundImage = 'images/'+device+'/playerNotSelected.png';
+				thePlayerButtons[i].selected = false;
+			}
+		}
+	} else {
+		for(var i=0;i<thePlayerButtons.length;i++){
+			if(!thePlayerButtons[i].playerIsSet){
+				thePlayerButtons[i].backgroundImage = 'images/'+device+'/playerNotSelected.png';
+				thePlayerButtons[i].selected = false;
+			}
+		}
 	}
 }
 
-var paintPossibleSets = function(){
-	// Buttons for user to select number of sets
-	for(var i=0;i<Games.Cricket.sets.length;i++){
-		var leftMargin = 29 + (14*i) + '%';
-		possibleSets[i] = Titanium.UI.createButton({
-			color:'#fff',
-			backgroundImage: 'images/ipad/blank-set.png',
-			hintText:'Player 1',
-			font:{fontSize:35,fontFamily:'Futura-CondensedMedium'},
-			textAlign:'center',
-			title: Games.Cricket.sets[i],
-			gamesToPlay: Games.Cricket.sets[i],
-			textAlign:'center',
-			width:110,
-			height: 110,
-			top: '15%',
-			left: leftMargin,
-			touchEnabled: true,
-		});
-		
-		possibleSet = possibleSets[i];
-		possibleSetTap(possibleSet);
-		setsSelect.add(possibleSet);
-	}
+var playButtonCheck = function(){
+	if(players.length>0 && setsChosen){
+		play.backgroundImage = 'images/'+device+'/PlayButton.png';
+		play.touchEnabled = true;
+		play.enabled = true;
+	} else {
+		play.backgroundImage = 'images/'+device+'/PlayButtonDisabled.png';
+		play.touchEnabled = false;
+		play.enabled = false;
+	}	
 }
 
 var GameView = Titanium.UI.createView({
 	id: 'Cricket View',
-	backgroundImage:'images/ipad/cricket-dark-wood.jpg',
+	backgroundImage:'images/'+device+'/cricket-dark-wood.jpg',
 });
+
 
 var indicators = Titanium.UI.createView({
 	id: 'Indicators',
@@ -230,23 +311,23 @@ var indicators = Titanium.UI.createView({
 
 var indicator1 = Titanium.UI.createLabel({
 	id: 'Indicator 1',
-	backgroundImage: 'images/ipad/dartIndicator.png',
+	backgroundImage: 'images/'+device+'/dartIndicator.png',
 	height: 13,
 	width: 13,
 	left: 26,
 });
 
 var indicator2 = Titanium.UI.createLabel({
-	id: 'Indicator 2',
-	backgroundImage: 'images/ipad/dartIndicator.png',
+	id: 'Indicator 1',
+	backgroundImage: 'images/'+device+'/dartIndicator.png',
 	height: 13,
 	width: 13,
 	left: 13,
 });
 
 var indicator3 = Titanium.UI.createLabel({
-	id: 'Indicator 3',
-	backgroundImage: 'images/ipad/dartIndicator.png',
+	id: 'Indicator 1',
+	backgroundImage: 'images/'+device+'/dartIndicator.png',
 	height: 13,
 	width: 13,
 	left: 0,
@@ -257,6 +338,7 @@ var turnBanners = [];
 var thePlayer;
 var leftSpace = null;
 var addColumns = function(playerCount, name){
+	debug(players)
 	for(var i=0; i<playerCount; i++){
 		thePlayer = players[i];
 		if(players[i].id<2){
@@ -265,7 +347,7 @@ var addColumns = function(playerCount, name){
 			leftSpace = (20*players[i].id) + 20 + '%'
 		}
 		turnBanners[i] = Titanium.UI.createImageView({
-			image: 'images/ipad/banner.png',
+			image: 'images/'+device+'/banner.png',
 			width: 100,
 			height: 127,
 			top: -127,
@@ -289,7 +371,7 @@ var addColumns = function(playerCount, name){
 }
 
 var play = Titanium.UI.createButton({
-	backgroundImage:'images/ipad/PlayButtonDisabled.png',
+	backgroundImage:'images/'+device+'/PlayButtonDisabled.png',
 	backgroundSelectedImage:'',
 	borderRadius: 10,
 	title:'',
@@ -301,6 +383,70 @@ var play = Titanium.UI.createButton({
 	enabeld: false,
 });
 
+play.addEventListener('click', function(){
+	addColumns(totalPlayers);
+	start_new_game();
+	win2.open();
+	win1.close();
+})
+
+var playerSliderDoor = function(player){
+	PlayerName.hintText = "Player Name";
+	if (sliderIsOpen) {
+		playerSelect.animate(playersSliderHideTop);
+		setsSelect.animate(playersSliderHideBottom);
+		sliderIsOpen = false;
+	} else if (!sliderIsOpen) {
+		playerSelect.animate(playersSliderExposeTop);
+		setsSelect.animate(playersSliderExposeBottom);
+		sliderIsOpen = true;
+	}
+}
+
+var printName = function(name, placement){
+	PlayerLabels[placement].text = name;
+	thePlayerButtons[placement].name = name;
+}
+
+//Return Key submission
+PlayerName.addEventListener('return',function(){
+	if (PlayerName.value != '') {
+		submitThePlayer();
+	}
+	playButtonCheck();
+});
+
+OkButton.addEventListener('click',function(){
+	if (PlayerName.value != '') {
+		submitThePlayer();
+	}
+	playButtonCheck();
+});
+
+DeletePlayer.addEventListener('click', function(){
+	removePlayer(deleteIndex, clearLabel, clearButton);
+	if (totalPlayers==0){
+		play.backgroundImage = 'images/'+device+'/PlayButtonDisabled.png',
+		play.touchEnabled = false;
+	}
+	playButtonCheck();
+});
+
+var submitThePlayer = function(){
+	totalPlayers++;
+	var playerName = PlayerName.value;
+	players.splice(placement,0,new Player(placement, playerName));
+	players.sort(function(a, b){
+		return a.id-b.id
+	})
+	printName(playerName, placement);
+	thePlayerButtons[placement].playerIsSet=true;
+	thePlayerButtons[placement].playerIndex = players.length-1;
+	playerSliderDoor();
+	// Database Function
+	//checkForNewPlayer(playerName);
+}
+
 indicators.add(indicator1);
 indicators.add(indicator2);
 indicators.add(indicator3);
@@ -310,12 +456,9 @@ factsView.add(factsLabel);
 playerSelect.add(factsView);
 setsSelect.add(play);
 setsSelect.add(numOfGamesText);
-setsSelect.add(letsPlay);
 //setsSelect.add(helpButton);
 playerSlider.add(PlayerName);
 playerSlider.add(OkButton);
 win1.add(playerSlider);
 win1.add(playerSelect);
 win1.add(setsSelect);
-
-Titanium.include('../../models/options.js');

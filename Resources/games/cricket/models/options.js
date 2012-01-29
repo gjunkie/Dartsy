@@ -118,6 +118,9 @@ var submitThePlayer = function(){
 	totalPlayers++;
 	var playerName = PlayerName.value;
 	players[placement] = new Player(placement, playerName);
+	players.sort(function(a, b){
+		return a.id-b.id
+	})
 	printName(playerName, placement);
 	thePlayerButtons[placement].playerIsSet=true;
 	thePlayerButtons[placement].playerIndex = players.length-1;

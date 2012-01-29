@@ -1,12 +1,8 @@
 
 // Points calculated once a number can be scored on
 var calculate_points = function(numberHit, value, tap_count){
-	if(tap_count==0){
+	if(tap_count<3){
 		numberHit.title = '';
-	} else if(tap_count==1){
-		numberHit.title = '/';
-	} else if(tap_count==2){
-		numberHit.title = 'X';
 	} else if(tap_count==3){
 		numberHit.title = 'O';
 	} else if (tap_count>3){
@@ -18,16 +14,22 @@ var calculate_points = function(numberHit, value, tap_count){
 
 // highlights the number passed in
 var highlight = function(scorableNum){
-	if(scorableNum.hits>2){
+	if(scorableNum.hits==1){
+		scorableNum.closed = false;
+		scorableNum.backgroundImage = 'images/'+device+'/buttonSingle.png';
+	} else if(scorableNum.hits==2){
+		scorableNum.closed = false;
+		scorableNum.backgroundImage = 'images/'+device+'/buttonDouble.png';
+	} else if(scorableNum.hits>2){
 		scorableNum.closed = true;
 		scorableNum.font = scorableNumFontActive;
 		scorableNum.color = '#189814';
-		scorableNum.backgroundImage = 'images/ipad/scorableButton.png';
+		scorableNum.backgroundImage = 'images/'+device+'/scorableButton.png';
 	} else {
 		scorableNum.closed = false;
 		scorableNum.font = scorableNumFontNormal;
 		scorableNum.color = '#ffffff';
-		scorableNum.backgroundImage = 'images/ipad/button.png';
+		scorableNum.backgroundImage = 'images/'+device+'/button.png';
 	}
 }
 

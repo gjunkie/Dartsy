@@ -61,25 +61,6 @@ var playerTap = function(aPlayer){
 	});
 }
 
-var possibleSetTap = function(possibleSet){
-	// Event listeners for sets
-	possibleSet.addEventListener('click', function(){
-		clearUnsetPlayers(null);
-		for(var i=0;i<=2;i++){
-			possibleSets[i].backgroundImage ='images/'+device+'/blank-set.png';
-		}
-		if (sliderIsOpen){
-			playerSliderDoor();
-		}
-		this.backgroundImage = 'images/'+device+'/blue-button.png';
-		GamesToPlay = this.gamesToPlay;
-		if (!setsChosen){
-			setsChosen = true;
-		}
-		playButtonCheck();
-	});
-}
-
 // To clear all buttons pass in null
 // To not clear active button, pass in button
 var clearUnsetPlayers = function(tappedButton){

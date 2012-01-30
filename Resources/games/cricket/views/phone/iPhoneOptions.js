@@ -138,7 +138,6 @@ var submittedPlayer = Titanium.UI.createLabel({
 });
 
 // Buttons for user to select number of players
-var paintPlayerSelections = function() {
 	for(var i=0;i<possiblePlayers;i++){
 		var leftMargin = 40 + (60*i);
 		thePlayerButtons[i] = Titanium.UI.createButton({
@@ -178,9 +177,7 @@ var paintPlayerSelections = function() {
 		playerSelect.add(aPlayer);
 		playerSelect.add(aPlayerLabel);
 	}
-}
 
-var paintPossibleSets = function(){
 	// Buttons for user to select number of sets
 	for(var i=0;i<Games.Cricket.sets.length;i++){
 		var leftMargin = 21 + (20*i) + '%';
@@ -204,7 +201,6 @@ var paintPossibleSets = function(){
 		possibleSetTap(possibleSet);
 		setsSelect.add(possibleSet);
 	}
-}
 
 var GameView = Titanium.UI.createView({
 	id: 'Cricket View',

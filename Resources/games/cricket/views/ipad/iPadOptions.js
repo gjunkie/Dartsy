@@ -93,7 +93,7 @@ var PlayerName = Titanium.UI.createTextField({
 });
 
 var OkButton = Titanium.UI.createButton({
-	backgroundImage:'images/ok.png',
+	backgroundImage:'images/'+device+'/ok.png',
 	width: 48,
 	height: 30,
 	right: 225,
@@ -228,7 +228,7 @@ for(var i=0;i<Games.Cricket.sets.length;i++){
 	var leftMargin = 29 + (14*i) + '%';
 	possibleSets[i] = Titanium.UI.createButton({
 		color:'#fff',
-		backgroundImage: 'images/blank-set.png',
+		backgroundImage: 'images/'+device+'/blank-set.png',
 		hintText:'Player 1',
 		font:{fontSize:35,fontFamily:'Futura-CondensedMedium'},
 		textAlign:'center',

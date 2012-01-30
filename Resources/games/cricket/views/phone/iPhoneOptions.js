@@ -136,7 +136,7 @@ var submittedPlayer = Titanium.UI.createLabel({
 	color: '#ffffff',
 	font:{fontSize:25,fontFamily:'Ballpark'},
 });
-
+var paintPlayerSelections = function(){
 // Buttons for user to select number of players
 	for(var i=0;i<possiblePlayers;i++){
 		var leftMargin = 40 + (60*i);
@@ -177,7 +177,8 @@ var submittedPlayer = Titanium.UI.createLabel({
 		playerSelect.add(aPlayer);
 		playerSelect.add(aPlayerLabel);
 	}
-
+}
+var paintPossibleSets = function(){
 	// Buttons for user to select number of sets
 	for(var i=0;i<Games.Cricket.sets.length;i++){
 		var leftMargin = 21 + (20*i) + '%';
@@ -198,9 +199,10 @@ var submittedPlayer = Titanium.UI.createLabel({
 		});
 		
 		possibleSet = possibleSets[i];
-		possibleSetTap(possibleSet);
+		//possibleSetTap(possibleSet);
 		setsSelect.add(possibleSet);
 	}
+}
 
 var GameView = Titanium.UI.createView({
 	id: 'Cricket View',

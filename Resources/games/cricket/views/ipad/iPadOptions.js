@@ -167,6 +167,7 @@ for(var i=0;i<possiblePlayers;i++){
 		touchEnabled: true,
 	});
 	aPlayer = thePlayerButtons[i];
+	playerTap(aPlayer);
 
 	PlayerLabels[i] = Titanium.UI.createLabel({
 		color: '#fff',
@@ -180,45 +181,6 @@ for(var i=0;i<possiblePlayers;i++){
 	});
 	aPlayerLabel = PlayerLabels[i];
 	
-	// Event listeners for players
-	aPlayer.addEventListener('click', function(){
-		if (this.playerIsSet){
-			clearUnsetPlayers(this);
-			deleteIndex = this.playerIndex;
-			clearLabel = PlayerLabels[this.id];
-			clearButton = this;
-			if ((lastPlayerButtonTapped == this.id && sliderIsOpen) || (lastPlayerButtonTapped != this.id && !sliderIsOpen) || (!sliderIsOpen)){
-				playerSliderDoor();
-			}
-			submittedPlayer.text = this.name;
-			playerSlider.remove(PlayerName);
-			playerSlider.remove(OkButton);
-			playerSlider.add(submittedPlayer);
-			playerSlider.add(DeletePlayer);
-		} else if (!this.playerIsSet){
-			playerSlider.add(PlayerName);
-			playerSlider.add(OkButton);
-			PlayerName.focus();
-			playerSlider.remove(submittedPlayer);
-			playerSlider.remove(DeletePlayer);
-			if (lastPlayerButtonTapped == this.id || lastPlayerButtonTapped == null || !sliderIsOpen){
-				playerSliderDoor();
-			}
-			PlayerName.value = '';
-			clearUnsetPlayers(this);
-			placement = this.id;
-			if(!this.selected){
-				this.selected = true;
-				this.backgroundImage = 'images/'+device+'/playerSelected.png';
-				playerClicked = true;
-			} else if (this.selected){
-				this.selected=false;
-				this.backgroundImage = 'images/'+device+'/playerNotSelected.png';
-			}
-		}
-		playButtonCheck();
-		lastPlayerButtonTapped = this.id;
-	});
 	playerSelect.add(aPlayer);
 	playerSelect.add(aPlayerLabel);
 }

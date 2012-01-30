@@ -103,8 +103,8 @@ Titanium.include('games/cricket/globalVariables.js');
 Titanium.include('games/cricket/cricket.js');
 Titanium.include('games/cricket/models/global.js');
 
-//paintPlayerSelections();
-//paintPossibleSets();
+paintPlayerSelections();
+paintPossibleSets();
 // open window with options
 win1.open();
 pickRandomProperty(Facts);

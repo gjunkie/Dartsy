@@ -144,85 +144,89 @@ var submittedPlayer = Titanium.UI.createLabel({
 
 	
 // Buttons for user to select number of players
-for(var i=0;i<possiblePlayers;i++){
-	var leftMargin = 20 + (15*i) + '%';
-	thePlayerButtons[i] = Titanium.UI.createButton({
-		id: i,
-		playerIndex: null,
-		name: '',
-		color:'#fff',
-		backgroundImage: 'images/'+device+'/playerNotSelected.png',
-		borderRadius: 50,
-		hintText:'Player 1',
-		font:{fontSize:30,fontFamily:'Ballpark'},
-		textAlign:'center',
-		title: '',
-		textAlign:'center',
-		width:116,
-		height: 116,
-		top: '65%',
-		left: leftMargin,
-		selected: false,
-		playerIsSet: false,
-		touchEnabled: true,
-	});
-	aPlayer = thePlayerButtons[i];
-	playerTap(aPlayer);
-
-	PlayerLabels[i] = Titanium.UI.createLabel({
-		color: '#fff',
-		id: i,
-		width: 116,
-		height: 30,
-		left: leftMargin,
-		textAlign: 'center',
-		font:{fontSize:24,fontFamily:'Ballpark'},
-		top: '87%',
-	});
-	aPlayerLabel = PlayerLabels[i];
+var paintPossibleSets = function(){
+	for(var i=0;i<possiblePlayers;i++){
+		var leftMargin = 20 + (15*i) + '%';
+		thePlayerButtons[i] = Titanium.UI.createButton({
+			id: i,
+			playerIndex: null,
+			name: '',
+			color:'#fff',
+			backgroundImage: 'images/'+device+'/playerNotSelected.png',
+			borderRadius: 50,
+			hintText:'Player 1',
+			font:{fontSize:30,fontFamily:'Ballpark'},
+			textAlign:'center',
+			title: '',
+			textAlign:'center',
+			width:116,
+			height: 116,
+			top: '65%',
+			left: leftMargin,
+			selected: false,
+			playerIsSet: false,
+			touchEnabled: true,
+		});
+		aPlayer = thePlayerButtons[i];
+		playerTap(aPlayer);
 	
-	playerSelect.add(aPlayer);
-	playerSelect.add(aPlayerLabel);
+		PlayerLabels[i] = Titanium.UI.createLabel({
+			color: '#fff',
+			id: i,
+			width: 116,
+			height: 30,
+			left: leftMargin,
+			textAlign: 'center',
+			font:{fontSize:24,fontFamily:'Ballpark'},
+			top: '87%',
+		});
+		aPlayerLabel = PlayerLabels[i];
+		
+		playerSelect.add(aPlayer);
+		playerSelect.add(aPlayerLabel);
+	}
 }
 
 // Buttons for user to select number of sets
-for(var i=0;i<Games.Cricket.sets.length;i++){
-	var leftMargin = 29 + (14*i) + '%';
-	possibleSets[i] = Titanium.UI.createButton({
-		color:'#fff',
-		backgroundImage: 'images/'+device+'/blank-set.png',
-		hintText:'Player 1',
-		font:{fontSize:35,fontFamily:'Futura-CondensedMedium'},
-		textAlign:'center',
-		title: Games.Cricket.sets[i],
-		gamesToPlay: Games.Cricket.sets[i],
-		textAlign:'center',
-		width:110,
-		height: 110,
-		top: '15%',
-		left: leftMargin,
-		touchEnabled: true,
-	});
-	
-	possibleSet = possibleSets[i];
+var paintPossibleSets = function(){
+	for(var i=0;i<Games.Cricket.sets.length;i++){
+		var leftMargin = 29 + (14*i) + '%';
+		possibleSets[i] = Titanium.UI.createButton({
+			color:'#fff',
+			backgroundImage: 'images/'+device+'/blank-set.png',
+			hintText:'Player 1',
+			font:{fontSize:35,fontFamily:'Futura-CondensedMedium'},
+			textAlign:'center',
+			title: Games.Cricket.sets[i],
+			gamesToPlay: Games.Cricket.sets[i],
+			textAlign:'center',
+			width:110,
+			height: 110,
+			top: '15%',
+			left: leftMargin,
+			touchEnabled: true,
+		});
 		
-	// Event listeners for sets
-	possibleSet.addEventListener('click', function(){
-		clearUnsetPlayers(null);
-		for(var i=0;i<=2;i++){
-			possibleSets[i].backgroundImage ='images/'+device+'/blank-set.png';
-		}
-		if (sliderIsOpen){
-			playerSliderDoor();
-		}
-		this.backgroundImage = 'images/'+device+'/blue-button.png';
-		GamesToPlay = this.gamesToPlay;
-		if (!setsChosen){
-			setsChosen = true;
-		}
-		playButtonCheck();
-	});
-	setsSelect.add(possibleSet);
+		possibleSet = possibleSets[i];
+			
+		// Event listeners for sets
+		possibleSet.addEventListener('click', function(){
+			clearUnsetPlayers(null);
+			for(var i=0;i<=2;i++){
+				possibleSets[i].backgroundImage ='images/'+device+'/blank-set.png';
+			}
+			if (sliderIsOpen){
+				playerSliderDoor();
+			}
+			this.backgroundImage = 'images/'+device+'/blue-button.png';
+			GamesToPlay = this.gamesToPlay;
+			if (!setsChosen){
+				setsChosen = true;
+			}
+			playButtonCheck();
+		});
+		setsSelect.add(possibleSet);
+	}
 }
 
 // To clear all buttons pass in null

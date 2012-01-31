@@ -144,7 +144,7 @@ var submittedPlayer = Titanium.UI.createLabel({
 
 	
 // Buttons for user to select number of players
-var paintPossibleSets = function(){
+var paintPlayerSelections = function(){
 	for(var i=0;i<possiblePlayers;i++){
 		var leftMargin = 20 + (15*i) + '%';
 		thePlayerButtons[i] = Titanium.UI.createButton({
@@ -208,23 +208,7 @@ var paintPossibleSets = function(){
 		});
 		
 		possibleSet = possibleSets[i];
-			
-		// Event listeners for sets
-		possibleSet.addEventListener('click', function(){
-			clearUnsetPlayers(null);
-			for(var i=0;i<=2;i++){
-				possibleSets[i].backgroundImage ='images/'+device+'/blank-set.png';
-			}
-			if (sliderIsOpen){
-				playerSliderDoor();
-			}
-			this.backgroundImage = 'images/'+device+'/blue-button.png';
-			GamesToPlay = this.gamesToPlay;
-			if (!setsChosen){
-				setsChosen = true;
-			}
-			playButtonCheck();
-		});
+		possibleSetTap(possibleSet);
 		setsSelect.add(possibleSet);
 	}
 }

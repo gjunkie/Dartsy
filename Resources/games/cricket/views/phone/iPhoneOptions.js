@@ -199,7 +199,7 @@ var paintPossibleSets = function(){
 		});
 		
 		possibleSet = possibleSets[i];
-		//possibleSetTap(possibleSet);
+		possibleSetTap(possibleSet);
 		setsSelect.add(possibleSet);
 	}
 }

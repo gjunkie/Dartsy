@@ -23,10 +23,6 @@ var helpButton = Titanium.UI.createButton({
 	right: 20,
 });
 
-helpButton.addEventListener('click',function(){
-	helpView.animate(helpViewShow);
-});
-
 var playerSelect = Titanium.UI.createView({
 	id: 'Player Selector',
 	backgroundImage:'images/'+device+'/cricket-intro-top.jpg',
@@ -56,15 +52,6 @@ var factsLabel = Titanium.UI.createLabel({
 	height:'95%',
 	width:'95%',
 });
-
-var pickRandomProperty = function(facts) {
-    var fact;
-    var count = 0;
-    for (var item in facts)
-        if (Math.random() < 1/++count)
-           fact = item;
-    factsLabel.text = facts[fact].toUpperCase();
-}
 
 var setsSelect = Titanium.UI.createView({
 	id: 'Sets Selector',
@@ -225,38 +212,6 @@ var paintPossibleSets = function(){
 	}
 }
 
-// To clear all buttons pass in null
-// To not clear active button, pass in button
-var clearUnsetPlayers = function(currentButton){
-	if(currentButton != null){
-		for(var i=0;i<thePlayerButtons.length;i++){
-			if(!thePlayerButtons[i].playerIsSet && thePlayerButtons[i] != currentButton){
-				thePlayerButtons[i].backgroundImage = 'images/'+device+'/playerNotSelected.png';
-				thePlayerButtons[i].selected = false;
-			}
-		}
-	} else {
-		for(var i=0;i<thePlayerButtons.length;i++){
-			if(!thePlayerButtons[i].playerIsSet){
-				thePlayerButtons[i].backgroundImage = 'images/'+device+'/playerNotSelected.png';
-				thePlayerButtons[i].selected = false;
-			}
-		}
-	}
-}
-
-var playButtonCheck = function(){
-	if(players.length>0 && setsChosen){
-		play.backgroundImage = 'images/'+device+'/PlayButton.png';
-		play.touchEnabled = true;
-		play.enabled = true;
-	} else {
-		play.backgroundImage = 'images/'+device+'/PlayButtonDisabled.png';
-		play.touchEnabled = false;
-		play.enabled = false;
-	}	
-}
-
 var GameView = Titanium.UI.createView({
 	id: 'Cricket View',
 	backgroundImage:'images/'+device+'/cricket-dark-wood.jpg',
@@ -343,55 +298,6 @@ var play = Titanium.UI.createButton({
 	touchEnabled: false,
 	enabeld: false,
 });
-
-play.addEventListener('click', function(){
-	addColumns(totalPlayers);
-	start_new_game();
-	win2.open();
-	win1.close();
-})
-
-var playerSliderDoor = function(player){
-	PlayerName.hintText = "Player Name";
-	if (sliderIsOpen) {
-		playerSelect.animate(playersSliderHideTop);
-		setsSelect.animate(playersSliderHideBottom);
-		sliderIsOpen = false;
-	} else if (!sliderIsOpen) {
-		playerSelect.animate(playersSliderExposeTop);
-		setsSelect.animate(playersSliderExposeBottom);
-		sliderIsOpen = true;
-	}
-}
-
-var printName = function(name, placement){
-	PlayerLabels[placement].text = name;
-	thePlayerButtons[placement].name = name;
-}
-
-DeletePlayer.addEventListener('click', function(){
-	removePlayer(deleteIndex, clearLabel, clearButton);
-	if (totalPlayers==0){
-		play.backgroundImage = 'images/'+device+'/PlayButtonDisabled.png',
-		play.touchEnabled = false;
-	}
-	playButtonCheck();
-});
-
-var submitThePlayer = function(){
-	totalPlayers++;
-	var playerName = PlayerName.value;
-	players.splice(placement,0,new Player(placement, playerName));
-	players.sort(function(a, b){
-		return a.id-b.id
-	})
-	printName(playerName, placement);
-	thePlayerButtons[placement].playerIsSet=true;
-	thePlayerButtons[placement].playerIndex = players.length-1;
-	playerSliderDoor();
-	// Database Function
-	//checkForNewPlayer(playerName);
-}
 
 indicators.add(indicator1);
 indicators.add(indicator2);

@@ -24,7 +24,8 @@ var playerTap = function(aPlayer){
 	aPlayer.addEventListener('click', function(){
 		if (this.playerIsSet){
 			clearUnsetPlayers(this);
-			deleteIndex = this.playerIndex;
+			debug(thePlayerButtons.indexOf(this))
+			deleteIndex = thePlayerButtons.indexOf(this);
 			clearLabel = PlayerLabels[this.id];
 			clearButton = this;
 			if ((lastPlayerButtonTapped == this.id && sliderIsOpen) || (lastPlayerButtonTapped != this.id && !sliderIsOpen) || (!sliderIsOpen)){
@@ -125,7 +126,7 @@ var submitThePlayer = function(){
 	printName(playerName, placement);
 	thePlayerButtons[placement].playerIsSet=true;
 	thePlayerButtons[placement].playerIndex = players.length-1;
-	playerSliderDoor();
+	playerSliderDoor();	
 	// Database Function
 	//checkForNewPlayer(playerName);
 }
@@ -179,3 +180,6 @@ play.addEventListener('click', function(){
 	win1.close();
 });
 
+helpButton.addEventListener('click',function(){
+	helpView.animate(helpViewShow);
+});

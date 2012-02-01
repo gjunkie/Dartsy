@@ -71,7 +71,19 @@ var reverseTurn = function(){
 	}
 }
 var removePlayer = function(playerIndex, label, button){
-	players.splice(playerIndex,1);
+	debug('players length '+players.length);
+	debug(players);
+
+	for(var i=0, c = players.length; i<c; i++){
+		debug(typeof players[i]);
+		debug('players length ' +players.length)
+		if(players[i] == undefined){
+			debug('delete '+i)
+			delete players[i];
+			continue;
+		}
+	}
+		debug(players)
 	label.text = '';
 	button.backgroundImage = 'images/ipad/playerNotSelected.png';
 	button.playerIsSet = false;

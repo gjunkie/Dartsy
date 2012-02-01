@@ -243,8 +243,6 @@ var singlePlayerFinished = function(winner){
 			start_new_game();
 		} else if(e.index == 1) {
 			end_set();
-			win1.open();
-			win2.close();
 		}
 	});
 }

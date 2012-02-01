@@ -92,6 +92,18 @@ var PlayerName = Titanium.UI.createTextField({
 	returnKeyType: Titanium.UI.RETURNKEY_DONE
 });
 
+var letsPlay = Titanium.UI.createLabel({
+	id: 'Lets Play',
+	text: 'Let\'s Play',
+	color: '#ffffff',
+	textAlign: 'center',
+	font:{fontSize:50,fontFamily:'Ballpark'},
+	opacity: 0,
+	bottom: 25,
+	height:60,
+	width:400,
+});
+
 var OkButton = Titanium.UI.createButton({
 	backgroundImage:'images/'+device+'/ok.png',
 	width: 48,
@@ -288,7 +300,6 @@ var turnBanners = [];
 var thePlayer;
 var leftSpace = null;
 var addColumns = function(playerCount, name){
-	debug(players)
 	for(var i=0; i<playerCount; i++){
 		thePlayer = players[i];
 		if(players[i].id<2){
@@ -358,21 +369,6 @@ var printName = function(name, placement){
 	thePlayerButtons[placement].name = name;
 }
 
-//Return Key submission
-PlayerName.addEventListener('return',function(){
-	if (PlayerName.value != '') {
-		submitThePlayer();
-	}
-	playButtonCheck();
-});
-
-OkButton.addEventListener('click',function(){
-	if (PlayerName.value != '') {
-		submitThePlayer();
-	}
-	playButtonCheck();
-});
-
 DeletePlayer.addEventListener('click', function(){
 	removePlayer(deleteIndex, clearLabel, clearButton);
 	if (totalPlayers==0){
@@ -405,6 +401,7 @@ playerSelect.add(playersText);
 factsView.add(factsLabel);
 playerSelect.add(factsView);
 setsSelect.add(play);
+setsSelect.add(letsPlay);
 setsSelect.add(numOfGamesText);
 //setsSelect.add(helpButton);
 playerSlider.add(PlayerName);
@@ -412,3 +409,4 @@ playerSlider.add(OkButton);
 win1.add(playerSlider);
 win1.add(playerSelect);
 win1.add(setsSelect);
+Titanium.include('../../models/options.js');

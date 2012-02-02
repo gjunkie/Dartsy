@@ -70,22 +70,20 @@ var reverseTurn = function(){
 		currentPlayerStart();
 	}
 }
-var removePlayer = function(playerIndex, label, button){
-	debug('players length '+players.length);
-	debug(players);
-
+var removePlayer = function(parentIndex, label, button){
 	for(var i=0, c = players.length; i<c; i++){
-		debug(typeof players[i]);
-		debug('players length ' +players.length)
-		if(players[i] == undefined){
-			debug('delete '+i)
-			delete players[i];
+		if(typeof players[i] === 'undefined') continue;
+		if(players[i].parent == parentIndex){
+			players.splice(i,1);
 			continue;
 		}
 	}
-		debug(players)
+	players.sort(function(a, b){
+		return a.id-b.id
+	})
+	debug(players)
 	label.text = '';
-	button.backgroundImage = 'images/ipad/playerNotSelected.png';
+	button.backgroundImage = 'images/'+device+'/playerNotSelected.png';
 	button.playerIsSet = false;
 	button.selected = false;
 	PlayerName.blur();

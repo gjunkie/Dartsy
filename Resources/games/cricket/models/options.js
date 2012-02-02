@@ -22,9 +22,9 @@ var pickRandomProperty = function(facts) {
 var playerTap = function(aPlayer){
 	// Event listeners for players
 	aPlayer.addEventListener('click', function(){
+		placement = this.id;
 		if (this.playerIsSet){
 			clearUnsetPlayers(this);
-			debug(thePlayerButtons.indexOf(this))
 			deleteIndex = thePlayerButtons.indexOf(this);
 			clearLabel = PlayerLabels[this.id];
 			clearButton = this;
@@ -47,7 +47,6 @@ var playerTap = function(aPlayer){
 			}
 			PlayerName.value = '';
 			clearUnsetPlayers(this);
-			placement = this.id;
 			if(!this.selected){
 				this.selected = true;
 				this.backgroundImage = 'images/'+device+'/playerSelected.png';
@@ -116,17 +115,23 @@ var playButtonCheck = function(){
 	}	
 }
 
-var submitThePlayer = function(){
+var submitThePlayer = function(parent){
 	totalPlayers++;
 	var playerName = PlayerName.value;
-	players[placement] = new Player(placement, playerName);
+	players.push(new Player(placement, playerName, parent));
 	players.sort(function(a, b){
 		return a.id-b.id
-	})
+	});
+	for(var i=0, c = players.length; i<c; i++){
+		if(typeof players[i] === 'undefined'){
+			players.splice(i,1);
+			continue;
+		}
+	}
 	printName(playerName, placement);
-	thePlayerButtons[placement].playerIsSet=true;
-	thePlayerButtons[placement].playerIndex = players.length-1;
-	playerSliderDoor();	
+	thePlayerButtons[placement].playerIsSet = true;
+	playerSliderDoor();
+	// find the id of every player and assign it to playerIndex of buttons
 	// Database Function
 	//checkForNewPlayer(playerName);
 }
@@ -152,20 +157,20 @@ var printName = function(name, placement){
 //Return Key submission
 PlayerName.addEventListener('return',function(){
 	if (PlayerName.value != '') {
-		submitThePlayer();
+		submitThePlayer(placement);
 	}
 	playButtonCheck();
 });
 
 OkButton.addEventListener('click',function(){
 	if (PlayerName.value != '') {
-		submitThePlayer();
+		submitThePlayer(placement);
 	}
 	playButtonCheck();
 });
 
 DeletePlayer.addEventListener('click', function(){
-	removePlayer(deleteIndex, clearLabel, clearButton);
+	removePlayer(placement, clearLabel, clearButton);
 	if (totalPlayers==0){
 		play.backgroundImage = 'images/'+device+'/PlayButtonDisabled.png',
 		play.touchEnabled = false;

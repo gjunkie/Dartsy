@@ -20,7 +20,7 @@ var closeNumbers = function(indx){
 			views[i].children[indx].status=false;
 			views[i].children[indx].animate(seeThru);
 			views[i].children[indx].color = '#ffffff';
-			views[i].children[indx].backgroundImage = 'images/ipad/button.png';
+			views[i].children[indx].backgroundImage = 'images/'+device+'/button.png';
 		}
 		availNums[indx].animate(seeThru);
 		return true;

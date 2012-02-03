@@ -96,11 +96,12 @@ var OkButton = Titanium.UI.createButton({
 });
 
 var DeletePlayer = Titanium.UI.createButton({
-	backgroundImage:'images/'+device+'/deletePlayer.png',
-	bottom: 4,
-	width: 13,
-	height: 13,
+	backgroundImage:'images/'+device+'/deletePlayer2.png',
+	bottom: 70,
+	width: 25,
+	height: 25,
 	title: '',
+	zIndex: 5,
 });
 
 var CricketTitle = Titanium.UI.createImageView({
@@ -132,9 +133,8 @@ var submittedPlayer = Titanium.UI.createLabel({
 	text: '',
 	textAlign: 'center',
 	height: 50,
-	top: -11,
 	color: '#ffffff',
-	font:{fontSize:25,fontFamily:'Ballpark'},
+	font:{fontSize:30,fontFamily:'Ballpark'},
 });
 var paintPlayerSelections = function(){
 // Buttons for user to select number of players

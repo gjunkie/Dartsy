@@ -56,8 +56,8 @@ var gameSlideUp = Titanium.UI.createAnimation();
     gameSlideUp.top = -94;
     gameSlideUp.bottom = 94;
 	} else {
-    gameSlideUp.top = -37;
-    gameSlideUp.bottom = 37;
+    gameSlideUp.top = -47;
+    gameSlideUp.bottom = 47;
 	}
     gameSlideUp.duration = 250;
     gameSlideUp.addEventListener('complete',function(){

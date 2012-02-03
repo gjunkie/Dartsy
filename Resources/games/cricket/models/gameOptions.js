@@ -23,8 +23,13 @@ GameOptionsMask.addEventListener('click', function(){
 
 gameOptionsTrigger.addEventListener('click', function(){
 	if(totalPlayers>1){
-		quitSet.right = '20%';
-		restartGame.left = '20%';
+		if(ipad){
+			quitSet.right = '20%';
+			restartGame.left = '20%';
+		} else if(iphone){
+			// quitSet.center = {x-axis:'25%',y-axis:'50%'};
+			// restartGame.center = {x-axis:'75%',y-axis:'50%'};
+		}
 		GameOptions.add(restartGame);
 		GameOptions.add(restartSet);
 		GameOptions.add(quitSet);

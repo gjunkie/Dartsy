@@ -7,6 +7,7 @@ var sliderIsOpen = false;
 var placement = null;
 var deleteIndex = null;
 var clearLabel = null;
+var deleteButtonVisible = false;
 var clearButton = null;
 var lastPlayerButtonTapped = null;
 
@@ -35,13 +36,13 @@ var playerTap = function(aPlayer){
 			playerSlider.remove(PlayerName);
 			playerSlider.remove(OkButton);
 			playerSlider.add(submittedPlayer);
-			playerSlider.add(DeletePlayer);
+			paintDeleteButton(this)
 		} else if (!this.playerIsSet){
 			playerSlider.add(PlayerName);
 			playerSlider.add(OkButton);
 			PlayerName.focus();
 			playerSlider.remove(submittedPlayer);
-			playerSlider.remove(DeletePlayer);
+			deleteButtonView.remove(DeletePlayer);
 			if (lastPlayerButtonTapped == this.id || lastPlayerButtonTapped == null || !sliderIsOpen){
 				playerSliderDoor();
 			}
@@ -101,6 +102,21 @@ var clearUnsetPlayers = function(tappedButton){
 	}
 }
 
+var paintDeleteButton = function(playerButton){
+	var newLeft = playerButton.left - 5;
+	deleteButtonVisible = true;
+	DeletePlayer.left = newLeft;
+	deleteButtonView.add(DeletePlayer);
+}
+
+var removeDeleteButton = function(){
+	debug('trying to remove buttons')
+	if(deleteButtonVisible){
+		deleteButtonView.remove(DeletePlayer);
+		deleteButtonVisible = false;
+	}
+}
+
 var playButtonCheck = function(){
 	if(players.length>0 && setsChosen){
 		play.backgroundImage = 'images/'+device+'/PlayButton.png';
@@ -147,6 +163,7 @@ var playerSliderDoor = function(player){
 		setsSelect.animate(playersSliderExposeBottom);
 		sliderIsOpen = true;
 	}
+	removeDeleteButton();
 }
 
 var printName = function(name, placement){

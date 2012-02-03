@@ -13,7 +13,7 @@ var restartGame = Titanium.UI.createButton({
 	borderRadius: 10,
 	title:'Restart Game',
 	backgroundImage: 'none',
-	font: {fontSize:24,fontFamily:'Ballpark'},
+	font: {fontSize:10,fontFamily:'Ballpark'},
 	textAlign:'center',
 	width:150,
 	height: 40,
@@ -25,7 +25,7 @@ var restartSet = Titanium.UI.createButton({
 	borderRadius: 10,
 	backgroundImage: 'none',
 	title:'Restart Set',
-	font: {fontSize:24,fontFamily:'Ballpark'},
+	font: {fontSize:10,fontFamily:'Ballpark'},
 	textAlign:'center',
 	width:150,
 	height: 40,
@@ -37,11 +37,11 @@ var quitSet = Titanium.UI.createButton({
 	borderRadius: 10,
 	title:'Quit',
 	backgroundImage: 'none',
-	font: {fontSize:24,fontFamily:'Ballpark'},
+	font: {fontSize:10,fontFamily:'Ballpark'},
 	textAlign:'center',
 	width:150,
 	height: 40,
-	right: '20%',
+	right: 100,
 });
 
 var clearBoard = Titanium.UI.createButton({
@@ -49,11 +49,11 @@ var clearBoard = Titanium.UI.createButton({
 	borderRadius: 10,
 	title:'Clear Board',
 	backgroundImage: 'none',
-	font: {fontSize:24,fontFamily:'Ballpark'},
+	font: {fontSize:10,fontFamily:'Ballpark'},
 	textAlign:'center',
 	width:150,
 	height: 40,
-	left: '30%',
+	left: 100,
 });
 
 var GameOptions = Titanium.UI.createView({

@@ -27,8 +27,8 @@ gameOptionsTrigger.addEventListener('click', function(){
 			quitSet.right = '20%';
 			restartGame.left = '20%';
 		} else if(iphone){
-			// quitSet.center = {x-axis:'25%',y-axis:'50%'};
-			// restartGame.center = {x-axis:'75%',y-axis:'50%'};
+			quitSet.center = {x:240,y:24};
+			restartGame.center = {x:80,y:24};
 		}
 		GameOptions.add(restartGame);
 		GameOptions.add(restartSet);

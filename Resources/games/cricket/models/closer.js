@@ -242,6 +242,8 @@ var singlePlayerFinished = function(winner){
 		if(e.index == 0) {
 			start_new_game();
 		} else if(e.index == 1) {
+			win1.open();
+			win2.close();
 			end_set();
 		}
 	});
@@ -259,9 +261,9 @@ var winnerAlert = function(winner){
 		if(e.index == 0) {
 			start_new_game();
 		} else if(e.index == 1) {
-			end_set();
 			win1.open();
 			win2.close();
+			end_set();
 		}
 	});
 }
@@ -278,9 +280,9 @@ var tieAlert = function(){
 		if(e.index == 0) {
 			start_new_game();
 		} else if(e.index == 1) {
-			end_set();
 			win1.open();
 			win2.close();
+			end_set();
 		}
 	});
 }
@@ -315,9 +317,9 @@ var winnerOfSets = function(winner){
 				players[i].wins = 0;
 			}
 		} else if(e.index == 2) {
-			end_set();
 			win1.open();
 			win2.close();
+			end_set();
 		}
 	});
 }
@@ -381,4 +383,5 @@ var end_set = function(){
 	}
 	views.length = 0;
 	GameNumber = 0;
+	playButtonCheck();
 }

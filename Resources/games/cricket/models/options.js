@@ -26,6 +26,7 @@ var playerTap = function(aPlayer){
 		placement = this.id;
 		if (this.playerIsSet){
 			clearUnsetPlayers(this);
+			paintDeleteButton(this);
 			deleteIndex = thePlayerButtons.indexOf(this);
 			clearLabel = PlayerLabels[this.id];
 			clearButton = this;
@@ -36,13 +37,12 @@ var playerTap = function(aPlayer){
 			playerSlider.remove(PlayerName);
 			playerSlider.remove(OkButton);
 			playerSlider.add(submittedPlayer);
-			paintDeleteButton(this)
 		} else if (!this.playerIsSet){
 			playerSlider.add(PlayerName);
 			playerSlider.add(OkButton);
 			PlayerName.focus();
 			playerSlider.remove(submittedPlayer);
-			deleteButtonView.remove(DeletePlayer);
+			removeDeleteButton();
 			if (lastPlayerButtonTapped == this.id || lastPlayerButtonTapped == null || !sliderIsOpen){
 				playerSliderDoor();
 			}
@@ -104,13 +104,14 @@ var clearUnsetPlayers = function(tappedButton){
 
 var paintDeleteButton = function(playerButton){
 	var newLeft = playerButton.left - 5;
-	deleteButtonVisible = true;
 	DeletePlayer.left = newLeft;
-	deleteButtonView.add(DeletePlayer);
+	if(!deleteButtonVisible){
+		deleteButtonView.add(DeletePlayer);
+		deleteButtonVisible = true;
+	}
 }
 
 var removeDeleteButton = function(){
-	debug('trying to remove buttons')
 	if(deleteButtonVisible){
 		deleteButtonView.remove(DeletePlayer);
 		deleteButtonVisible = false;
@@ -157,13 +158,13 @@ var playerSliderDoor = function(player){
 	if (sliderIsOpen) {
 		playerSelect.animate(playersSliderHideTop);
 		setsSelect.animate(playersSliderHideBottom);
+		removeDeleteButton();
 		sliderIsOpen = false;
 	} else if (!sliderIsOpen) {
 		playerSelect.animate(playersSliderExposeTop);
 		setsSelect.animate(playersSliderExposeBottom);
 		sliderIsOpen = true;
 	}
-	removeDeleteButton();
 }
 
 var printName = function(name, placement){

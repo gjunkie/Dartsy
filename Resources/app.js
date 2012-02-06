@@ -56,8 +56,11 @@ if(Titanium.Platform.osname == 'ipad'){
 
 if(Titanium.Platform.osname == 'iphone'){
 	var possiblePlayers = 4;
+	var tutorialWindow = Titanium.UI.createWindow({  
+	    title:'Tutorial',
+	});
 	var win1 = Titanium.UI.createWindow({  
-	    title:'Instructions',
+	    title:'Options',
 	});
 	var win2 = Titanium.UI.createWindow({  
 	    title:'Cricket',
@@ -82,6 +85,7 @@ var iOSCheck = function(){
 		Ti.API.debug('iPhone');
 		iphone = true;
 		device = 'phone';
+		Titanium.include('games/cricket/views/phone/tutorial.js');
 		Titanium.include('games/cricket/views/phone/iPhoneOptions.js');
 		Titanium.include('games/cricket/views/phone/dartsModal.js');
 		Titanium.include('games/cricket/views/phone/buttons.js');
@@ -106,5 +110,5 @@ Titanium.include('games/cricket/models/global.js');
 paintPlayerSelections();
 paintPossibleSets();
 // open window with options
-win1.open();
+tutorialWindow.open();
 pickRandomProperty(Facts);

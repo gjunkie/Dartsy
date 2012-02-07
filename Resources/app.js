@@ -1,3 +1,4 @@
+
 // this sets the background color of the master UIView (when there are no windows/tab groups on it)
 Titanium.UI.setBackgroundImage('#000');
 
@@ -109,6 +110,15 @@ Titanium.include('games/cricket/models/global.js');
 
 paintPlayerSelections();
 paintPossibleSets();
-// open window with options
-tutorialWindow.open();
+
+
+// Check if this is first time running application,
+// if so, show tutorial, else show options
+if(!(Ti.App.Properties.hasProperty('firstLaunch'))){
+	tutorialWindow.open();
+} else {
+	win1.open();
+}
 pickRandomProperty(Facts);
+
+

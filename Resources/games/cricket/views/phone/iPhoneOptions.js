@@ -106,9 +106,9 @@ var DeletePlayer = Titanium.UI.createButton({
 
 var CricketTitle = Titanium.UI.createImageView({
 	image: 'images/'+device+'/CricketTitle.png',
-	width: 110,
-	height: 58,
-	top: 40,
+	width: 160,
+	height: 75,
+	top: 30,
 });
 
 var playersText = Titanium.UI.createLabel({

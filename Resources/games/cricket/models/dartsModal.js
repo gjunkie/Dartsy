@@ -67,7 +67,6 @@ var button_calc = function(button, multiplier, owner){
 		button.hits++;
 		calculate_points(button, button.worth, button.hits);
 		if(available_to_score(button, button.hits)){
-			highlight(button);
 			for(var i = 0; i < allNumbers; i++){
 				points += ~~(button.parent.children[i].title);
 			}

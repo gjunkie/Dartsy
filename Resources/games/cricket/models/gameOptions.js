@@ -22,31 +22,60 @@ GameOptionsMask.addEventListener('click', function(){
 });
 
 gameOptionsTrigger.addEventListener('click', function(){
-	if(totalPlayers>1){
-		if(ipad){
-			quitSet.right = '20%';
-			restartGame.left = '20%';
-		} else if(iphone){
-			quitSet.center = {x:240,y:24};
-			restartGame.center = {x:80,y:24};
-		}
-		GameOptions.add(restartGame);
-		GameOptions.add(restartSet);
-		GameOptions.add(quitSet);
+	if(iphone){
+		gameOptionsDialog.show();
 	} else {
-		quitSet.right = '30%';
-		GameOptions.add(clearBoard);
-		GameOptions.add(quitSet);
-	}
-	if (GameOptionsVisible == false) {
-		GameView.animate(gameSlideUp);
-		win2.add(GameOptionsMask);
-	} else if (GameOptionsVisible == true) {
-		GameView.animate(gameSlideDown);
+		if(totalPlayers>1){
+			if(ipad){
+				quitSet.right = '20%';
+				restartGame.left = '20%';
+			} else if(iphone){
+				quitSet.center = {x:240,y:24};
+				restartGame.center = {x:80,y:24};
+			}
+			GameOptions.add(restartGame);
+			GameOptions.add(restartSet);
+			GameOptions.add(quitSet);
+		} else {
+			quitSet.right = '30%';
+			GameOptions.add(clearBoard);
+			GameOptions.add(quitSet);
+		}
+		if (GameOptionsVisible == false) {
+			GameView.animate(gameSlideUp);
+			win2.add(GameOptionsMask);
+		} else if (GameOptionsVisible == true) {
+			GameView.animate(gameSlideDown);
+		}
 	}
 });
 
+
+if(iphone){
+	gameOptionsDialog.addEventListener('click',function(e){
+		if(e.index == 0) {
+			restartGamePressed();
+		} else if(e.index == 1) {
+			restartSetPressed();
+		}else if(e.index == 2) {
+			quitSetPressed();
+		}
+	});
+}
+
 restartGame.addEventListener('click', function(){
+	restartGamePressed();
+});
+
+quitSet.addEventListener('click', function(){
+	quitSetPressed();
+});
+
+restartSet.addEventListener('click', function(){
+	restartSetPressed();
+});
+
+var restartGamePressed = function(){
 	restartGameAlert.show();
 	restartGameAlert.addEventListener('click',function(e){
 		if(e.index == 0) {
@@ -55,9 +84,9 @@ restartGame.addEventListener('click', function(){
 		GameView.animate(gameSlideDown);
 		win2.remove(GameOptionsMask);
 	});
-});
+}
 
-quitSet.addEventListener('click', function(){
+var quitSetPressed = function(){
 	quitSetAlert.show();
 	quitSetAlert.addEventListener('click',function(e){
 		if(e.index == 0) {
@@ -68,9 +97,9 @@ quitSet.addEventListener('click', function(){
 		GameView.animate(gameSlideDown);
 		win2.remove(GameOptionsMask);
 	});
-});
+}
 
-restartSet.addEventListener('click', function(){
+var restartSetPressed = function(){
 	restartSetAlert.show();
 	restartSetAlert.addEventListener('click',function(e){
 		if(e.index == 0) {
@@ -80,4 +109,4 @@ restartSet.addEventListener('click', function(){
 		GameView.animate(gameSlideDown);
 		win2.remove(GameOptionsMask);
 	});
-});
+}

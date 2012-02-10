@@ -92,6 +92,15 @@ var clearBoardAlert = Titanium.UI.createAlertDialog({
     cancel: 1,
 });
 
+var gameOptionsDialog = Titanium.UI.createOptionDialog({
+    title: '',
+    options: ['Restart Game','Restart Set','Quit', 'Cancel'],
+    cancel:3,
+    destructive: 2,
+});
+
+
+
 clearBoard.addEventListener('click', function(){
 	clearBoardAlert.show();
 	clearBoardAlert.addEventListener('click',function(e){

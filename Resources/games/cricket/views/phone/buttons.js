@@ -59,7 +59,7 @@ var multDialogBull = Titanium.UI.createOptionDialog({
 
 for(i=0;i<gameKeys.length;i++){
 	// Numbers in the middle
-	topDistance = 50+(58*i);
+	topDistance = 50+(55*i);
 	backgroundImageNumber = Games.Cricket.avail_nums[i];
 	availNums[i] = Titanium.UI.createLabel({
 		backgroundImage: 'images/'+device+'/numbers/'+backgroundImageNumber+'.png',
@@ -76,8 +76,7 @@ for(i=0;i<gameKeys.length;i++){
 // Player buttons/labels
 var paintButtons = function(myView, totalPlayers, playerIndex){
 	for(var i=0;i<allNumbers;i++){
-		topDistance = 43+(58*i);
-		modalTopDistance = 50+(58*i);
+		topDistance = 43+(55*i);
 		if (i<allNumbers) {
 			playerButtons[i] = Titanium.UI.createButton({
 				id: Games.Cricket.avail_nums[i],
@@ -93,7 +92,6 @@ var paintButtons = function(myView, totalPlayers, playerIndex){
 				width:50,
 				height: 50,
 				top: topDistance,
-				incModal: modalTopDistance,
 				relation: availNums[i],
 				hits: 0,
 				worth: Games.Cricket.avail_nums[i],
@@ -115,17 +113,14 @@ var paintButtons = function(myView, totalPlayers, playerIndex){
 
 var Names = function(myView, index){
 	playerNamesLabels[index] = Titanium.UI.createLabel({
-		borderColor: '#e5e5e5',
-		borderWidth: 0,
 		color:'#fff',
 		backgroundColor:'none',
-		borderRadius: 5,
 		text: players[index].name.substr(0, 1),
 		font:{fontSize:30,fontFamily:'Ballpark'},
 		textAlign:'center',
-		width:100,
-		height: 50,
-		top: -5,
+		width:50,
+		height: 25,
+		top: 2,
 		touchEnabled: true,
 		zIndex: 1,
 	});

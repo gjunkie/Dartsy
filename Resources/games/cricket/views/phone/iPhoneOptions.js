@@ -212,32 +212,32 @@ var GameView = Titanium.UI.createView({
 var indicators = Titanium.UI.createView({
 	id: 'Indicators',
 	height: 13,
-	width: 30,
-	top: 30,
+	width: 36,
+	top: 28,
 	myView: null,
 });
 
 var indicator1 = Titanium.UI.createLabel({
 	id: 'Indicator 1',
 	backgroundImage: 'images/'+device+'/dartIndicator.png',
-	height: 6,
-	width: 6,
-	left: 20,
+	height: 8,
+	width: 8,
+	left: 26,
 });
 
 var indicator2 = Titanium.UI.createLabel({
 	id: 'Indicator 2',
 	backgroundImage: 'images/'+device+'/dartIndicator.png',
-	height: 6,
-	width: 6,
-	left: 10,
+	height: 8,
+	width: 8,
+	left: 13,
 });
 
 var indicator3 = Titanium.UI.createLabel({
 	id: 'Indicator 3',
 	backgroundImage: 'images/'+device+'/dartIndicator.png',
-	height: 6,
-	width: 6,
+	height: 8,
+	width: 8,
 	left: 0,
 });
 	

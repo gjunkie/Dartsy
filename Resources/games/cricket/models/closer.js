@@ -345,22 +345,22 @@ var resetGlobalVars = function(){
 
 // Start new game. This restarts current game. Does not resest Games Played.
 // Do not set views to not touch enabled so names can be used to skip turns
+// REVERSE THIS LOOP, RUN NUMBERS INSIDE OF PLAYERS TO NOT RUN THINGS TOO MANY TIMES WHEN I DONT NEED TO
 var start_new_game = function(){
-	for(var numOfButtons=0;numOfButtons<7;numOfButtons++){
-		for(var numOfViews=0;numOfViews<totalPlayers;numOfViews++){
-			calculate_points(players[numOfViews].buttons[numOfButtons], 0, 0);
+	for(var numOfViews=0;numOfViews<totalPlayers;numOfViews++){
+		for(var numOfButtons=0;numOfButtons<7;numOfButtons++){
 			players[numOfViews].buttons[numOfButtons].hits = 0;
 			players[numOfViews].buttons[numOfButtons].animate(notSeeThru);
+			// May be able to use Status and CLosed for the same thing and make this loop shorter
 			players[numOfViews].buttons[numOfButtons].status = true;
 			players[numOfViews].buttons[numOfButtons].touchEnabled = false;
 			players[numOfViews].buttons[numOfButtons].closed = false;
-			printScore(views[numOfViews].children[8], 0);
-			highlight(players[numOfViews].buttons[numOfButtons]);
-			players[numOfViews].turn = false;
+			calculate_points(players[numOfViews].buttons[numOfButtons], 0, 0);
+			availNums[numOfButtons].animate(notSeeThru);
 		}
-		availNums[numOfButtons].animate(notSeeThru);
+			printScore(views[numOfViews].children[8], 0);
+			players[numOfViews].turn = false;
 	}
-	killModal();
 	if(currentPlayerIndex>0){
 		slideBanner(turnBanners[currentPlayerIndex],'up');
 	}

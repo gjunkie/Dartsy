@@ -116,11 +116,11 @@ var Names = function(myView, index){
 		color:'#fff',
 		backgroundColor:'none',
 		text: players[index].name.substr(0, 1),
-		font:{fontSize:30,fontFamily:'Ballpark'},
+		font:{fontSize:27,fontFamily:'Ballpark'},
 		textAlign:'center',
 		width:50,
 		height: 25,
-		top: 2,
+		top: 4,
 		touchEnabled: true,
 		zIndex: 1,
 	});

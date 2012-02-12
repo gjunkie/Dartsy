@@ -111,12 +111,15 @@ Titanium.include('games/cricket/models/global.js');
 paintPlayerSelections();
 paintPossibleSets();
 
-
-// Check if this is first time running application,
-// if so, show tutorial, else show options
-if(!(Ti.App.Properties.hasProperty('firstLaunch'))){
-	tutorialWindow.open();
-} else {
+if(iphone){
+	// Check if this is first time running application,
+	// if so, show tutorial, else show options
+	if(!(Ti.App.Properties.hasProperty('firstLaunch'))){
+		tutorialWindow.open();
+	} else {
+		win1.open();
+	}
+} else if(ipad){
 	win1.open();
 }
 pickRandomProperty(Facts);

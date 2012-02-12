@@ -3,8 +3,8 @@ var gameOptionsTrigger = Titanium.UI.createLabel({
 	color:'#fff',
 	backgroundImage:'images/'+device+'/CricketOptions.png',
 	text:'',
-	width:35,
-	height: 30,
+	width:44,
+	height: 35,
 	bottom: 0,
 });
 

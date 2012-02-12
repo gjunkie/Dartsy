@@ -371,13 +371,6 @@ var start_new_game = function(){
 var end_set = function(){
 	GameView.animate(gameSlideDown);
 	for(i=0;i<totalPlayers;i++){
-		viewChildrenCount = views[i].children.length;
-		for(var numOfButtons=0;numOfButtons<viewChildrenCount;numOfButtons++){
-			viewChild = views[i].children[numOfButtons];
-			if(viewChild != null){
-				views[i].remove(views[i].children[numOfButtons]);
-			}
-		}
 		players[i].buttons.length = 0;
 		GameView.remove(views[i]);
 	}

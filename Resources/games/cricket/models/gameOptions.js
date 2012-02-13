@@ -22,46 +22,18 @@ GameOptionsMask.addEventListener('click', function(){
 });
 
 gameOptionsTrigger.addEventListener('click', function(){
-	if(iphone){
-		gameOptionsDialog.show();
-	} else {
-		if(totalPlayers>1){
-			if(ipad){
-				quitSet.right = '20%';
-				restartGame.left = '20%';
-			} else if(iphone){
-				quitSet.center = {x:240,y:24};
-				restartGame.center = {x:80,y:24};
-			}
-			GameOptions.add(restartGame);
-			GameOptions.add(restartSet);
-			GameOptions.add(quitSet);
-		} else {
-			quitSet.right = '30%';
-			GameOptions.add(clearBoard);
-			GameOptions.add(quitSet);
-		}
-		if (GameOptionsVisible == false) {
-			GameView.animate(gameSlideUp);
-			win2.add(GameOptionsMask);
-		} else if (GameOptionsVisible == true) {
-			GameView.animate(gameSlideDown);
-		}
-	}
+	gameOptionsDialog.show({view:gameOptionsTrigger});
 });
 
-
-if(iphone){
-	gameOptionsDialog.addEventListener('click',function(e){
-		if(e.index == 0) {
-			restartGamePressed();
-		} else if(e.index == 1) {
-			restartSetPressed();
-		}else if(e.index == 2) {
-			quitSetPressed();
-		}
-	});
-}
+gameOptionsDialog.addEventListener('click',function(e){
+	if(e.index == 0) {
+		restartGamePressed();
+	} else if(e.index == 1) {
+		restartSetPressed();
+	}else if(e.index == 2) {
+		quitSetPressed();
+	}
+});
 
 restartGame.addEventListener('click', function(){
 	restartGamePressed();

@@ -2,7 +2,7 @@
 if(ipad){
 	var scorableNumFontNormal = {fontSize:50}
 	var scorableNumFontActive = {fontSize:20}
-	var deleteButtonView = playerSlider;
+	var deleteButtonView = playerSelect;
 /* iPhone specific variables */
 } else if (iphone){
 	var scorableNumFontNormal = {fontSize:35}

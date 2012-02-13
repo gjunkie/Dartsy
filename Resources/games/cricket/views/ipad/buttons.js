@@ -1,6 +1,5 @@
 // This file creates all scorable buttons and playable numbers on the board 
 
-debug('view buttons ipad loaded');
 var allNumbers = Object.keys(Games.Cricket.avail_nums).length;
 var gameKeys = Games.Cricket.avail_nums;
 var availNums=[];

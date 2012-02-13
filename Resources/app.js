@@ -73,7 +73,6 @@ var iphone = false;
 var device;
 var iOSCheck = function(){
 	if(Titanium.Platform.osname == 'ipad'){
-		Ti.API.debug('iPad');
 		ipad = true;
 		device = 'ipad';
 		Titanium.include('games/cricket/views/ipad/help.js');
@@ -83,7 +82,6 @@ var iOSCheck = function(){
 		Titanium.include('games/cricket/views/ipad/gameOptions.js');
 	
 	} else if(Titanium.Platform.osname == 'iphone'){
-		Ti.API.debug('iPhone');
 		iphone = true;
 		device = 'phone';
 		Titanium.include('games/cricket/views/phone/tutorial.js');

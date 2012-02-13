@@ -368,6 +368,7 @@ var start_new_game = function(){
 	currentPlayerStart(0);
 }
 
+// Try setting all arrays to 0 instead of removing each individual element.
 var end_set = function(){
 	GameView.animate(gameSlideDown);
 	for(i=0;i<totalPlayers;i++){

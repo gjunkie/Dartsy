@@ -51,6 +51,10 @@ var buttonTap = function(playerButton){
 	playerButton.addEventListener('click',function(){
 		if (throwsThisRound != 3){
 			button_calc(this, 1, this.owner);
+			if(!someoneFinished) {
+				debug('CHECKING FOR FINISH')
+				checkClosedNums(playerButton.parent.children, playerButton.owner);
+			}
 			if(ipad){
 				addDartsModal(this, this.parent, this.incModal);
 			}
@@ -98,15 +102,11 @@ var namesTap = function(index){
 					players[i].startedTurn = true;
 					loopMisses(i);
 				}
+				checkClosedNums(players[currentPlayerIndex].buttons, players[currentPlayerIndex]);
 				// Check if game is over before running this
 				for(var i=0;i<index;i++){
 					players[i].startedTurn = true;
 					loopMisses(i);
-				}
-				checkClosedNums(players[currentPlayerIndex].buttons, players[currentPlayerIndex]);
-				if(someoneFinished) {
-					lastTurn = true;
-					winner();
 				}
 				for(var i=index;i<totalPlayers;i++){
 					players[i].startedTurn = false;

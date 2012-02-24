@@ -68,9 +68,11 @@ var allPlayersFinished = function(){
 	}
 	// try removing throwsThisRound == 3 to end game even if not all darts are thrown
 	if(playersFinished == totalPlayers && throwsThisRound == 3){
+		debug('players finished')
 		playersFinished=0;
 		return true;
 	} else {
+		debug('not all players finished')
 		playersFinished = 0;
 		return false;
 	}
@@ -180,8 +182,10 @@ var allPlayersClosedAllNumbers = function(){
 // Determines if 2 or more players are tied
 var matchesHighestScore = function(playerToCheck, topScore){
 	if (players[playerToCheck].score == topScore){
+		debug('mathes highest score')
     	return true;
     } else {
+		debug('does not match highest score')
     	return false;
 	}
 }
@@ -368,11 +372,11 @@ var start_new_game = function(){
 	currentPlayerStart(0);
 }
 
-// Try setting all arrays to 0 instead of removing each individual element.
 var end_set = function(){
 	GameView.animate(gameSlideDown);
 	for(i=0;i<totalPlayers;i++){
 		players[i].buttons.length = 0;
+		players[i].wins = 0;
 		GameView.remove(views[i]);
 	}
 	views.length = 0;

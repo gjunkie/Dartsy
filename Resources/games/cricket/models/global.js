@@ -10,7 +10,9 @@ var changeTurn = function(newPlayerIndex){
 			currentPlayerIndex++;
 			currentPlayerStart(newPlayerIndex);
 		} else {
-			if(someoneFinished || allPlayersClosedAllNumbers()) {
+			if(!someoneFinished) {
+				checkClosedNums(button.parent.children, owner);
+			} else if(someoneFinished) {
 				winner();
 			}
 			currentPlayerDone();
@@ -45,7 +47,6 @@ var currentPlayerStart = function(newPlayerIndex){
 	if (newPlayerIndex != null){
 		currentPlayerIndex = newPlayerIndex;
 	}
-	slideBanner(turnBanners[currentPlayerIndex],'down');
 	indicatorsRemoved = false;
 	players[currentPlayerIndex].turn = true;
 	players[currentPlayerIndex].startedTurn = true;
@@ -55,6 +56,7 @@ var currentPlayerStart = function(newPlayerIndex){
 			players[currentPlayerIndex].buttons[i].touchEnabled = true;
 		}
 	}
+	slideBanner(turnBanners[currentPlayerIndex],'down');
 }
 
 var reverseTurn = function(){
@@ -81,7 +83,6 @@ var removePlayer = function(parentIndex, label, button){
 	players.sort(function(a, b){
 		return a.id-b.id
 	})
-	debug(players)
 	label.text = '';
 	button.backgroundImage = 'images/'+device+'/playerNotSelected.png';
 	button.playerIsSet = false;

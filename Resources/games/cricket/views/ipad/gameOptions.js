@@ -94,7 +94,7 @@ var quitSetAlert = Titanium.UI.createAlertDialog({
 var gameOptionsDialog = Titanium.UI.createOptionDialog({
     title: '',
     options: ['Restart Game','Restart Set','Quit'],
-    bottom:60,
+    title:'Options',
     destructive: 2,
 });
 

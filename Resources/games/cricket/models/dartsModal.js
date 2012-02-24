@@ -74,11 +74,6 @@ var button_calc = function(button, multiplier, owner){
 			players[currentPlayerIndex].score = points;
 			points = 0;
 		}
-		if(!someoneFinished) {
-			checkClosedNums(button.parent.children, owner);
-		} else if(someoneFinished) {
-			winner(button.parent.children);
-		}
 		if(closeNumbers(button.index)){
 			break;
 		};

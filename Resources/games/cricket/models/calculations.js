@@ -126,11 +126,6 @@ var numbers_missed = function(player, index){
 		removeIndicator(throwsThisRound);
 	}
 	player.throwsThisRound = throwsThisRound;
-	if(!someoneFinished) {
-		checkClosedNums(player.buttons, player);
-	} else if(someoneFinished) {
-		winner(currentPlayerIndex, views[currentPlayerIndex].children);
-	}
 }
 
 var loopMisses = function(index){

@@ -1,10 +1,6 @@
 
 var GameOptionsVisible = false;
 
-clearBoard.addEventListener('click', function(){
-	start_new_game();
-});
-
 var removeOptions = function(){
 	if(totalPlayers>1){
 		GameOptions.remove(restartGame);
@@ -22,9 +18,15 @@ GameOptionsMask.addEventListener('click', function(){
 });
 
 gameOptionsTrigger.addEventListener('click', function(){
-	gameOptionsDialog.show({view:gameOptionsTrigger});
+	if(totalPlayers>1){
+		gameOptionsDialog.show({view:gameOptionsTrigger});
+	} else {
+		gameOptionsDialogSingle.show({view:gameOptionsTrigger});
+	}
 });
 
+
+// 
 gameOptionsDialog.addEventListener('click',function(e){
 	if(e.index == 0) {
 		restartGamePressed();
@@ -35,17 +37,21 @@ gameOptionsDialog.addEventListener('click',function(e){
 	}
 });
 
-restartGame.addEventListener('click', function(){
-	restartGamePressed();
-});
-
-quitSet.addEventListener('click', function(){
-	quitSetPressed();
-});
-
-restartSet.addEventListener('click', function(){
-	restartSetPressed();
-});
+// restartGame.addEventListener('click', function(){
+	// restartGamePressed();
+// });
+// 
+// quitSet.addEventListener('click', function(){
+	// quitSetPressed();
+// });
+// 
+// restartSet.addEventListener('click', function(){
+	// restartSetPressed();
+// });
+// 
+// clearBoard.addEventListener('click', function(){
+	// start_new_game();
+// });
 
 var restartGamePressed = function(){
 	restartGameAlert.show();
@@ -53,7 +59,6 @@ var restartGamePressed = function(){
 		if(e.index == 0) {
 			start_new_game();
 		}
-		GameView.animate(gameSlideDown);
 		win2.remove(GameOptionsMask);
 	});
 }
@@ -66,7 +71,6 @@ var quitSetPressed = function(){
 			win1.open();
 			win2.close();
 		}
-		GameView.animate(gameSlideDown);
 		win2.remove(GameOptionsMask);
 	});
 }
@@ -76,9 +80,22 @@ var restartSetPressed = function(){
 	restartSetAlert.addEventListener('click',function(e){
 		if(e.index == 0) {
 			GameNumber = 0;
+			for(var i=0;i<totalPlayers;i++){
+				players[i].wins = 0;
+			}
 			start_new_game();
 		}
-		GameView.animate(gameSlideDown);
+		win2.remove(GameOptionsMask);
+	});
+}
+
+var clearBoardPressed = function(){
+	clearBaordAlert.show();
+	clearBaordAlert.addEventListener('click',function(e){
+		if(e.index == 0) {
+			GameNumber = 0;
+			start_new_game();
+		}
 		win2.remove(GameOptionsMask);
 	});
 }

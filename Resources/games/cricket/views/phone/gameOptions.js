@@ -1,55 +1,10 @@
 
 var gameOptionsTrigger = Titanium.UI.createLabel({
-	color:'#fff',
 	backgroundImage:'images/'+device+'/CricketOptions.png',
 	text:'',
 	width:44,
 	height: 35,
 	bottom: 0,
-});
-
-var restartGame = Titanium.UI.createButton({
-	color:'#fff',
-	title:'Restart Game',
-	backgroundImage: 'none',
-	font: {fontSize:12,fontFamily:'Ballpark'},
-	textAlign:'center',
-	width:150,
-	height: 40,
-	left: '20%',
-});
-
-var restartSet = Titanium.UI.createButton({
-	color:'#fff',
-	backgroundImage: 'none',
-	title:'Restart Set',
-	font: {fontSize:12,fontFamily:'Ballpark'},
-	textAlign:'center',
-	width:150,
-	height: 40,
-});
-
-
-var quitSet = Titanium.UI.createButton({
-	color:'#fff',
-	title:'Quit',
-	backgroundImage: 'none',
-	font: {fontSize:12,fontFamily:'Ballpark'},
-	textAlign:'center',
-	width:150,
-	height: 40,
-	right: 100,
-});
-
-var clearBoard = Titanium.UI.createButton({
-	color:'#fff',
-	title:'Clear Board',
-	backgroundImage: 'none',
-	font: {fontSize:12,fontFamily:'Ballpark'},
-	textAlign:'center',
-	width:150,
-	height: 40,
-	left: 100,
 });
 
 var GameOptions = Titanium.UI.createView({
@@ -99,18 +54,11 @@ var gameOptionsDialog = Titanium.UI.createOptionDialog({
     destructive: 2,
 });
 
-
-
-clearBoard.addEventListener('click', function(){
-	clearBoardAlert.show();
-	clearBoardAlert.addEventListener('click',function(e){
-		if(e.index == 0) {
-			GameNumber = 0;
-			start_new_game();
-		}
-		GameView.animate(gameSlideDown);
-		win2.remove(GameOptionsMask);
-	});
+var gameOptionsDialogSingle = Titanium.UI.createOptionDialog({
+    title: '',
+    options: ['Clear Board','Quit', 'Cancel'],
+    cancel:2,
+    destructive: 1,
 });
 
 numbersView.add(gameOptionsTrigger);

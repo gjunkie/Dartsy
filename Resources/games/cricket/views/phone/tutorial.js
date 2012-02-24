@@ -21,7 +21,7 @@ tutorialWindow.add(scrollView);
 // Page 2
 var pageTwoTextLine1 = Titanium.UI.createLabel({
 	text: 'To change turns, tap a player\'name. Dartsy will',
-	font:{fontSize:14,fontFamily:'Futura-CondensedMedium'},
+	font:{fontSize:16,fontFamily:'Futura-CondensedMedium'},
 	textAlign: 'center',
 	color: '#ffffff',
 	height: 20,
@@ -30,7 +30,7 @@ var pageTwoTextLine1 = Titanium.UI.createLabel({
 
 var pageTwoTextLine2 = Titanium.UI.createLabel({
 	text: 'assume misses for any players skipped.',
-	font:{fontSize:14,fontFamily:'Futura-CondensedMedium'},
+	font:{fontSize:16,fontFamily:'Futura-CondensedMedium'},
 	textAlign: 'center',
 	color: '#ffffff',
 	height: 20,
@@ -43,7 +43,7 @@ page2.add(pageTwoTextLine2);
 // Page 3
 var pageThreeTextLine1 = Titanium.UI.createLabel({
 	text: 'To score doubles and triples, hold down the number',
-	font:{fontSize:14,fontFamily:'Futura-CondensedMedium'},
+	font:{fontSize:16,fontFamily:'Futura-CondensedMedium'},
 	textAlign: 'center',
 	color: '#ffffff',
 	height: 20,
@@ -52,7 +52,7 @@ var pageThreeTextLine1 = Titanium.UI.createLabel({
 
 var pageThreeTextLine2 = Titanium.UI.createLabel({
 	text: 'you scored on to reveal your options.',
-	font:{fontSize:14,fontFamily:'Futura-CondensedMedium'},
+	font:{fontSize:16,fontFamily:'Futura-CondensedMedium'},
 	textAlign: 'center',
 	color: '#ffffff',
 	height: 20,
@@ -71,7 +71,7 @@ var tutorialPlayButton = Titanium.UI.createButton({
 })
 
 tutorialPlayButton.addEventListener('click', function(){
-	//Ti.App.Properties.setBool('firstLaunch',true);
+	Ti.App.Properties.setBool('firstLaunch',true);
 	win1.open();
 	tutorialWindow.close();
 })

@@ -188,6 +188,7 @@ var matchesHighestScore = function(playerToCheck, topScore){
 
 var winner = function(){
 	if (totalPlayers == 1) {
+		
 		// If only one person is playing
 		singlePlayerFinished()
 	} else if(has_highest_score() && allPlayersFinished()) {

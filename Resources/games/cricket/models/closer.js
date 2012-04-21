@@ -68,11 +68,9 @@ var allPlayersFinished = function(){
 	}
 	// try removing throwsThisRound == 3 to end game even if not all darts are thrown
 	if(playersFinished == totalPlayers && throwsThisRound == 3){
-		debug('players finished')
 		playersFinished=0;
 		return true;
 	} else {
-		debug('not all players finished')
 		playersFinished = 0;
 		return false;
 	}
@@ -182,10 +180,8 @@ var allPlayersClosedAllNumbers = function(){
 // Determines if 2 or more players are tied
 var matchesHighestScore = function(playerToCheck, topScore){
 	if (players[playerToCheck].score == topScore){
-		debug('mathes highest score')
     	return true;
     } else {
-		debug('does not match highest score')
     	return false;
 	}
 }

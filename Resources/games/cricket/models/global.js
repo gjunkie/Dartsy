@@ -11,7 +11,7 @@ var changeTurn = function(newPlayerIndex){
 			currentPlayerStart(newPlayerIndex);
 		} else {
 			if(!someoneFinished) {
-				checkClosedNums(button.parent.children, owner);
+				checkClosedNums(players[currentPlayerIndex].buttons, players[currentPlayerIndex]);
 			} else if(someoneFinished) {
 				winner();
 			}

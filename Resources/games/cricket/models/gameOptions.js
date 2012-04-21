@@ -1,17 +1,6 @@
 
 var GameOptionsVisible = false;
 
-var removeOptions = function(){
-	if(totalPlayers>1){
-		GameOptions.remove(restartGame);
-		GameOptions.remove(restartSet);
-		GameOptions.remove(quitSet);
-	} else {
-		GameOptions.remove(clearBoard);
-		GameOptions.remove(quitSet);
-	}
-}
-
 GameOptionsMask.addEventListener('click', function(){
 	GameView.animate(gameSlideDown);
 	win2.remove(GameOptionsMask);

@@ -70,7 +70,6 @@ var gameSlideDown = Titanium.UI.createAnimation();
     gameSlideDown.duration = 250;
     gameSlideDown.addEventListener('complete',function(){
 		GameOptionsVisible = false;
-		removeOptions();
     });
     
 // Fade out modal

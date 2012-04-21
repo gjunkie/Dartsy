@@ -1,15 +1,27 @@
 
 // Show Hide players slider in options screen
 var playersSliderExposeTop = Titanium.UI.createAnimation();
-    playersSliderExposeTop.top = '-6%';
+	if(ipad){
+	    playersSliderExposeTop.top = '-6%';
+	} else {
+	    playersSliderExposeTop.top = -65;
+	}
     playersSliderExposeTop.duration = 250;
 
 var playersSliderExposeBottom = Titanium.UI.createAnimation();
-    playersSliderExposeBottom.bottom = '-6%';
+	if(ipad){
+		playersSliderExposeBottom.bottom = '-6%';
+	} else {
+		playersSliderExposeBottom.bottom = 0;
+	}
     playersSliderExposeBottom.duration = 250;
     
 var playersSliderHideTop = Titanium.UI.createAnimation();
-    playersSliderHideTop.top = '0%';
+	if(ipad){
+    	playersSliderHideTop.top = '0%';
+	} else {
+  		playersSliderHideTop.top = -20;
+   	}
     playersSliderHideTop.duration = 250;
     playersSliderHideTop.addEventListener('complete', function(){
 		PlayerName.blur();
@@ -29,12 +41,24 @@ var playersSliderShowHideBottom = Titanium.UI.createAnimation();
     playersSliderShowHideBottom.bottom = '0%';
     playersSliderShowHideBottom.duration = 250;
 	playersSliderShowHideBottom.autoreverse = true;
-
+	
+var letsPlayFadeOut = Titanium.UI.createAnimation();
+    letsPlayFadeOut.opacity = 0;
+    letsPlayFadeOut.duration = 250;
+    
+var letsPlayFadeIn = Titanium.UI.createAnimation();
+    letsPlayFadeIn.opacity = 1;
+    letsPlayFadeIn.duration = 250;
 
 // Game transitions up/down
 var gameSlideUp = Titanium.UI.createAnimation();
+	if(ipad){
     gameSlideUp.top = -94;
     gameSlideUp.bottom = 94;
+	} else {
+    gameSlideUp.top = -47;
+    gameSlideUp.bottom = 47;
+	}
     gameSlideUp.duration = 250;
     gameSlideUp.addEventListener('complete',function(){
 		GameOptionsVisible = true;
@@ -46,7 +70,6 @@ var gameSlideDown = Titanium.UI.createAnimation();
     gameSlideDown.duration = 250;
     gameSlideDown.addEventListener('complete',function(){
 		GameOptionsVisible = false;
-		removeOptions();
     });
     
 // Fade out modal
@@ -108,7 +131,11 @@ var slideBanner = function(banner, direction){
 	if (direction == 'down'){
 		top = 0;
 	} else if (direction == 'up'){
-		top = -127;
+		if(ipad){
+			top = -127;
+		} else {
+			top = -100;
+		}
 	}
 	var turnBannerSlider = Titanium.UI.createAnimation();
 	turnBannerSlider.duration = 250;

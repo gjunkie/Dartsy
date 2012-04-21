@@ -1,6 +1,7 @@
 
-var Player = function(id,name) {
+var Player = function(id,name, parent) {
 	this.id = id;
+	this.parent = parent;
 	this.name = name;
 	this.turn = false;
 	this.throwsThisRound = 0;

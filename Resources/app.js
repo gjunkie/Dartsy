@@ -1,3 +1,4 @@
+
 // this sets the background color of the master UIView (when there are no windows/tab groups on it)
 Titanium.UI.setBackgroundImage('#000');
 
@@ -55,26 +56,70 @@ if(Titanium.Platform.osname == 'ipad'){
 }
 
 if(Titanium.Platform.osname == 'iphone'){
-	var possiblePlayers = 2;
+	var possiblePlayers = 4;
+	var tutorialWindow = Titanium.UI.createWindow({  
+	    title:'Tutorial',
+	});
 	var win1 = Titanium.UI.createWindow({  
-	    title:'Instructions',
+	    title:'Options',
 	});
 	var win2 = Titanium.UI.createWindow({  
 	    title:'Cricket',
 	});
 }
 
-Titanium.include('games/cricket/models/global.js');
-Titanium.include('games/cricket/views/ipad/help.js');
-Titanium.include('games/cricket/views/options.js');
-Titanium.include('games/cricket/cricket.js');
+var ipad = false;
+var iphone = false;
+var device;
+var iOSCheck = function(){
+	if(Titanium.Platform.osname == 'ipad'){
+		ipad = true;
+		device = 'ipad';
+		Titanium.include('games/cricket/views/ipad/help.js');
+		Titanium.include('games/cricket/views/ipad/iPadOptions.js');
+		Titanium.include('games/cricket/views/ipad/dartsModal.js');
+		Titanium.include('games/cricket/views/ipad/buttons.js');
+		Titanium.include('games/cricket/views/ipad/gameOptions.js');
+	
+	} else if(Titanium.Platform.osname == 'iphone'){
+		iphone = true;
+		device = 'phone';
+		Titanium.include('games/cricket/views/phone/tutorial.js');
+		Titanium.include('games/cricket/views/phone/iPhoneOptions.js');
+		Titanium.include('games/cricket/views/phone/dartsModal.js');
+		Titanium.include('games/cricket/views/phone/buttons.js');
+		Titanium.include('games/cricket/views/phone/gameOptions.js');
+	} else {
+		//Titanium.include('games/cricket/views/android/help.js');
+		Titanium.include('games/cricket/views/android/options.js');
+		Titanium.include('games/cricket/views/android/dartsModal.js');
+		Titanium.include('games/cricket/views/android/buttons.js');
+		Titanium.include('games/cricket/views/android/gameOptions.js');
+	}
+	if(iphone || ipad){
+		Titanium.UI.iPhone.statusBarStyle = Titanium.UI.iPhone.StatusBar.OPAQUE_BLACK;
+	}
+}
+iOSCheck();
 
-// open window with name fields
-win1.open();
+Titanium.include('games/cricket/globalVariables.js');
+Titanium.include('games/cricket/cricket.js');
+Titanium.include('games/cricket/models/global.js');
+
+paintPlayerSelections();
+paintPossibleSets();
+
+if(iphone){
+	// Check if this is first time running application,
+	// if so, show tutorial, else show options
+	if(!(Ti.App.Properties.hasProperty('firstLaunch'))){
+		tutorialWindow.open();
+	} else {
+		win1.open();
+	}
+} else if(ipad){
+	win1.open();
+}
 pickRandomProperty(Facts);
 
-if(Titanium.Platform.osname == 'ipad'){
-	Ti.API.debug('iPad');
-} else if(Titanium.Platform.osname == 'iphone'){
-	Ti.API.debug('iPhone');
-}
+

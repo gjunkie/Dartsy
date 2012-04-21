@@ -14,23 +14,22 @@ var calculate_points = function(numberHit, value, tap_count){
 
 // highlights the number passed in
 var highlight = function(scorableNum){
-	
 	if(scorableNum.hits==1){
 		scorableNum.closed = false;
-		scorableNum.backgroundImage = 'images/buttonSingle.png';
+		scorableNum.backgroundImage = 'images/'+device+'/buttonSingle.png';
 	} else if(scorableNum.hits==2){
 		scorableNum.closed = false;
-		scorableNum.backgroundImage = 'images/buttonDouble.png';
+		scorableNum.backgroundImage = 'images/'+device+'/buttonDouble.png';
 	} else if(scorableNum.hits>2){
 		scorableNum.closed = true;
-		scorableNum.font = {fontSize:20};
+		scorableNum.font = scorableNumFontActive;
 		scorableNum.color = '#189814';
-		scorableNum.backgroundImage = 'images/scorableButton.png';
+		scorableNum.backgroundImage = 'images/'+device+'/scorableButton.png';
 	} else {
 		scorableNum.closed = false;
-		scorableNum.font = {fontSize:50};
+		scorableNum.font = scorableNumFontNormal;
 		scorableNum.color = '#ffffff';
-		scorableNum.backgroundImage = 'images/button.png';
+		scorableNum.backgroundImage = 'images/'+device+'/button.png';
 	}
 }
 
@@ -127,13 +126,13 @@ var numbers_missed = function(player, index){
 		removeIndicator(throwsThisRound);
 	}
 	player.throwsThisRound = throwsThisRound;
-	if(!someoneFinished) {
-		checkClosedNums(player.buttons, player);
-	} else if(someoneFinished) {
-		winner(currentPlayerIndex, views[currentPlayerIndex].children);
-	}
 }
 
+var loopMisses = function(index){
+	for(var a=0;a<3;a++){
+		numbers_missed(players[index], true);
+	}
+}
 
 // Print total score
 var printScore = function(label, score){

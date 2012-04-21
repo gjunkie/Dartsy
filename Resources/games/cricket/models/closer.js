@@ -20,7 +20,7 @@ var closeNumbers = function(indx){
 			views[i].children[indx].status=false;
 			views[i].children[indx].animate(seeThru);
 			views[i].children[indx].color = '#ffffff';
-			views[i].children[indx].backgroundImage = 'images/button.png';
+			views[i].children[indx].backgroundImage = 'images/'+device+'/button.png';
 		}
 		availNums[indx].animate(seeThru);
 		return true;
@@ -188,6 +188,7 @@ var matchesHighestScore = function(playerToCheck, topScore){
 
 var winner = function(){
 	if (totalPlayers == 1) {
+		
 		// If only one person is playing
 		singlePlayerFinished()
 	} else if(has_highest_score() && allPlayersFinished()) {
@@ -242,9 +243,9 @@ var singlePlayerFinished = function(winner){
 		if(e.index == 0) {
 			start_new_game();
 		} else if(e.index == 1) {
-			end_set();
 			win1.open();
 			win2.close();
+			end_set();
 		}
 	});
 }
@@ -261,9 +262,9 @@ var winnerAlert = function(winner){
 		if(e.index == 0) {
 			start_new_game();
 		} else if(e.index == 1) {
-			end_set();
 			win1.open();
 			win2.close();
+			end_set();
 		}
 	});
 }
@@ -280,9 +281,9 @@ var tieAlert = function(){
 		if(e.index == 0) {
 			start_new_game();
 		} else if(e.index == 1) {
-			end_set();
 			win1.open();
 			win2.close();
+			end_set();
 		}
 	});
 }
@@ -317,9 +318,9 @@ var winnerOfSets = function(winner){
 				players[i].wins = 0;
 			}
 		} else if(e.index == 2) {
-			end_set();
 			win1.open();
 			win2.close();
+			end_set();
 		}
 	});
 }
@@ -345,22 +346,22 @@ var resetGlobalVars = function(){
 
 // Start new game. This restarts current game. Does not resest Games Played.
 // Do not set views to not touch enabled so names can be used to skip turns
+// REVERSE THIS LOOP, RUN NUMBERS INSIDE OF PLAYERS TO NOT RUN THINGS TOO MANY TIMES WHEN I DONT NEED TO
 var start_new_game = function(){
-	for(var numOfButtons=0;numOfButtons<7;numOfButtons++){
-		for(var numOfViews=0;numOfViews<totalPlayers;numOfViews++){
-			calculate_points(players[numOfViews].buttons[numOfButtons], 0, 0);
+	for(var numOfViews=0;numOfViews<totalPlayers;numOfViews++){
+		for(var numOfButtons=0;numOfButtons<7;numOfButtons++){
 			players[numOfViews].buttons[numOfButtons].hits = 0;
 			players[numOfViews].buttons[numOfButtons].animate(notSeeThru);
+			// May be able to use Status and CLosed for the same thing and make this loop shorter
 			players[numOfViews].buttons[numOfButtons].status = true;
 			players[numOfViews].buttons[numOfButtons].touchEnabled = false;
 			players[numOfViews].buttons[numOfButtons].closed = false;
-			printScore(views[numOfViews].children[8], 0);
-			highlight(players[numOfViews].buttons[numOfButtons]);
-			players[numOfViews].turn = false;
+			calculate_points(players[numOfViews].buttons[numOfButtons], 0, 0);
+			availNums[numOfButtons].animate(notSeeThru);
 		}
-		availNums[numOfButtons].animate(notSeeThru);
+			printScore(views[numOfViews].children[8], 0);
+			players[numOfViews].turn = false;
 	}
-	killModal();
 	if(currentPlayerIndex>0){
 		slideBanner(turnBanners[currentPlayerIndex],'up');
 	}
@@ -371,16 +372,11 @@ var start_new_game = function(){
 var end_set = function(){
 	GameView.animate(gameSlideDown);
 	for(i=0;i<totalPlayers;i++){
-		viewChildrenCount = views[i].children.length;
-		for(var numOfButtons=0;numOfButtons<viewChildrenCount;numOfButtons++){
-			viewChild = views[i].children[numOfButtons];
-			if(viewChild != null){
-				views[i].remove(views[i].children[numOfButtons]);
-			}
-		}
 		players[i].buttons.length = 0;
+		players[i].wins = 0;
 		GameView.remove(views[i]);
 	}
 	views.length = 0;
 	GameNumber = 0;
+	playButtonCheck();
 }

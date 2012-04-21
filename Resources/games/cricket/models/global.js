@@ -10,7 +10,9 @@ var changeTurn = function(newPlayerIndex){
 			currentPlayerIndex++;
 			currentPlayerStart(newPlayerIndex);
 		} else {
-			if(someoneFinished || allPlayersClosedAllNumbers()) {
+			if(!someoneFinished) {
+				checkClosedNums(players[currentPlayerIndex].buttons, players[currentPlayerIndex]);
+			} else if(someoneFinished) {
 				winner();
 			}
 			currentPlayerDone();
@@ -45,7 +47,6 @@ var currentPlayerStart = function(newPlayerIndex){
 	if (newPlayerIndex != null){
 		currentPlayerIndex = newPlayerIndex;
 	}
-	slideBanner(turnBanners[currentPlayerIndex],'down');
 	indicatorsRemoved = false;
 	players[currentPlayerIndex].turn = true;
 	players[currentPlayerIndex].startedTurn = true;
@@ -55,6 +56,7 @@ var currentPlayerStart = function(newPlayerIndex){
 			players[currentPlayerIndex].buttons[i].touchEnabled = true;
 		}
 	}
+	slideBanner(turnBanners[currentPlayerIndex],'down');
 }
 
 var reverseTurn = function(){
@@ -70,10 +72,19 @@ var reverseTurn = function(){
 		currentPlayerStart();
 	}
 }
-var removePlayer = function(playerIndex, label, button){
-	players.splice(playerIndex,1);
+var removePlayer = function(parentIndex, label, button){
+	for(var i=0, c = players.length; i<c; i++){
+		if(typeof players[i] === 'undefined') continue;
+		if(players[i].parent == parentIndex){
+			players.splice(i,1);
+			continue;
+		}
+	}
+	players.sort(function(a, b){
+		return a.id-b.id
+	})
 	label.text = '';
-	button.backgroundImage = 'images/playerNotSelected.png';
+	button.backgroundImage = 'images/'+device+'/playerNotSelected.png';
 	button.playerIsSet = false;
 	button.selected = false;
 	PlayerName.blur();

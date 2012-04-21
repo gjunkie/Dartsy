@@ -10,11 +10,7 @@
     <sdk-version>1.8.0.1.v20111222130907</sdk-version>
     <id>com.gjunkie.dartsy</id>
     <name>Dartsy</name>
-<<<<<<< HEAD
-    <version>1.0.2</version>
-=======
     <version>1.5</version>
->>>>>>> iphone
     <publisher>gjunkie</publisher>
     <url>http://twitter.com/dartsyapp</url>
     <description>not specified</description>

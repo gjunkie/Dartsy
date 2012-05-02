@@ -7,7 +7,7 @@
         <target device="android">false</target>
         <target device="blackberry">false</target>
     </deployment-targets>
-    <sdk-version>1.8.0.1.v20111222130907</sdk-version>
+    <sdk-version>2.0.1.GA2</sdk-version>
     <id>com.gjunkie.dartsy</id>
     <name>Dartsy</name>
     <version>1.5</version>

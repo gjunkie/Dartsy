@@ -199,7 +199,8 @@ DeletePlayer.addEventListener('click', function(){
 play.addEventListener('click', function(){
 	addColumns(totalPlayers);
 	start_new_game();
-	PlayerSelectWindow.open();
+	// Change this to a dynamic window
+	CricketWindow.open();
 	win1.close();
 });
 

@@ -99,6 +99,6 @@ var gameOptionsDialog = Titanium.UI.createOptionDialog({
 });
 
 numbersView.add(gameOptionsTrigger);
-PlayerSelectWindow.add(GameOptions);
+CricketWindow.add(GameOptions);
 
 Titanium.include('../../models/gameOptions.js');

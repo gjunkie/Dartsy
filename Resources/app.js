@@ -45,26 +45,31 @@ var Facts = [
 	'When all three darts hit the same number it is called "Three in a Bed".',
 ];
 
+// All views common to all devices
+var win1 = Titanium.UI.createWindow({  
+    title:'Game Select',
+});
+var win2 = Titanium.UI.createWindow({  
+    title:'Player Select',
+});
+var win3 = Titanium.UI.createWindow({  
+    title:'Players View',
+});
+var win4 = Titanium.UI.createWindow({  
+    title:'New Player View',
+});
+var win5 = Titanium.UI.createWindow({  
+    title:'Player Stats View',
+});
+	
 if(Titanium.Platform.osname == 'ipad'){
 	var possiblePlayers = 4;
-	var win1 = Titanium.UI.createWindow({  
-	    title:'Options',
-	});
-	var win2 = Titanium.UI.createWindow({  
-	    title:'Cricket',
-	});
 }
 
 if(Titanium.Platform.osname == 'iphone'){
 	var possiblePlayers = 4;
 	var tutorialWindow = Titanium.UI.createWindow({  
 	    title:'Tutorial',
-	});
-	var win1 = Titanium.UI.createWindow({  
-	    title:'Options',
-	});
-	var win2 = Titanium.UI.createWindow({  
-	    title:'Cricket',
 	});
 }
 
@@ -76,7 +81,7 @@ var iOSCheck = function(){
 		ipad = true;
 		device = 'ipad';
 		Titanium.include('games/cricket/views/ipad/help.js');
-		Titanium.include('options/views/ipad/iPadOptions.js');
+		Titanium.include('options/views/ipad/playerSelect.js');
 		Titanium.include('games/cricket/views/ipad/dartsModal.js');
 		Titanium.include('games/cricket/views/ipad/buttons.js');
 		Titanium.include('games/cricket/views/ipad/gameOptions.js');
@@ -85,7 +90,7 @@ var iOSCheck = function(){
 		iphone = true;
 		device = 'phone';
 		Titanium.include('games/cricket/views/phone/tutorial.js');
-		Titanium.include('options/views/phone/iPhoneOptions.js');
+		Titanium.include('options/views/phone/playerSelect.js');
 		Titanium.include('games/cricket/views/phone/dartsModal.js');
 		Titanium.include('games/cricket/views/phone/buttons.js');
 		Titanium.include('games/cricket/views/phone/gameOptions.js');

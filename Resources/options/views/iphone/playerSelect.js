@@ -3,31 +3,33 @@ var players = [];
 var thePlayerButtons = [];
 var PlayerLabels = [];
 var possibleSets = [];
-var setsChosen = false;
-var GamesToPlay = 0;
-var totalPlayers = 0;
-var GameNumber = 1;
-var sliderIsOpen = false;
-var placement = null;
-var deleteIndex = null;
-var clearLabel = null;
-var clearButton = null;
-var lastPlayerButtonTapped = null;
 
 var helpButton = Titanium.UI.createButton({
 	id: 'Help Button',
-	backgroundImage:'images/help.png',
+	backgroundImage:'images/'+device+'/help.png',
 	height:31,
 	width:31,
 	bottom: 20,
 	right: 20,
 });
 
+helpButton.addEventListener('click',function(){
+	helpView.animate(helpViewShow);
+});
+
 var playerSelect = Titanium.UI.createView({
 	id: 'Player Selector',
 	backgroundImage:'images/'+device+'/cricket-intro-top.jpg',
-	height:'50%',
-	top: 0,
+	height:240,
+	top: -20,
+	zIndex: 3,
+});
+
+var setsSelect = Titanium.UI.createView({
+	id: 'Sets Selector',
+	backgroundImage:'images/'+device+'/cricket-intro-bottom.jpg',
+	height:240,
+	bottom: 0,
 	zIndex: 3,
 });
 
@@ -35,12 +37,12 @@ var factsView = Titanium.UI.createView({
 	id: 'Fun Facts',
 	backgroundColor:'#161616',
 	height:100,
-	width:420,
+	width:320,
 	opacity: 0.75,
 	borderRadius: 20,
 	borderWidth:2,
 	borderColor:'#000000',
-	top: 150,
+	top: 50,
 	zIndex: 4,
 });
 
@@ -48,35 +50,9 @@ var factsLabel = Titanium.UI.createLabel({
 	id: 'Fun Facts',
 	color: '#949494',
 	textAlign: 'center',
-	font:{fontSize:12,fontFamily:'Futura'},
+	font:{fontSize:11,fontFamily:'Futura'},
 	height:'95%',
 	width:'95%',
-});
-
-var setsSelect = Titanium.UI.createView({
-	id: 'Sets Selector',
-	backgroundImage:'images/'+device+'/cricket-intro-bottom.jpg',
-	height:'50%',
-	bottom: 0,
-	zIndex: 3,
-});
-
-var playerSlider = Titanium.UI.createView({
-	id: 'Player Slider',
-	backgroundImage: 'images/'+device+'/PlayerSubmit_bg.jpg',
-	height: '15%',
-});
-
-var PlayerName = Titanium.UI.createTextField({
-    color:'#336699',
-    hintText:'Player Name',
-	width: 200,
-	height: 30,
-	autocorrect: false,
-    borderStyle:Titanium.UI.INPUT_BORDERSTYLE_ROUNDED,
-    keyboardToolbarColor: '#999',   
-    keyboardToolbarHeight: 40,
-	returnKeyType: Titanium.UI.RETURNKEY_DONE
 });
 
 var letsPlay = Titanium.UI.createLabel({
@@ -84,44 +60,64 @@ var letsPlay = Titanium.UI.createLabel({
 	text: 'Let\'s Play',
 	color: '#ffffff',
 	textAlign: 'center',
-	font:{fontSize:50,fontFamily:'Ballpark'},
+	font:{fontSize:30,fontFamily:'Ballpark'},
 	opacity: 0,
-	bottom: 25,
-	height:60,
-	width:400,
+	bottom: 3,
+	height:50,
+	width:200,
+});
+
+var playerSlider = Titanium.UI.createView({
+	id: 'Player Slider',
+	backgroundImage: 'images/'+device+'/PlayerSubmit_bg.jpg',
+	height: 45,
+	top: 175,
+});
+
+var PlayerName = Titanium.UI.createTextField({
+    color:'#336699',
+    hintText:'Player Name',
+	width: 180,
+	height: 30,
+	left: 40,
+	autocorrect: false,
+    borderStyle:Titanium.UI.INPUT_BORDERSTYLE_ROUNDED,
+    keyboardToolbarColor: '#999',   
+    keyboardToolbarHeight: 40,
+	returnKeyType: Titanium.UI.RETURNKEY_DONE
 });
 
 var OkButton = Titanium.UI.createButton({
 	backgroundImage:'images/'+device+'/ok.png',
-	width: 48,
-	height: 30,
-	right: 225,
+	width: 45,
+	height: 27,
+	right: 30,
 	title: '',
 });
 
 var DeletePlayer = Titanium.UI.createButton({
 	backgroundImage:'images/'+device+'/deletePlayer2.png',
-	bottom: 120,
-	width: 50,
-	height: 50,
+	bottom: 70,
+	width: 25,
+	height: 25,
 	title: '',
 	zIndex: 5,
 });
 
 var CricketTitle = Titanium.UI.createImageView({
 	image: 'images/'+device+'/CricketTitle.png',
-	width: 219,
-	height: 117,
-	top: 20,
+	width: 160,
+	height: 75,
+	top: 30,
 });
 
 var playersText = Titanium.UI.createLabel({
 	text: 'CHOOSE PLAYERS',
 	textAlign: 'center',
 	height: 30,
-	bottom: 200,
+	bottom: 95,
 	color: '#b2b2b2',
-	font:{fontSize:25,fontFamily:'Futura-CondensedMedium'},
+	font:{fontSize:18,fontFamily:'Futura-CondensedMedium'},
 });
 
 var numOfGamesText = Titanium.UI.createLabel({
@@ -130,7 +126,7 @@ var numOfGamesText = Titanium.UI.createLabel({
 	height: 30,
 	top: 20,
 	color: '#b2b2b2',
-	font:{fontSize:25,fontFamily:'Futura-CondensedMedium'},
+	font:{fontSize:18,fontFamily:'Futura-CondensedMedium'},
 });
 
 var submittedPlayer = Titanium.UI.createLabel({
@@ -138,29 +134,26 @@ var submittedPlayer = Titanium.UI.createLabel({
 	textAlign: 'center',
 	height: 50,
 	color: '#ffffff',
-	font:{fontSize:50,fontFamily:'Ballpark'},
+	font:{fontSize:30,fontFamily:'Ballpark'},
 });
-
-	
-// Buttons for user to select number of players
 var paintPlayerSelections = function(){
+// Buttons for user to select number of players
 	for(var i=0;i<possiblePlayers;i++){
-		var leftMargin = 155 + (116*i);
+		var leftMargin = 40 + (60*i);
 		thePlayerButtons[i] = Titanium.UI.createButton({
 			id: i,
 			playerIndex: null,
 			name: '',
 			color:'#fff',
 			backgroundImage: 'images/'+device+'/playerNotSelected.png',
-			borderRadius: 50,
 			hintText:'Player 1',
 			font:{fontSize:30,fontFamily:'Ballpark'},
 			textAlign:'center',
 			title: '',
 			textAlign:'center',
-			width:116,
-			height: 116,
-			top: '65%',
+			width:60,
+			height: 60,
+			top: 145,
 			left: leftMargin,
 			selected: false,
 			playerIsSet: false,
@@ -172,12 +165,12 @@ var paintPlayerSelections = function(){
 		PlayerLabels[i] = Titanium.UI.createLabel({
 			color: '#fff',
 			id: i,
-			width: 116,
+			width: 60,
 			height: 30,
 			left: leftMargin,
 			textAlign: 'center',
-			font:{fontSize:24,fontFamily:'Ballpark'},
-			top: '87%',
+			font:{fontSize:17,fontFamily:'Ballpark'},
+			top: 205,
 		});
 		aPlayerLabel = PlayerLabels[i];
 		
@@ -185,23 +178,22 @@ var paintPlayerSelections = function(){
 		playerSelect.add(aPlayerLabel);
 	}
 }
-
-// Buttons for user to select number of sets
 var paintPossibleSets = function(){
+	// Buttons for user to select number of sets
 	for(var i=0;i<Games.Cricket.sets.length;i++){
-		var leftMargin = 29 + (14*i) + '%';
+		var leftMargin = 21 + (20*i) + '%';
 		possibleSets[i] = Titanium.UI.createButton({
 			color:'#fff',
 			backgroundImage: 'images/'+device+'/blank-set.png',
 			hintText:'Player 1',
-			font:{fontSize:35,fontFamily:'Futura-CondensedMedium'},
+			font:{fontSize:25,fontFamily:'Futura-CondensedMedium'},
 			textAlign:'center',
 			title: Games.Cricket.sets[i],
 			gamesToPlay: Games.Cricket.sets[i],
 			textAlign:'center',
-			width:110,
-			height: 110,
-			top: '15%',
+			width:55,
+			height: 55,
+			top: 50,
 			left: leftMargin,
 			touchEnabled: true,
 		});
@@ -217,36 +209,35 @@ var GameView = Titanium.UI.createView({
 	backgroundImage:'images/'+device+'/cricket-dark-wood.jpg',
 });
 
-
 var indicators = Titanium.UI.createView({
 	id: 'Indicators',
-	height: 16,
-	width: 56,
-	top: 70,
+	height: 13,
+	width: 36,
+	top: 28,
 	myView: null,
 });
 
 var indicator1 = Titanium.UI.createLabel({
 	id: 'Indicator 1',
 	backgroundImage: 'images/'+device+'/dartIndicator.png',
-	height: 16,
-	width: 16,
-	left: 40,
+	height: 8,
+	width: 8,
+	left: 26,
 });
 
 var indicator2 = Titanium.UI.createLabel({
-	id: 'Indicator 1',
+	id: 'Indicator 2',
 	backgroundImage: 'images/'+device+'/dartIndicator.png',
-	height: 16,
-	width: 16,
-	left: 20,
+	height: 8,
+	width: 8,
+	left: 13,
 });
 
 var indicator3 = Titanium.UI.createLabel({
-	id: 'Indicator 1',
+	id: 'Indicator 3',
 	backgroundImage: 'images/'+device+'/dartIndicator.png',
-	height: 16,
-	width: 16,
+	height: 8,
+	width: 8,
 	left: 0,
 });
 	
@@ -254,26 +245,26 @@ var views = [];
 var turnBanners = [];
 var thePlayer;
 var leftSpace = null;
+var rightSpace = null;
 var addColumns = function(playerCount, name){
 	for(var i=0; i<playerCount; i++){
 		thePlayer = players[i];
 		if(players[i].id<2){
-			leftSpace = (20*players[i].id) + '%'
+			leftSpace = (58*players[i].id);
 		} else if (players[i].id>1){
-			leftSpace = (20*players[i].id) + 20 + '%'
+			leftSpace = (60*players[i].id)+82;
 		}
 		turnBanners[i] = Titanium.UI.createImageView({
 			image: 'images/'+device+'/banner.png',
-			width: 100,
-			height: 127,
+			width: 200,
+			height: 50,
 			top: -127,
 			zIndex: 0,
 		});
 		
 		views[i] = Titanium.UI.createView({
 			id: 'view ' + i,
-			borderRadius:10,
-			width:'20%',
+			width:60,
 			left: leftSpace,
 		});
 		theView = views[i];
@@ -289,12 +280,10 @@ var addColumns = function(playerCount, name){
 var play = Titanium.UI.createButton({
 	backgroundImage:'images/'+device+'/PlayButtonDisabled.png',
 	backgroundSelectedImage:'',
-	borderRadius: 10,
 	title:'',
-	textAlign:'center',
-	width:112,
-	height: 112,
-	bottom: '20%',
+	width:56,
+	height: 56,
+	bottom: 50,
 	touchEnabled: false,
 	enabeld: false,
 });
@@ -304,15 +293,13 @@ indicators.add(indicator2);
 indicators.add(indicator3);
 playerSelect.add(CricketTitle);
 playerSelect.add(playersText);
-factsView.add(factsLabel);
-playerSelect.add(factsView);
 setsSelect.add(play);
 setsSelect.add(letsPlay);
 setsSelect.add(numOfGamesText);
-//setsSelect.add(helpButton);
 playerSlider.add(PlayerName);
 playerSlider.add(OkButton);
 win1.add(playerSlider);
 win1.add(playerSelect);
 win1.add(setsSelect);
-Titanium.include('../../models/options.js');
+
+Titanium.include('../../models/playerSelect.js');

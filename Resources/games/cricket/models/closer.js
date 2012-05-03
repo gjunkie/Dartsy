@@ -1,3 +1,10 @@
+/*
+ * This file should include all logic
+ * to be run when players are finished.
+ * 
+ * Do not include any view-specific code.
+*/
+
 
 var playersClosed = 0;
 var playersFinished = 0;

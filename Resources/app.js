@@ -76,7 +76,7 @@ var iOSCheck = function(){
 		ipad = true;
 		device = 'ipad';
 		Titanium.include('games/cricket/views/ipad/help.js');
-		Titanium.include('games/cricket/views/ipad/iPadOptions.js');
+		Titanium.include('options/views/ipad/iPadOptions.js');
 		Titanium.include('games/cricket/views/ipad/dartsModal.js');
 		Titanium.include('games/cricket/views/ipad/buttons.js');
 		Titanium.include('games/cricket/views/ipad/gameOptions.js');
@@ -85,7 +85,7 @@ var iOSCheck = function(){
 		iphone = true;
 		device = 'phone';
 		Titanium.include('games/cricket/views/phone/tutorial.js');
-		Titanium.include('games/cricket/views/phone/iPhoneOptions.js');
+		Titanium.include('options/views/phone/iPhoneOptions.js');
 		Titanium.include('games/cricket/views/phone/dartsModal.js');
 		Titanium.include('games/cricket/views/phone/buttons.js');
 		Titanium.include('games/cricket/views/phone/gameOptions.js');

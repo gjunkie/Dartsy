@@ -3,7 +3,7 @@ var GameOptionsVisible = false;
 
 GameOptionsMask.addEventListener('click', function(){
 	GameView.animate(gameSlideDown);
-	win2.remove(GameOptionsMask);
+	PlayerSelectWindow.remove(GameOptionsMask);
 });
 
 gameOptionsTrigger.addEventListener('click', function(){
@@ -48,7 +48,7 @@ var restartGamePressed = function(){
 		if(e.index == 0) {
 			start_new_game();
 		}
-		win2.remove(GameOptionsMask);
+		PlayerSelectWindow.remove(GameOptionsMask);
 	});
 }
 
@@ -58,9 +58,9 @@ var quitSetPressed = function(){
 		if(e.index == 0) {
 			end_set();
 			win1.open();
-			win2.close();
+			PlayerSelectWindow.close();
 		}
-		win2.remove(GameOptionsMask);
+		PlayerSelectWindow.remove(GameOptionsMask);
 	});
 }
 
@@ -74,7 +74,7 @@ var restartSetPressed = function(){
 			}
 			start_new_game();
 		}
-		win2.remove(GameOptionsMask);
+		PlayerSelectWindow.remove(GameOptionsMask);
 	});
 }
 
@@ -85,6 +85,6 @@ var clearBoardPressed = function(){
 			GameNumber = 0;
 			start_new_game();
 		}
-		win2.remove(GameOptionsMask);
+		PlayerSelectWindow.remove(GameOptionsMask);
 	});
 }

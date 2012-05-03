@@ -99,6 +99,6 @@ var gameOptionsDialog = Titanium.UI.createOptionDialog({
 });
 
 numbersView.add(gameOptionsTrigger);
-win2.add(GameOptions);
+PlayerSelectWindow.add(GameOptions);
 
 Titanium.include('../../models/gameOptions.js');

@@ -49,7 +49,7 @@ var Facts = [
 var win1 = Titanium.UI.createWindow({  
     title:'Game Select',
 });
-var win2 = Titanium.UI.createWindow({  
+var PlayerSelectWindow = Titanium.UI.createWindow({  
     title:'Player Select',
 });
 var win3 = Titanium.UI.createWindow({  
@@ -59,6 +59,9 @@ var win4 = Titanium.UI.createWindow({
     title:'New Player View',
 });
 var win5 = Titanium.UI.createWindow({  
+    title:'Player Stats View',
+});
+var CricketWindow = Titanium.UI.createWindow({  
     title:'Player Stats View',
 });
 	

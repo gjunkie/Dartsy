@@ -199,7 +199,7 @@ DeletePlayer.addEventListener('click', function(){
 play.addEventListener('click', function(){
 	addColumns(totalPlayers);
 	start_new_game();
-	win2.open();
+	PlayerSelectWindow.open();
 	win1.close();
 });
 

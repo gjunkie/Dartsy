@@ -274,7 +274,7 @@ var addColumns = function(playerCount, name){
 		theView.add(turnBanner);
 		GameView.add(theView);
 	}
-	win2.add(GameView);
+	PlayerSelectWindow.add(GameView);
 }
 
 var play = Titanium.UI.createButton({

@@ -2,6 +2,7 @@
 var buttonHit = null;
 var theMultiplier = 0;
 
+// Miss button tapped
 miss.addEventListener('click', function(){
 	this.animate(buttonPressed);
 	numbers_missed(players[currentPlayerIndex], currentPlayerIndex);
@@ -16,6 +17,7 @@ miss.addEventListener('click', function(){
 	killModal();
 });
 
+// Undo button tapped
 undoPoints.addEventListener('click', function(){
 	if (totalThrows > 0) {
 		killModal();
@@ -51,6 +53,7 @@ var multiplierDialog = function(button, multiplier, player){
 	button_calc(button, multiplier, player);
 }
 
+// A number is hit
 var buttonTap = function(playerButton){
 	playerButton.addEventListener('click',function(){
 		if (throwsThisRound != 3){
@@ -81,6 +84,7 @@ var buttonTap = function(playerButton){
 	}
 }
 
+// A player name is tapped to skip to player
 var namesTap = function(index){
 	// Quickly change turns by tapping another player's name
 	playerNamesLabels[index].addEventListener('click',function(){

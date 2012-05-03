@@ -6,7 +6,7 @@ var debug = function(code){
 	Ti.API.debug(code);
 }
 
-Titanium.include('games/cricket/models/db.js');
+Titanium.include('global/db.js');
 
 createOrRunDb();
 
@@ -89,12 +89,6 @@ var iOSCheck = function(){
 		Titanium.include('games/cricket/views/phone/dartsModal.js');
 		Titanium.include('games/cricket/views/phone/buttons.js');
 		Titanium.include('games/cricket/views/phone/gameOptions.js');
-	} else {
-		//Titanium.include('games/cricket/views/android/help.js');
-		Titanium.include('games/cricket/views/android/options.js');
-		Titanium.include('games/cricket/views/android/dartsModal.js');
-		Titanium.include('games/cricket/views/android/buttons.js');
-		Titanium.include('games/cricket/views/android/gameOptions.js');
 	}
 	if(iphone || ipad){
 		Titanium.UI.iPhone.statusBarStyle = Titanium.UI.iPhone.StatusBar.OPAQUE_BLACK;

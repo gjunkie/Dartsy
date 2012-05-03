@@ -46,7 +46,7 @@ var Facts = [
 ];
 
 // All views common to all devices
-var win1 = Titanium.UI.createWindow({  
+var GameSelectWindow = Titanium.UI.createWindow({  
     title:'Game Select',
 });
 var PlayerSelectWindow = Titanium.UI.createWindow({  
@@ -84,6 +84,7 @@ var iOSCheck = function(){
 		ipad = true;
 		device = 'ipad';
 		Titanium.include('games/cricket/views/ipad/help.js');
+		Titanium.include('options/views/ipad/gameSelect.js');
 		Titanium.include('options/views/ipad/playerSelect.js');
 		Titanium.include('games/cricket/views/ipad/dartsModal.js');
 		Titanium.include('games/cricket/views/ipad/buttons.js');
@@ -93,6 +94,7 @@ var iOSCheck = function(){
 		iphone = true;
 		device = 'phone';
 		Titanium.include('games/cricket/views/phone/tutorial.js');
+		Titanium.include('options/views/phone/gameSelect.js');
 		Titanium.include('options/views/phone/playerSelect.js');
 		Titanium.include('games/cricket/views/phone/dartsModal.js');
 		Titanium.include('games/cricket/views/phone/buttons.js');
@@ -117,10 +119,10 @@ if(iphone){
 	if(!(Ti.App.Properties.hasProperty('firstLaunch'))){
 		tutorialWindow.open();
 	} else {
-		PlayerSelectWindow.open();
+		GameSelectWindow.open();
 	}
 } else if(ipad){
-	PlayerSelectWindow.open();
+	GameSelectWindow.open();
 }
 pickRandomProperty(Facts);
 

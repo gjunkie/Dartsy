@@ -117,10 +117,10 @@ if(iphone){
 	if(!(Ti.App.Properties.hasProperty('firstLaunch'))){
 		tutorialWindow.open();
 	} else {
-		win1.open();
+		PlayerSelectWindow.open();
 	}
 } else if(ipad){
-	win1.open();
+	PlayerSelectWindow.open();
 }
 pickRandomProperty(Facts);
 

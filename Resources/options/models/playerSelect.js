@@ -201,7 +201,7 @@ play.addEventListener('click', function(){
 	start_new_game();
 	// Change this to a dynamic window
 	CricketWindow.open();
-	win1.close();
+	PlayerSelectWindow.close();
 });
 
 helpButton.addEventListener('click',function(){

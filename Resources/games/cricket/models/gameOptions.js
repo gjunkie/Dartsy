@@ -57,7 +57,7 @@ var quitSetPressed = function(){
 	quitSetAlert.addEventListener('click',function(e){
 		if(e.index == 0) {
 			end_set();
-			win1.open();
+			PlayerSelectWindow.open();
 			CricketWindow.close();
 		}
 		CricketWindow.remove(GameOptionsMask);

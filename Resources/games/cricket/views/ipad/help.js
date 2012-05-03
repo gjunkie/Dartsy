@@ -7,4 +7,4 @@ var helpView = Titanium.UI.createView({
 	zIndex:10,
 });
 
-win1.add(helpView);
+PlayerSelectWindow.add(helpView);

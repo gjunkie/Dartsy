@@ -72,7 +72,7 @@ var tutorialPlayButton = Titanium.UI.createButton({
 
 tutorialPlayButton.addEventListener('click', function(){
 	Ti.App.Properties.setBool('firstLaunch',true);
-	win1.open();
+	PlayerSelectWindow.open();
 	tutorialWindow.close();
 })
 

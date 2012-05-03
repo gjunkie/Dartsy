@@ -250,7 +250,7 @@ var singlePlayerFinished = function(winner){
 		if(e.index == 0) {
 			start_new_game();
 		} else if(e.index == 1) {
-			win1.open();
+			PlayerSelectWindow.open();
 			CricketWindow.close();
 			end_set();
 		}
@@ -269,7 +269,7 @@ var winnerAlert = function(winner){
 		if(e.index == 0) {
 			start_new_game();
 		} else if(e.index == 1) {
-			win1.open();
+			PlayerSelectWindow.open();
 			CricketWindow.close();
 			end_set();
 		}
@@ -288,7 +288,7 @@ var tieAlert = function(){
 		if(e.index == 0) {
 			start_new_game();
 		} else if(e.index == 1) {
-			win1.open();
+			PlayerSelectWindow.open();
 			CricketWindow.close();
 			end_set();
 		}
@@ -325,7 +325,7 @@ var winnerOfSets = function(winner){
 				players[i].wins = 0;
 			}
 		} else if(e.index == 2) {
-			win1.open();
+			PlayerSelectWindow.open();
 			CricketWindow.close();
 			end_set();
 		}

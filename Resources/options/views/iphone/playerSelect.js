@@ -298,8 +298,8 @@ setsSelect.add(letsPlay);
 setsSelect.add(numOfGamesText);
 playerSlider.add(PlayerName);
 playerSlider.add(OkButton);
-win1.add(playerSlider);
-win1.add(playerSelect);
-win1.add(setsSelect);
+PlayerSelectWindow.add(playerSlider);
+PlayerSelectWindow.add(playerSelect);
+PlayerSelectWindow.add(setsSelect);
 
 Titanium.include('../../models/playerSelect.js');

@@ -63,6 +63,9 @@ var win5 = Titanium.UI.createWindow({
 });
 var CricketWindow = Titanium.UI.createWindow({  
     title:'Player Stats View',
+});	
+var tutorialWindow = Titanium.UI.createWindow({  
+    title:'Tutorial',
 });
 
 var ipad = false;
@@ -74,14 +77,9 @@ var iOSCheck = function(){
 	if(Titanium.Platform.osname == 'ipad'){
 		ipad = true;
 		device = 'ipad';
-		Titanium.include('games/cricket/views/ipad/help.js');
 	} else if(Titanium.Platform.osname == 'iphone'){
 		iphone = true;
 		device = 'phone';
-		var tutorialWindow = Titanium.UI.createWindow({  
-		    title:'Tutorial',
-		});
-		Titanium.include('games/cricket/views/phone/tutorial.js');
 	}
 	if(iphone || ipad){
 		Titanium.UI.iPhone.statusBarStyle = Titanium.UI.iPhone.StatusBar.OPAQUE_BLACK;
@@ -91,22 +89,13 @@ iOSCheck();
 
 Titanium.include('options/views/'+device+'/gameSelect.js');
 Titanium.include('options/views/'+device+'/playerSelect.js');
+//Titanium.include('games/cricket/views/ipad/help.js');
 
 
 paintPlayerSelections();
 paintPossibleSets();
 
-if(iphone){
-	// Check if this is first time running application,
-	// if so, show tutorial, else show options
-	if(!(Ti.App.Properties.hasProperty('firstLaunch'))){
-		tutorialWindow.open();
-	} else {
-		GameSelectWindow.open();
-	}
-} else if(ipad){
-	GameSelectWindow.open();
-}
 pickRandomProperty(Facts);
 
+GameSelectWindow.open();
 

@@ -64,41 +64,24 @@ var win5 = Titanium.UI.createWindow({
 var CricketWindow = Titanium.UI.createWindow({  
     title:'Player Stats View',
 });
-	
-if(Titanium.Platform.osname == 'ipad'){
-	var possiblePlayers = 4;
-}
-
-if(Titanium.Platform.osname == 'iphone'){
-	var possiblePlayers = 4;
-	var tutorialWindow = Titanium.UI.createWindow({  
-	    title:'Tutorial',
-	});
-}
 
 var ipad = false;
 var iphone = false;
 var device;
+var possiblePlayers = 4;
+
 var iOSCheck = function(){
 	if(Titanium.Platform.osname == 'ipad'){
 		ipad = true;
 		device = 'ipad';
 		Titanium.include('games/cricket/views/ipad/help.js');
-		Titanium.include('options/views/ipad/gameSelect.js');
-		Titanium.include('options/views/ipad/playerSelect.js');
-		Titanium.include('games/cricket/views/ipad/dartsModal.js');
-		Titanium.include('games/cricket/views/ipad/buttons.js');
-		Titanium.include('games/cricket/views/ipad/gameOptions.js');
-	
 	} else if(Titanium.Platform.osname == 'iphone'){
 		iphone = true;
 		device = 'phone';
+		var tutorialWindow = Titanium.UI.createWindow({  
+		    title:'Tutorial',
+		});
 		Titanium.include('games/cricket/views/phone/tutorial.js');
-		Titanium.include('options/views/phone/gameSelect.js');
-		Titanium.include('options/views/phone/playerSelect.js');
-		Titanium.include('games/cricket/views/phone/dartsModal.js');
-		Titanium.include('games/cricket/views/phone/buttons.js');
-		Titanium.include('games/cricket/views/phone/gameOptions.js');
 	}
 	if(iphone || ipad){
 		Titanium.UI.iPhone.statusBarStyle = Titanium.UI.iPhone.StatusBar.OPAQUE_BLACK;
@@ -106,9 +89,9 @@ var iOSCheck = function(){
 }
 iOSCheck();
 
-Titanium.include('games/cricket/globalVariables.js');
-Titanium.include('games/cricket/cricket.js');
-Titanium.include('games/cricket/models/global.js');
+Titanium.include('options/views/'+device+'/gameSelect.js');
+Titanium.include('options/views/'+device+'/playerSelect.js');
+
 
 paintPlayerSelections();
 paintPossibleSets();

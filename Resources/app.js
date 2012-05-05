@@ -15,15 +15,8 @@ createOrRunDb();
 // Available numbers should list bullseye last
 var Games = { 
 	Cricket : {
-		avail_nums : [
-			20, 
-			19, 
-			18, 
-			17, 
-			16, 
-			15, 
-			25 
-		],
+		game : 'Cricket',
+		avail_nums : [ 20, 19, 18, 17, 16, 15, 25],
 		play : false,
 		sets: [1,3,5],
 		rounds: 0,

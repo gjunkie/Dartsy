@@ -1,11 +1,4 @@
 
-var GameOptionsVisible = false;
-
-GameOptionsMask.addEventListener('click', function(){
-	GameView.animate(gameSlideDown);
-	CricketWindow.remove(GameOptionsMask);
-});
-
 gameOptionsTrigger.addEventListener('click', function(){
 	if(totalPlayers>1){
 		gameOptionsDialog.show({view:gameOptionsTrigger});
@@ -14,8 +7,6 @@ gameOptionsTrigger.addEventListener('click', function(){
 	}
 });
 
-
-// 
 gameOptionsDialog.addEventListener('click',function(e){
 	if(e.index == 0) {
 		restartGamePressed();
@@ -26,21 +17,13 @@ gameOptionsDialog.addEventListener('click',function(e){
 	}
 });
 
-// restartGame.addEventListener('click', function(){
-	// restartGamePressed();
-// });
-// 
-// quitSet.addEventListener('click', function(){
-	// quitSetPressed();
-// });
-// 
-// restartSet.addEventListener('click', function(){
-	// restartSetPressed();
-// });
-// 
-// clearBoard.addEventListener('click', function(){
-	// start_new_game();
-// });
+gameOptionsDialogSingle.addEventListener('click',function(e){
+	if(e.index == 0) {
+		clearBoardPressed();
+	}else if(e.index == 1) {
+		quitSetPressed();
+	}
+});
 
 var restartGamePressed = function(){
 	restartGameAlert.show();
@@ -48,7 +31,6 @@ var restartGamePressed = function(){
 		if(e.index == 0) {
 			start_new_game();
 		}
-		CricketWindow.remove(GameOptionsMask);
 	});
 }
 
@@ -60,7 +42,6 @@ var quitSetPressed = function(){
 			PlayerSelectWindow.open();
 			CricketWindow.close();
 		}
-		CricketWindow.remove(GameOptionsMask);
 	});
 }
 
@@ -74,17 +55,15 @@ var restartSetPressed = function(){
 			}
 			start_new_game();
 		}
-		CricketWindow.remove(GameOptionsMask);
 	});
 }
 
 var clearBoardPressed = function(){
-	clearBaordAlert.show();
-	clearBaordAlert.addEventListener('click',function(e){
+	clearBoardAlert.show();
+	clearBoardAlert.addEventListener('click',function(e){
 		if(e.index == 0) {
 			GameNumber = 0;
 			start_new_game();
 		}
-		CricketWindow.remove(GameOptionsMask);
 	});
 }

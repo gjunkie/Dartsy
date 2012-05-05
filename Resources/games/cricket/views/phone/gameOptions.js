@@ -7,18 +7,6 @@ var gameOptionsTrigger = Titanium.UI.createLabel({
 	bottom: 0,
 });
 
-var GameOptions = Titanium.UI.createView({
-	id: 'Game Options',
-	height: 47,
-	bottom: 0,
-	backgroundImage: 'images/'+device+'/gameOptions.png',
-});
-
-var GameOptionsMask = Titanium.UI.createView({
-	id: 'Game Options Mask',
-	bottom: 94,
-});
-
 var restartGameAlert = Titanium.UI.createAlertDialog({
     title: 'Restart Game',
     message: 'Are you sure you want to restart this game?',
@@ -62,6 +50,5 @@ var gameOptionsDialogSingle = Titanium.UI.createOptionDialog({
 });
 
 numbersView.add(gameOptionsTrigger);
-CricketWindow.add(GameOptions);
 
 Titanium.include('../../models/gameOptions.js');

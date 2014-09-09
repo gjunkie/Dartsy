@@ -1,18 +1,8 @@
-Welcome to your Appcelerator Titanium Mobile Project
+Dartsy
+=========
 
-This is a blank project.  Start by editing your application's app.js to 
-make your first mobile project using Titanium.
+A few years ago I made my first iOS app using Appcelerator Titanium. It is a dart scroing app. I got as far as
+supporting the 3.5" iPhone and original iPad. I might take another stab at this using Swift at a later date, but since
+the app is no longer available on the iOS App Store, I figure I'd make this public for anyone who wanted to see it.
 
-
-
-----------------------------------
-Stuff our legal folk make us say:
-
-Appcelerator, Appcelerator Titanium and associated marks and logos are 
-trademarks of Appcelerator, Inc. 
-
-Titanium is Copyright (c) 2009-2010 by Appcelerator, Inc. All Rights Reserved.
-
-Titanium is licensed under the Apache Public License (Version 2). Please
-see the LICENSE file for the full license.
-
+Disclaimer: I was a young buck when I wrote this.
